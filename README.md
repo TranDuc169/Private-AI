@@ -2,7 +2,7 @@
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
-**Trạng thái bàn giao:** đã viết source, API contract, migration, kiểm thử và hướng dẫn. API client đã được kiểm tra với phản hồi giả lập. Chưa chạy build React, pytest hoặc kết nối PostgreSQL thật trong môi trường bàn giao vì không tìm thấy Node/npm, Python, Docker và Git qua dòng lệnh. Không coi tuần 2 đã nghiệm thu đến khi các bước kiểm tra bên dưới chạy thành công. Chưa push lên GitHub.
+**Trạng thái cập nhật 03/10/2026:** người dùng đã chạy thành công React → FastAPI → PostgreSQL, báo kiểm thử/build đạt và push GitHub thành công. Kiểm tra trực tiếp repository local xác nhận commit `fcfbca1`, `main` khớp bản ghi `origin/main`, và 4 test frontend chạy lại đạt. Chưa xác minh lại GitHub trực tuyến hoặc chạy lại đầy đủ backend/build trong môi trường công cụ do giới hạn quyền. Xem [VALIDATION](docs/VALIDATION.md). Còn thử riêng BGE-M3/Qwen3, lưu minh chứng đầy đủ và bàn giao cho Khánh để chốt tuần 2.
 
 ## Đã có trong bộ mã
 
@@ -80,7 +80,7 @@ npm.cmd run dev
 
 Mở [http://127.0.0.1:5173](http://127.0.0.1:5173). Giao diện tự gọi `/health`; khi DB hoạt động, dòng trạng thái ghi **Đã kết nối FastAPI và truy vấn PostgreSQL thành công**. Chuyển Chat/Tài liệu/Lịch sử để kiểm tra routing. Ô chat bị khóa có chủ đích vì chưa có API RAG.
 
-Không có lockfile được tạo bằng trình quản lý package trong môi trường này. Sau lần cài thành công, commit `frontend/package-lock.json` và dùng `npm.cmd ci` cho các lần cài sau; chốt phiên bản Python sau khi nhóm chạy kiểm thử trên môi trường thống nhất.
+Đã có `frontend/package-lock.json`; dùng `npm.cmd ci` cho các lần cài sau. `package.json` đã cho phép script cài đặt của `esbuild@0.25.12`. Python hiện dùng khoảng phiên bản dependency; chưa có lockfile Python, nhóm cần ghi phiên bản thực tế khi thu minh chứng.
 
 ## 5. Kiểm tra và nghiệm thu
 
@@ -133,7 +133,20 @@ Tài liệu và hội thoại đều có `workspace_id` bắt buộc. Message k�
 
 Xem [hiện trạng](docs/STATUS.md), [API contract](docs/API.md), [schema và ERD](docs/SCHEMA.md), [biên bản kiểm tra](docs/VALIDATION.md).
 
-## 7. Đưa mã lên repository trống
+## 7. Git và bàn giao cho Khánh
+
+Người dùng đã xác nhận push lần đầu. Commit local kiểm tra ngày 03/10/2026 là `fcfbca1`. Các cập nhật tài liệu sau đó chưa commit/push.
+
+Khánh mở CMD tại thư mục muốn lưu dự án:
+
+```cmd
+git clone https://github.com/TranDuc169/Private-AI.git
+cd Private-AI
+```
+
+Tiếp tục cấu hình/chạy theo các bước trên (các khối PowerShell cần dùng PowerShell). Chỉ kiểm tra frontend thì thực hiện bước 4; chưa bật backend sẽ có thông báo không gọi được API. Để kiểm tra tích hợp, cần chạy cả DB/backend/frontend. Ghi lại commit, phiên bản công cụ và kết quả chạy. Chưa có xác nhận Khánh đã thực hiện.
+
+### Tham khảo: khởi tạo lần đầu (đã thực hiện)
 
 Sau khi cài Git, đứng ở thư mục gốc, xem lại file trước khi commit:
 

@@ -1,4 +1,4 @@
-# Đối chiếu hiện trạng — 02/10/2026
+# Đối chiếu hiện trạng — cập nhật 03/10/2026
 
 Đã đọc văn bản của `Phan_cong_12_tuan_Duc_Khanh.pdf` (7 trang) và `Bao_cao_tuan_01_RAG_rut_gon.pdf` (11 trang), đồng thời xem ảnh chat prototype trích từ báo cáo. Tài liệu là căn cứ mô tả/thiết kế; không coi danh sách công việc trong PDF là bằng chứng đã triển khai.
 
@@ -19,9 +19,11 @@
 
 Đã có mã nguồn React/Vite/Tailwind, routing/sidebar/component, API client, FastAPI `/health`, SQLAlchemy/session factory, migration 5 bảng và hướng dẫn local. Đây là bộ mã mới tham chiếu thiết kế, chưa phải chuyển đổi source prototype vì source chưa được cung cấp. Các kiểm tra thực tế ghi ở VALIDATION.md.
 
+Người dùng đã xác nhận chạy tích hợp thành công, test/build đạt và push GitHub. Kiểm tra trực tiếp ngày 03/10 xác nhận commit local `fcfbca1`, HEAD và bản ghi local `origin/main` trùng nhau; 4 test frontend chạy lại đạt. Chưa xác minh lại remote trực tuyến. Build/backend chưa chạy lại được trong môi trường công cụ do giới hạn quyền, API không hoạt động tại thời điểm kiểm tra lại. Không suy diễn thành lỗi ở lần chạy trước của người dùng.
+
 ## Phần còn thiếu theo lộ trình
 
-- Nghiệm thu tuần 2 trên máy có runtime: build, chạy frontend/backend/PostgreSQL, kiểm tra migration và ghi minh chứng. Chưa chạy thử BGE-M3/Qwen3 theo kế hoạch phần cứng.
+- Chốt tuần 2: lưu đủ ảnh/output test, build và migration trên máy người dùng; thử BGE-M3/Qwen3, ghi cấu hình/thời gian; Khánh clone repo và xác nhận chạy được. Phần chạy tích hợp và test/build đã được người dùng báo đạt.
 - Tuần 3: auth/JWT, password hashing, workspace CRUD, kiểm tra ownership.
 - Tuần 4–5: upload/parse PDF, trạng thái xử lý, chunks, BGE-M3, pgvector.
 - Tuần 6–8: retrieval lọc workspace trước Top-K, RAG Qwen3/Ollama, citation và thiếu bằng chứng.

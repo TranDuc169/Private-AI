@@ -1,0 +1,61 @@
+Date: 2026-10-03 (Asia/Saigon)
+Context: assistant tool environment; separate from user's earlier successful CMD runs.
+
+[GIT LOCAL, before documentation edits]
+## main...origin/main
+fcfbca1 Add week 2 React FastAPI PostgreSQL skeleton
+origin	https://github.com/TranDuc169/Private-AI.git (fetch)
+origin	https://github.com/TranDuc169/Private-AI.git (push)
+fcfbca11ea726a8cf9b2a2055a55bf94ccb9f2bd
+fcfbca11ea726a8cf9b2a2055a55bf94ccb9f2bd
+
+[FRONTEND]
+
+> private-ai-frontend@0.2.0 test
+> node --test src/api.test.js
+
+✔ health calls backend and accepts only the agreed healthy response (18.2758ms)
+✔ database outage is distinct from network failure (0.5492ms)
+✔ HTML fallback and unexpected JSON cannot report a healthy database (0.5851ms)
+✔ unexpected HTTP errors cannot report success (0.268ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.292
+
+> private-ai-frontend@0.2.0 build
+> vite build
+
+X [ERROR] Cannot read directory "../../../../../../..": Access is denied.
+
+X [ERROR] Could not resolve "C:\\Users\\Admin\\Documents\\Codex\\2026-10-02\\t-i-ti-p-t-c\\outputs\\private-ai-week2\\frontend\\vite.config.js"
+
+failed to load config from C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\vite.config.js
+error during build:
+Error: Build failed with 2 errors:
+error: Cannot read directory "../../../../../../..": Access is denied.
+error: Could not resolve "C:\\Users\\Admin\\Documents\\Codex\\2026-10-02\\t-i-ti-p-t-c\\outputs\\private-ai-week2\\frontend\\vite.config.js"
+    at failureErrorWithLog (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:1467:15)
+    at C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:926:25
+    at runOnEndCallbacks (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:1307:45)
+    at buildResponseToResult (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:924:7)
+    at C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:951:16
+    at responseCallbacks.<computed> (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:658:12)
+    at Socket.readFromStdout (C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\frontend\node_modules\esbuild\lib\main.js:581:7)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:568:12)
+
+[BACKEND attempt; subsequent Alembic/check_db did not run]
+Unable to create process using '"C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe" -m pytest -q'
+
+[HEALTH RECHECK]
+GET http://127.0.0.1:8000/health: connection refused.
+
+[REMOTE RECHECK]
+git ls-remote origin refs/heads/main: remote-https helper unavailable.
+
