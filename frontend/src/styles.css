@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #eeeaf5; background: #101016; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, textarea { font: inherit; }
+button { border: 0; border-radius: 9px; padding: 9px 16px; color: white; background: #8655e8; cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+button:focus-visible, a:focus-visible { outline: 3px solid #b291f5; outline-offset: 3px; }
+.app-shell { min-height: 100dvh; display: grid; grid-template-columns: 260px minmax(0, 1fr); }
+.sidebar { background: #17161f; padding: 30px 22px; border-right: 1px solid #34303f; display: flex; flex-direction: column; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 20px; }
+.brand small { display: block; font-size: 11px; font-weight: 400; color: #aaa4ba; }
+.brand-icon { display: grid; place-items: center; height: 38px; width: 38px; border-radius: 12px; color: white; background: #8655e8; }
+.workspace-box { margin: 35px 0 25px; border: 1px solid #393244; background: #211e2b; border-radius: 12px; padding: 14px; }
+.workspace-box small, .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .12em; color: #aaa4ba; }
+.workspace-box p { font-weight: 600; font-size: 14px; margin: 9px 0; }
+.workspace-box span, .sidebar-note, .team { font-size: 12px; line-height: 1.7; color: #aaa4ba; }
+nav { display: grid; gap: 6px; }
+nav a { padding: 11px 13px; border-radius: 9px; color: #aaa4ba; text-decoration: none; font-size: 14px; }
+nav a.active { background: #302440; color: #8655e8; font-weight: 650; }
+.sidebar-note { margin: 23px 12px; }
+.team { margin-top: auto; padding-top: 35px; }
+main { padding: 30px 42px; min-width: 0; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+h1 { font-size: 22px; font-weight: 650; margin: 8px 0 0; }
+.badge { font-size: 11px; border: 1px solid #34303f; border-radius: 20px; padding: 7px 12px; white-space: nowrap; }
+.health { margin-top: 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 18px; border: 1px solid #34303f; background: #211e2b; border-radius: 12px; font-size: 13px; }
+.secondary { background: #17161f; color: #eeeaf5; white-space: nowrap; font-size: 12px; }
+.dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 100%; background: #718794; }
+.dot.success { background: #168469; }.dot.error, .dot.database-error { background: #bd6539; }
+.chat { display: flex; flex-direction: column; min-height: calc(100dvh - 200px); max-width: 850px; margin: auto; }
+.empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 70px 24px; }
+.empty-icon { display: grid; place-items: center; background: #302440; color: #8655e8; border-radius: 18px; height: 62px; width: 62px; font-size: 36px; }
+h2 { font-weight: 600; font-size: 25px; margin: 23px 0 12px; }
+.empty p { max-width: 520px; color: #aaa4ba; font-size: 14px; line-height: 1.9; }
+.composer { border: 1px solid #34303f; border-radius: 18px; padding: 18px; background: #211e2b; margin-bottom: 15px; }
+textarea { display: block; width: 100%; border: 0; resize: none; background: transparent; font-size: 14px; }
+.composer small { color: #aaa4ba; font-size: 11px; }
+@media (max-width: 760px) { .app-shell { grid-template-columns: 1fr; }.sidebar { padding: 16px; }.workspace-box { margin: 15px 0; }nav { grid-template-columns: repeat(3, 1fr); }nav a { text-align: center; padding: 10px 4px; }.team, .sidebar-note { display: none; }main { padding: 22px 16px; }h1 { font-size: 18px; }.badge { display: none; }.health { align-items: flex-start; flex-direction: column; }.chat { min-height: 500px; }.empty { padding: 45px 10px; }h2 { font-size: 21px; } }
