@@ -2,7 +2,7 @@
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
-**Trạng thái cập nhật 04/10/2026:** người dùng đã chạy thành công React → FastAPI → PostgreSQL, báo kiểm thử/build đạt và push GitHub thành công. Kiểm tra trực tiếp repository local xác nhận commit `fcfbca1`, `main` khớp bản ghi `origin/main`, và 4 test frontend chạy lại đạt. Chưa xác minh lại GitHub trực tuyến hoặc chạy lại đầy đủ backend/build trong môi trường công cụ do giới hạn quyền. Xem [VALIDATION](docs/VALIDATION.md). Đã thử riêng Qwen3 4B Instruct và BGE-M3 thành công theo output người dùng; đã lưu JSON, thời gian và hướng dẫn chạy lại trong [MODEL_SMOKE_TEST](docs/MODEL_SMOKE_TEST.md). Còn lưu đủ minh chứng ứng dụng và bàn giao cho Khánh.
+**Trạng thái cập nhật 04/10/2026:** người dùng đã chạy thành công React → FastAPI → PostgreSQL, báo kiểm thử/build đạt và push GitHub thành công. Kiểm tra trực tiếp repository local xác nhận commit `fcfbca1`, `main` khớp bản ghi `origin/main`, và 4 test frontend chạy lại đạt. Chưa xác minh lại GitHub trực tuyến hoặc chạy lại đầy đủ backend/build trong môi trường công cụ do giới hạn quyền. Xem [VALIDATION](docs/VALIDATION.md). Đã thử riêng Qwen3 4B Instruct và BGE-M3 thành công theo output người dùng; đã lưu JSON, thời gian và hướng dẫn chạy lại trong [MODEL_SMOKE_TEST](docs/MODEL_SMOKE_TEST.md). Đã có log kiểm thử/build/migration và ảnh trong docs/evidence/week2 tại commit 3007e3a. Còn chờ Khánh xác nhận chạy thử.
 
 ## Đã có trong bộ mã
 
@@ -175,3 +175,7 @@ git push -u origin main
 | Thiếu bảng | Chạy `alembic upgrade head` trong đúng backend và DB |
 
 Tham khảo triển khai: [Vite](https://vite.dev/guide/), [Tailwind với Vite](https://tailwindcss.com/docs/installation/using-vite), [Alembic autogenerate](https://alembic.sqlalchemy.org/en/latest/autogenerate.html).
+
+## Minh chứng theo tuần
+
+Xem [quy ước thư mục và tag](docs/evidence/README.md). Giữ nguyên tag week-02; minh chứng tuần 3 lưu riêng trong docs/evidence/week3, không ghi đè tuần 2.

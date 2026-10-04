@@ -15,9 +15,9 @@ Máy theo ảnh Task Manager: Intel Core i5-12450H, RAM khoảng 16 GB (15,7 GB 
 
 ## Minh chứng
 
-- [Qwen3: phản hồi JSON](evidence/qwen3-4b-instruct-result.json), chép từ output người dùng.
-- [BGE-M3: phản hồi JSON](evidence/bge-m3-result.json), trích nguyên JSON từ file người dùng gửi.
-- [BGE-M3: lệnh và output gốc](evidence/bge-m3-cmd.txt).
+- [Qwen3: phản hồi JSON](evidence/week2/qwen3-4b-instruct-result.json), chép từ output người dùng.
+- [BGE-M3: phản hồi JSON](evidence/week2/bge-m3-result.json), trích nguyên JSON từ file người dùng gửi.
+- [BGE-M3: lệnh và output gốc](evidence/week2/bge-m3-cmd.txt).
 
 Kiểm tra cấu trúc: Qwen kết thúc stop, không bị cắt ở giới hạn token; BGE có đúng 1024 phần tử số hữu hạn, vector khác 0. Các kiểm tra này không đánh giá độ chính xác RAG hay chất lượng truy xuất.
 
@@ -38,10 +38,10 @@ Hai file request chỉ dùng thử model độc lập, chưa được gọi từ
 
 ## Vấn đề đã gặp
 
-Tag qwen3:4b đã cài trên máy báo metadata Thinking và thinking.values=[true]. Các lần yêu cầu tắt suy luận vẫn trả suy nghĩ dài rồi dừng do length. Chuyển sang tag Instruct cụ thể ở trên đã có câu trả lời hoàn chỉnh. Giữ [kết quả raw thất bại](evidence/qwen3-4b-raw-result.json) và request tools/qwen3-4b-raw-test.json chỉ để tra cứu chẩn đoán; không dùng làm cấu hình chính hay minh chứng PASS.
+Tag qwen3:4b đã cài trên máy báo metadata Thinking và thinking.values=[true]. Các lần yêu cầu tắt suy luận vẫn trả suy nghĩ dài rồi dừng do length. Chuyển sang tag Instruct cụ thể ở trên đã có câu trả lời hoàn chỉnh. Giữ [kết quả raw thất bại](evidence/week2/qwen3-4b-raw-result.json) và request tools/qwen3-4b-raw-test.json chỉ để tra cứu chẩn đoán; không dùng làm cấu hình chính hay minh chứng PASS.
 
 ## Việc còn lại
 
-- Lưu đủ output kiểm thử/build/migration và ảnh kết nối của ứng dụng; các xác nhận trước giữ nguồn trong VALIDATION.md.
+- Đã bổ sung output kiểm thử/build/migration và ảnh kết nối trong commit 3007e3a; xem VALIDATION.md.
 - Khánh clone repository, ghi commit bằng git rev-parse HEAD, chạy theo README và xác nhận kết quả. Chưa có xác nhận; chưa gửi tin nhắn cho Khánh.
 - Chưa triển khai RAG, pgvector, upload PDF hay chat AI trong ứng dụng ở bước này.

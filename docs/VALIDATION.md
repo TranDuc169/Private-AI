@@ -27,7 +27,7 @@ Phân biệt kiểm tra trực tiếp, ảnh trong cuộc trò chuyện và xác
 
 ## Kiểm tra lại bằng công cụ ngày 03/10
 
-Output thực tế lưu ở [evidence/2026-10-03-checks.txt](evidence/2026-10-03-checks.txt).
+Output thực tế lưu ở [evidence/week2/2026-10-03-checks.txt](evidence/week2/2026-10-03-checks.txt).
 
 - Node/npm và Git đã có. Working tree sạch trước khi cập nhật tài liệu; commit local `fcfbca1`.
 - `npm test`: đạt 4 test, dùng mock fetch.
@@ -46,3 +46,9 @@ Các hạn chế trên không phủ nhận kết quả chạy thành công trư�
 4. Khánh: commit đã clone và kết quả làm theo README.
 
 Không lưu .env, token hoặc mật khẩu vào minh chứng. Chạy thử model không đồng nghĩa hoàn thành RAG.
+
+## Minh chứng bổ sung đã có trong commit 3007e3a
+
+Đọc các file trong [week2](evidence/week2/): backend 3 test pass (1 cảnh báo deprecation), frontend 4 test pass, Vite build thành công, Alembic không phát hiện thay đổi schema, check_db PASS đủ 5 bảng, Docker healthy, health JSON ok/up. Đây là output đã lưu trong repo, không phải chạy lại ở lần cập nhật tài liệu này. commit.txt ghi revision được kiểm tra là 834e89f. Có ba file ảnh minh chứng; lần này chưa kiểm tra lại nội dung ảnh. Các mục thiếu output ở phần lịch sử trên mô tả thời điểm trước khi bổ sung.
+
+Tag week-02 đã có tại 3007e3a và được giữ nguyên. Xem [quy ước các tuần](evidence/README.md). Còn chờ Khánh xác nhận chạy thử.
