@@ -29,7 +29,7 @@ Người dùng đã xác nhận chạy tích hợp thành công, test/build đ�
 
 - Qwen3 4B Instruct và BGE-M3 đã chạy thử độc lập thành công theo JSON người dùng cung cấp: Qwen trả 3 câu tiếng Việt, stop, 87 token; BGE tạo 1 vector 1024 chiều. Đã lưu output, cấu hình máy đã biết và thời gian trong [MODEL_SMOKE_TEST.md](MODEL_SMOKE_TEST.md). Chưa tích hợp model vào ứng dụng.
 - Đã có log kiểm thử/build/migration và ảnh trong docs/evidence/week2 tại commit 3007e3a, tag week-02 giữ nguyên. Còn chờ Khánh clone repo và xác nhận chạy được.
-- Tuần 3: đã có auth/JWT, password hashing, workspace CRUD, kiểm tra ownership; cần người dùng/Khánh chạy nghiệm thu trên môi trường của mình trước khi chốt tag week-03.
+- Tuần 3: đã có auth/JWT, password hashing, workspace CRUD, kiểm tra ownership; người dùng đã báo chạy thử OK, ghi nhận riêng trong minh chứng tuần 3; còn chờ Khánh chạy thử. Mốc week-03 lưu code và minh chứng hiện có.
 - Tuần 4–5: upload/parse PDF, trạng thái xử lý, chunks, BGE-M3, pgvector.
 - Tuần 6–8: retrieval lọc workspace trước Top-K, RAG Qwen3/Ollama, citation và thiếu bằng chứng.
 - Tuần 9–10: summary/checklist/roadmap/quiz trong chat chung, lưu và mở lại lịch sử theo workspace.

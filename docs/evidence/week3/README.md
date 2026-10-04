@@ -17,4 +17,4 @@ Nguồn: trợ lý chạy trực tiếp trên bản thay đổi tuần 3, nền 
 
 Môi trường: Python 3.12.14 trong .venv-week3 riêng ngoài repo, phiên bản Python packages trong python-packages.txt; Vite 6.4.3. Không thay .venv Python 3.12 của người dùng. Đã bổ sung JWT_SECRET ngẫu nhiên vào backend/.env local bằng setup_auth.py; khóa không nằm trong log/repo. File requirements mô tả khoảng phiên bản; python-packages.txt ghi phiên bản lần kiểm tra này, không phải lockfile đa nền tảng.
 
-Chưa nghiệm thu bởi người dùng/Khánh; chưa gắn tag week-03. Không thay minh chứng week2 hay tag week-02. Các hạn chế triển khai hiện tại được ghi trong ../../WEEK3.md.
+Người dùng đã báo “test oke rồi”; phạm vi xác nhận và giới hạn ghi trong [user-confirmation-2026-10-05.md](user-confirmation-2026-10-05.md). Chưa có xác nhận của Khánh. Mốc week-03 chốt code và minh chứng hiện có. Không thay minh chứng week2 hay tag week-02. Các hạn chế triển khai hiện tại được ghi trong ../../WEEK3.md.

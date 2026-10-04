@@ -2,7 +2,7 @@
 
 ## Tuần 3
 
-Trợ lý chạy trực tiếp: 10 backend test đạt (SQLite tạm và health mock), 7 auth/workspace test đạt trên PostgreSQL với schema riêng, 6 frontend test đạt; build với configLoader runner đạt. Alembic check và check_db.py đạt trên DB local. Kiểm tra trình duyệt thật với hai tài khoản trên schema PostgreSQL tạm đạt; có ảnh desktop/mobile. Log và giới hạn cụ thể ở [week3/README.md](evidence/week3/README.md). Chưa có xác nhận nghiệm thu của người dùng hoặc Khánh cho tuần 3. Phần dưới là lịch sử tuần 2.
+Trợ lý chạy trực tiếp: 10 backend test đạt (SQLite tạm và health mock), 7 auth/workspace test đạt trên PostgreSQL với schema riêng, 6 frontend test đạt; build với configLoader runner đạt. Alembic check và check_db.py đạt trên DB local. Kiểm tra trình duyệt thật với hai tài khoản trên schema PostgreSQL tạm đạt; có ảnh desktop/mobile. Log và giới hạn cụ thể ở [week3/README.md](evidence/week3/README.md). Người dùng đã báo chạy thử OK; chưa cung cấp log mới hoặc phạm vi từng bài thử. Xem [xác nhận](evidence/week3/user-confirmation-2026-10-05.md). Chưa có xác nhận của Khánh. Phần dưới là lịch sử tuần 2.
 
 Phân biệt kiểm tra trực tiếp, ảnh trong cuộc trò chuyện và xác nhận bằng lời. Không coi test mock là minh chứng DB thật.
 

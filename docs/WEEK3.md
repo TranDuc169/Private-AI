@@ -126,6 +126,6 @@ git push origin main
 - git show --stat HEAD hiển thị tóm tắt các file trong commit mới nhất để bạn xem trước.
 - git push origin main gửi commit mới của main lên GitHub tên origin. Đây là push thường, không sửa lịch sử. Nếu remote có commit mới, dừng và đọc thông báo; không dùng --force.
 
-Chưa tạo tag week-03 trước khi bạn nghiệm thu. Tag week-02 vẫn chỉ đúng snapshot đã chốt, không di chuyển sang code tuần 3.
+Sau khi người dùng báo chạy thử OK, mốc week-03 được dùng để chốt code và minh chứng hiện có; chưa có xác nhận của Khánh. Tag week-02 vẫn chỉ đúng snapshot đã chốt, không di chuyển sang code tuần 3.
 
 Tham khảo cách dùng thư viện: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/
