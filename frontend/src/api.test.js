@@ -1,6 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getHealth } from './api.js';
+import { getHealth, apiRequest } from './api.js';
+
+test('authenticated requests send bearer and JSON; delete accepts empty 204', async () => {
+  const result = await apiRequest('/workspaces', { token: 'test-token', method: 'POST', body: { name: 'A' }, fetchImpl: async (url, options) => {
+    assert.ok(url.endsWith('/workspaces'));
+    assert.equal(options.headers.Authorization, 'Bearer test-token');
+    assert.equal(options.body, JSON.stringify({ name: 'A' }));
+    return Response.json({ id: 'a', name: 'A' }, { status: 201 });
+  } });
+  assert.equal(result.id, 'a');
+  assert.equal(await apiRequest('/workspaces/a', { method: 'DELETE', fetchImpl: async () => new Response(null, { status: 204 }) }), null);
+});
+
+test('401 retains status for session reset; validation errors are readable', async () => {
+  await assert.rejects(apiRequest('/workspaces', { fetchImpl: async () => Response.json({ detail: 'Expired' }, { status: 401 }) }), error => error.status === 401 && error.message === 'Expired');
+  await assert.rejects(apiRequest('/workspaces', { fetchImpl: async () => Response.json({ detail: [{ msg: 'invalid' }] }, { status: 422 }) }), error => error.status === 422 && !error.message.includes('[object Object]'));
+});
 
 test('health calls backend and accepts only the agreed healthy response', async () => {
   const result = await getHealth({ fetchImpl: async (url) => {

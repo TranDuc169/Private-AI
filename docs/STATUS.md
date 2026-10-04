@@ -1,4 +1,8 @@
-# Đối chiếu hiện trạng — cập nhật 04/10/2026
+# Đối chiếu hiện trạng — cập nhật 05/10/2026
+
+## Tuần 3
+
+Đã triển khai đăng ký/đăng nhập Argon2 + JWT, /auth/me, workspace CRUD theo chủ sở hữu, danh sách tài liệu/hội thoại theo workspace; có giao diện thật gọi API. Không thêm migration vì schema tuần 2 đã đủ. Token chỉ giữ trong bộ nhớ; tải lại trang cần đăng nhập lại. Chưa triển khai RAG hoặc upload. Xem [hướng dẫn](WEEK3.md) và [minh chứng mới](evidence/week3/README.md). Các phần dưới giữ bối cảnh lịch sử tuần 2.
 
 Đã đọc văn bản của `Phan_cong_12_tuan_Duc_Khanh.pdf` (7 trang) và `Bao_cao_tuan_01_RAG_rut_gon.pdf` (11 trang), đồng thời xem ảnh chat prototype trích từ báo cáo. Tài liệu là căn cứ mô tả/thiết kế; không coi danh sách công việc trong PDF là bằng chứng đã triển khai.
 
@@ -25,7 +29,7 @@ Người dùng đã xác nhận chạy tích hợp thành công, test/build đ�
 
 - Qwen3 4B Instruct và BGE-M3 đã chạy thử độc lập thành công theo JSON người dùng cung cấp: Qwen trả 3 câu tiếng Việt, stop, 87 token; BGE tạo 1 vector 1024 chiều. Đã lưu output, cấu hình máy đã biết và thời gian trong [MODEL_SMOKE_TEST.md](MODEL_SMOKE_TEST.md). Chưa tích hợp model vào ứng dụng.
 - Đã có log kiểm thử/build/migration và ảnh trong docs/evidence/week2 tại commit 3007e3a, tag week-02 giữ nguyên. Còn chờ Khánh clone repo và xác nhận chạy được.
-- Tuần 3: auth/JWT, password hashing, workspace CRUD, kiểm tra ownership.
+- Tuần 3: đã có auth/JWT, password hashing, workspace CRUD, kiểm tra ownership; cần người dùng/Khánh chạy nghiệm thu trên môi trường của mình trước khi chốt tag week-03.
 - Tuần 4–5: upload/parse PDF, trạng thái xử lý, chunks, BGE-M3, pgvector.
 - Tuần 6–8: retrieval lọc workspace trước Top-K, RAG Qwen3/Ollama, citation và thiếu bằng chứng.
 - Tuần 9–10: summary/checklist/roadmap/quiz trong chat chung, lưu và mở lại lịch sử theo workspace.

@@ -1,0 +1,5 @@
+SELECT 1: 1
+Database: private_ai
+Migration: 0001_initial
+Tables: conversations, documents, messages, users, workspaces
+PASS: PostgreSQL query and initial migration verified.

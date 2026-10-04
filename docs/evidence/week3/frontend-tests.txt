@@ -1,0 +1,18 @@
+
+> private-ai-frontend@0.2.0 test
+> node --test src/api.test.js
+
+✔ authenticated requests send bearer and JSON; delete accepts empty 204 (19.3095ms)
+✔ 401 retains status for session reset; validation errors are readable (0.9533ms)
+✔ health calls backend and accepts only the agreed healthy response (0.3984ms)
+✔ database outage is distinct from network failure (0.3338ms)
+✔ HTML fallback and unexpected JSON cannot report a healthy database (0.6312ms)
+✔ unexpected HTTP errors cannot report success (0.2649ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.0012

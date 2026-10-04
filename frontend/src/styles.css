@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+input, select { display: block; width: 100%; margin-top: 6px; border: 1px solid #655675; border-radius: 8px; padding: 10px; background: #17161f; color: #eeeaf5; font: inherit; }
+input:focus-visible, select:focus-visible { outline: 2px solid #b291f5; }
+label { font-size: 13px; }
+.stack { display: grid; gap: 12px; }
+.account-panel { max-width: 430px; margin: 40px auto; padding: 24px; background: #211e2b; border: 1px solid #393244; border-radius: 16px; }
+.account-panel p { line-height: 1.6; }
+.account-panel small, .data-panel small { color: #aaa4ba; }
+.account-email { overflow-wrap: anywhere; font-size: 13px; }
+.error-text { color: #ffb6a3; overflow-wrap: anywhere; }
+.data-panel { padding: 24px 0; }
+
 :root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #eeeaf5; background: #101016; font-synthesis: none; }
 * { box-sizing: border-box; }
 body { margin: 0; }

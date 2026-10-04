@@ -1,0 +1,2 @@
+PASS: live browser + FastAPI + isolated PostgreSQL schema
+Register/login, create/rename/select/delete workspace, document/history empty states, logout, second account isolation, reload clears session, mobile no horizontal overflow, no JS page errors.

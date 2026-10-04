@@ -8,7 +8,7 @@ from app.main import create_app
 
 
 def make_app():
-    return create_app(Settings(database_url="postgresql+psycopg://unused:unused@localhost/unused"))
+    return create_app(Settings(database_url="postgresql+psycopg://unused:unused@localhost/unused", jwt_secret="test-only-secret-at-least-32-characters"))
 
 
 def test_health_executes_database_query():

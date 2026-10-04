@@ -1,4 +1,6 @@
-# Private AI Knowledge Platform — Tuần 2
+# Private AI Knowledge Platform — Tuần 3
+
+**Bắt đầu tại [hướng dẫn tuần 3](docs/WEEK3.md): giải thích từng file thay đổi, từng lệnh CMD và cách kiểm tra bằng hai tài khoản.** Đã thêm đăng ký/đăng nhập JWT, Argon2, workspace CRUD và kiểm tra chủ sở hữu. Minh chứng mới: [week3](docs/evidence/week3/README.md). Tag week-02 và minh chứng week2 được giữ nguyên.
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
@@ -13,7 +15,7 @@ Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã
 - SQLAlchemy 2, cấu hình `.env`, session factory và Alembic migration đầu tiên.
 - Năm bảng nền tảng; documents và conversations gắn workspace, messages gắn conversation.
 
-Đăng nhập/JWT, CRUD workspace, upload/parse PDF, pgvector, BGE-M3, Qwen3, retrieval, citation, AI tasks và API lịch sử **chưa triển khai**. Có bảng trong DB không có nghĩa là đã có chức năng. Quyền sở hữu và cách ly truy cập cần triển khai, kiểm thử từ tuần 3. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
+Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Upload/parse PDF, pgvector, RAG, citation, gửi chat và mở nội dung hội thoại chưa triển khai. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
 
 ## 1. Chuẩn bị
 
@@ -42,7 +44,7 @@ Các lệnh sao chép `.env` dưới đây chỉ chạy lần đầu; không ghi
 Ở thư mục gốc:
 
 ```powershell
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 docker compose up -d --wait db
 docker compose ps
 ```
@@ -55,9 +57,10 @@ Mở terminal thứ hai từ thư mục gốc:
 
 ```powershell
 cd backend
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe setup_auth.py
 .\.venv\Scripts\python.exe -m alembic upgrade head
 .\.venv\Scripts\python.exe check_db.py
 .\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --reload --host 127.0.0.1 --port 8000
@@ -73,7 +76,7 @@ Mở terminal thứ ba từ thư mục gốc:
 
 ```powershell
 cd frontend
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 npm.cmd install
 npm.cmd run dev
 ```
@@ -129,7 +132,7 @@ Chờ DB sẵn sàng, nhấn kiểm tra lại: trạng thái thành công. Dừn
 
 React hiển thị giao diện; `src/api.js` tập trung lệnh HTTP để sau này thêm API dễ hơn. FastAPI nhận request rồi dùng engine SQLAlchemy kết nối PostgreSQL. Model mô tả bảng; Alembic ghi lại từng thay đổi bảng để hai máy có cùng schema. `.env` giữ cấu hình riêng của mỗi máy, `.env.example` là mẫu chia sẻ.
 
-Tài liệu và hội thoại đều có `workspace_id` bắt buộc. Message kế thừa phạm vi workspace thông qua conversation. Đây mới là nền tảng dữ liệu: tuần 3 cần xác thực user, kiểm tra ownership và lọc query; frontend không được tự coi workspace ID là quyền truy cập.
+Tài liệu và hội thoại đều có `workspace_id` bắt buộc. Message kế thừa phạm vi workspace thông qua conversation. Backend tuần 3 xác thực user, kiểm tra ownership và lọc query trước khi trả danh sách; frontend không được tự coi workspace ID là quyền truy cập.
 
 Xem [hiện trạng](docs/STATUS.md), [API contract](docs/API.md), [schema và ERD](docs/SCHEMA.md), [biên bản kiểm tra](docs/VALIDATION.md).
 
