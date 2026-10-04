@@ -1,0 +1,14 @@
+npm notice run private-ai-frontend@0.2.0 test
+npm notice run node --test src/api.test.js
+✔ health calls backend and accepts only the agreed healthy response (18.8164ms)
+✔ database outage is distinct from network failure (0.6754ms)
+✔ HTML fallback and unexpected JSON cannot report a healthy database (0.7215ms)
+✔ unexpected HTTP errors cannot report success (0.2807ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.3199
