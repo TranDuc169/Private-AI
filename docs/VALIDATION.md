@@ -1,4 +1,4 @@
-# Biên bản kiểm tra — cập nhật 03/10/2026
+# Biên bản kiểm tra — cập nhật 04/10/2026
 
 Phân biệt kiểm tra trực tiếp, ảnh trong cuộc trò chuyện và xác nhận bằng lời. Không coi test mock là minh chứng DB thật.
 
@@ -20,7 +20,8 @@ Phân biệt kiểm tra trực tiếp, ảnh trong cuộc trò chuyện và xác
 | PostgreSQL + migration + alembic check | Ảnh PostgreSQL Healthy, /health ok/up; người dùng báo check_db.py và alembic check đạt; chưa có output đầy đủ lưu trong repo |
 | React → FastAPI → PostgreSQL | Người dùng xác nhận thành công sau khi chạy lại backend |
 | Khánh chạy thử | Chưa có xác nhận |
-| BGE-M3 / Qwen3 | Chưa chạy, không nằm trong mã kết nối tuần 2 này |
+| Qwen3 4B Instruct | PASS chạy độc lập theo JSON người dùng gửi: 3 câu tiếng Việt, 87 token, stop; tổng 9,664 s |
+| BGE-M3 | PASS chạy độc lập theo JSON người dùng gửi: 1 vector 1024 chiều; tổng 5,236 s; trợ lý kiểm tra JSON và phần tử hữu hạn |
 
 Đã chạy 7 tình huống API client trên bản source cuối bằng Node REPL (mock fetch; không phải kết nối backend). Đã thêm test source cho backend và frontend cùng script `backend/check_db.py` kiểm tra DB thật. Lệnh và kết quả kỳ vọng ở README. Những test chưa thực thi không được tính là PASS.
 
@@ -40,8 +41,8 @@ Các hạn chế trên không phủ nhận kết quả chạy thành công trư�
 ## Minh chứng còn cần lưu để chốt tuần 2
 
 1. Ảnh kết nối xanh và /health trong cùng lần chạy; output pytest, alembic check, check_db.py, npm test và npm run build kèm ngày/commit.
-2. BGE-M3: một câu đầu vào, shape vector, thời gian encode; tách thời gian tải model khỏi suy luận.
-3. Qwen3 qua Ollama: tag model, câu hỏi/câu trả lời, thời gian; ghi CPU, RAM, GPU/VRAM và phiên bản công cụ. Chưa tải/chạy model trong lần cập nhật này.
+2. Đã lưu minh chứng BGE-M3 và Qwen3 tại [MODEL_SMOKE_TEST.md](MODEL_SMOKE_TEST.md), gồm request, phản hồi JSON, kích thước vector, thời gian tổng/nạp model và cấu hình máy đã biết. Chưa xác minh VRAM/tỷ lệ CPU-GPU; BGE không trả riêng thời gian encode.
+3. Kết quả model là smoke test từ output người dùng, chưa đánh giá chất lượng RAG. Không tính lần thử Thinking bị cắt token là PASS.
 4. Khánh: commit đã clone và kết quả làm theo README.
 
 Không lưu .env, token hoặc mật khẩu vào minh chứng. Chạy thử model không đồng nghĩa hoàn thành RAG.

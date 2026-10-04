@@ -2,7 +2,7 @@
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
-**Trạng thái cập nhật 03/10/2026:** người dùng đã chạy thành công React → FastAPI → PostgreSQL, báo kiểm thử/build đạt và push GitHub thành công. Kiểm tra trực tiếp repository local xác nhận commit `fcfbca1`, `main` khớp bản ghi `origin/main`, và 4 test frontend chạy lại đạt. Chưa xác minh lại GitHub trực tuyến hoặc chạy lại đầy đủ backend/build trong môi trường công cụ do giới hạn quyền. Xem [VALIDATION](docs/VALIDATION.md). Còn thử riêng BGE-M3/Qwen3, lưu minh chứng đầy đủ và bàn giao cho Khánh để chốt tuần 2.
+**Trạng thái cập nhật 04/10/2026:** người dùng đã chạy thành công React → FastAPI → PostgreSQL, báo kiểm thử/build đạt và push GitHub thành công. Kiểm tra trực tiếp repository local xác nhận commit `fcfbca1`, `main` khớp bản ghi `origin/main`, và 4 test frontend chạy lại đạt. Chưa xác minh lại GitHub trực tuyến hoặc chạy lại đầy đủ backend/build trong môi trường công cụ do giới hạn quyền. Xem [VALIDATION](docs/VALIDATION.md). Đã thử riêng Qwen3 4B Instruct và BGE-M3 thành công theo output người dùng; đã lưu JSON, thời gian và hướng dẫn chạy lại trong [MODEL_SMOKE_TEST](docs/MODEL_SMOKE_TEST.md). Còn lưu đủ minh chứng ứng dụng và bàn giao cho Khánh.
 
 ## Đã có trong bộ mã
 
@@ -13,7 +13,7 @@ Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã
 - SQLAlchemy 2, cấu hình `.env`, session factory và Alembic migration đầu tiên.
 - Năm bảng nền tảng; documents và conversations gắn workspace, messages gắn conversation.
 
-Đăng nhập/JWT, CRUD workspace, upload/parse PDF, pgvector, BGE-M3, Qwen3, retrieval, citation, AI tasks và API lịch sử **chưa triển khai**. Có bảng trong DB không có nghĩa là đã có chức năng. Quyền sở hữu và cách ly truy cập cần triển khai, kiểm thử từ tuần 3. Việc chạy thử model ghi trong PDF chưa thực hiện trong gói này.
+Đăng nhập/JWT, CRUD workspace, upload/parse PDF, pgvector, BGE-M3, Qwen3, retrieval, citation, AI tasks và API lịch sử **chưa triển khai**. Có bảng trong DB không có nghĩa là đã có chức năng. Quyền sở hữu và cách ly truy cập cần triển khai, kiểm thử từ tuần 3. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
 
 ## 1. Chuẩn bị
 
@@ -135,7 +135,7 @@ Xem [hiện trạng](docs/STATUS.md), [API contract](docs/API.md), [schema và E
 
 ## 7. Git và bàn giao cho Khánh
 
-Người dùng đã xác nhận push lần đầu. Commit local kiểm tra ngày 03/10/2026 là `fcfbca1`. Các cập nhật tài liệu sau đó chưa commit/push.
+Người dùng đã xác nhận push lần đầu. Commit local kiểm tra ngày 03/10/2026 là `fcfbca1`. Commit ec4fcc7 đã lưu lần cập nhật tài liệu trước. Dùng git log -1 --oneline để xem commit hiện tại; dùng git status -sb để kiểm tra trạng thái đồng bộ.
 
 Khánh mở CMD tại thư mục muốn lưu dự án:
 

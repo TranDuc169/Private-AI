@@ -1,4 +1,4 @@
-# Đối chiếu hiện trạng — cập nhật 03/10/2026
+# Đối chiếu hiện trạng — cập nhật 04/10/2026
 
 Đã đọc văn bản của `Phan_cong_12_tuan_Duc_Khanh.pdf` (7 trang) và `Bao_cao_tuan_01_RAG_rut_gon.pdf` (11 trang), đồng thời xem ảnh chat prototype trích từ báo cáo. Tài liệu là căn cứ mô tả/thiết kế; không coi danh sách công việc trong PDF là bằng chứng đã triển khai.
 
@@ -23,7 +23,8 @@ Người dùng đã xác nhận chạy tích hợp thành công, test/build đ�
 
 ## Phần còn thiếu theo lộ trình
 
-- Chốt tuần 2: lưu đủ ảnh/output test, build và migration trên máy người dùng; thử BGE-M3/Qwen3, ghi cấu hình/thời gian; Khánh clone repo và xác nhận chạy được. Phần chạy tích hợp và test/build đã được người dùng báo đạt.
+- Qwen3 4B Instruct và BGE-M3 đã chạy thử độc lập thành công theo JSON người dùng cung cấp: Qwen trả 3 câu tiếng Việt, stop, 87 token; BGE tạo 1 vector 1024 chiều. Đã lưu output, cấu hình máy đã biết và thời gian trong [MODEL_SMOKE_TEST.md](MODEL_SMOKE_TEST.md). Chưa tích hợp model vào ứng dụng.
+- Chốt tuần 2: còn lưu đủ ảnh/output test, build và migration trên máy người dùng; Khánh clone repo và xác nhận chạy được. Phần chạy tích hợp và test/build đã được người dùng báo đạt.
 - Tuần 3: auth/JWT, password hashing, workspace CRUD, kiểm tra ownership.
 - Tuần 4–5: upload/parse PDF, trạng thái xử lý, chunks, BGE-M3, pgvector.
 - Tuần 6–8: retrieval lọc workspace trước Top-K, RAG Qwen3/Ollama, citation và thiếu bằng chứng.

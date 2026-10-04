@@ -1,0 +1,11 @@
+{
+  "model": "qwen3:4b",
+  "prompt": "<|im_start|>user\nExplain RAG in Vietnamese in exactly 3 short sentences.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "raw": true,
+  "think": false,
+  "stream": false,
+  "options": {
+    "num_predict": 256,
+    "num_ctx": 2048
+  }
+}

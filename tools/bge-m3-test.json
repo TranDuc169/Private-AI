@@ -1,0 +1,4 @@
+{
+  "model": "bge-m3",
+  "input": "RAG retrieves relevant documents to answer questions."
+}
