@@ -11,6 +11,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.config import Settings
 from app.db import make_engine, make_session_factory
 from app.routes import router
+from app.documents import router as documents_router
+from app.upload_limit import UploadLimitMiddleware
 
 
 class HealthResponse(BaseModel):
@@ -32,9 +34,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             engine.dispose()
 
     # Resolve CORS configuration without requiring a database connection on import.
-    app = FastAPI(title="Private AI Knowledge Platform", version="0.3.0", lifespan=lifespan)
+    app = FastAPI(title="Private AI Knowledge Platform", version="0.4.0", lifespan=lifespan)
     app.state.settings = config
     app.include_router(router)
+    app.include_router(documents_router)
+    app.add_middleware(UploadLimitMiddleware, maximum=config.max_upload_bytes)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=config.cors_origins,

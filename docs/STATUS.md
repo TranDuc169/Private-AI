@@ -1,5 +1,9 @@
 # Đối chiếu hiện trạng — cập nhật 05/10/2026
 
+## Tuần 4
+
+Đã triển khai upload PDF thật theo workspace, lưu file riêng bằng UUID, metadata và trạng thái, trích xuất văn bản theo trang, xem văn bản và retry trên giao diện. Có giới hạn dung lượng/trang/ký tự/thời gian; kiểm tra quyền ở mọi API. Migration 0002_pdf_documents đã chạy trên DB local, số bản ghi cũ không đổi. Chưa có OCR, chunks, embedding, pgvector hoặc RAG. Xem [WEEK4](WEEK4.md) và [minh chứng tuần 4](evidence/week4/README.md). Chưa nghiệm thu bởi người dùng/Khánh, chưa gắn tag week-04. Các phần dưới mô tả các mốc trước.
+
 ## Tuần 3
 
 Đã triển khai đăng ký/đăng nhập Argon2 + JWT, /auth/me, workspace CRUD theo chủ sở hữu, danh sách tài liệu/hội thoại theo workspace; có giao diện thật gọi API. Không thêm migration vì schema tuần 2 đã đủ. Token chỉ giữ trong bộ nhớ; tải lại trang cần đăng nhập lại. Chưa triển khai RAG hoặc upload. Xem [hướng dẫn](WEEK3.md) và [minh chứng mới](evidence/week3/README.md). Các phần dưới giữ bối cảnh lịch sử tuần 2.

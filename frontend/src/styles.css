@@ -10,6 +10,13 @@ label { font-size: 13px; }
 .account-email { overflow-wrap: anywhere; font-size: 13px; }
 .error-text { color: #ffb6a3; overflow-wrap: anywhere; }
 .data-panel { padding: 24px 0; }
+.upload-panel, .text-preview { padding: 20px; margin: 16px 0; border: 1px solid #393244; background: #211e2b; border-radius: 12px; }
+.document-list { list-style: none; padding: 0; display: grid; gap: 12px; }
+.document-list li { padding: 16px; border: 1px solid #393244; border-radius: 12px; overflow-wrap: anywhere; }
+.document-list p { font-size: 13px; }
+.document-list button { white-space: normal; overflow-wrap: anywhere; }
+.text-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 500px; overflow: auto; font: inherit; line-height: 1.6; }
+.page-controls { display: flex; flex-wrap: wrap; gap: 8px; }
 
 :root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #eeeaf5; background: #101016; font-synthesis: none; }
 * { box-sizing: border-box; }

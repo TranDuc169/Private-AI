@@ -1,5 +1,9 @@
 # Biên bản kiểm tra — cập nhật 05/10/2026
 
+## Tuần 4
+
+Trợ lý chạy: backend 19 pass, 2 skip (hai test cần PostgreSQL); PostgreSQL 18 pass gồm migration dữ liệu cũ và khóa khi process đồng thời; frontend 7 pass, production build với configLoader runner pass; trình duyệt upload/trích xuất/đổi trang/đổi workspace/hai tài khoản pass. Đã nâng cấp DB local lên 0002_pdf_documents, số bản ghi trước/sau không đổi và alembic check đạt. Minh chứng và giới hạn tại [week4](evidence/week4/README.md). Chưa có xác nhận của người dùng/Khánh cho tuần 4. Phần bên dưới giữ lịch sử kết quả cũ.
+
 ## Tuần 3
 
 Trợ lý chạy trực tiếp: 10 backend test đạt (SQLite tạm và health mock), 7 auth/workspace test đạt trên PostgreSQL với schema riêng, 6 frontend test đạt; build với configLoader runner đạt. Alembic check và check_db.py đạt trên DB local. Kiểm tra trình duyệt thật với hai tài khoản trên schema PostgreSQL tạm đạt; có ảnh desktop/mobile. Log và giới hạn cụ thể ở [week3/README.md](evidence/week3/README.md). Người dùng đã báo chạy thử OK; chưa cung cấp log mới hoặc phạm vi từng bài thử. Xem [xác nhận](evidence/week3/user-confirmation-2026-10-05.md). Chưa có xác nhận của Khánh. Phần dưới là lịch sử tuần 2.

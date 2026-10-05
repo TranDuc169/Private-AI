@@ -1,10 +1,11 @@
 const baseUrl = (import.meta.env?.VITE_API_BASE_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
 
 export async function apiRequest(path, { token, method = 'GET', body, signal, fetchImpl = fetch } = {}) {
+  const multipart = body instanceof FormData;
   const response = await fetchImpl(`${baseUrl}${path}`, {
     method, signal, cache: 'no-store',
-    headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) },
-    ...(body ? { body: JSON.stringify(body) } : {}),
+    headers: { Accept: 'application/json', ...(body && !multipart ? { 'Content-Type': 'application/json' } : {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+    ...(body ? { body: multipart ? body : JSON.stringify(body) } : {}),
   });
   if (response.status === 204) return null;
   const data = await response.json();

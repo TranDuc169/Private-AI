@@ -1,6 +1,6 @@
-# Private AI Knowledge Platform — Tuần 3
+# Private AI Knowledge Platform — Tuần 4
 
-**Bắt đầu tại [hướng dẫn tuần 3](docs/WEEK3.md): giải thích từng file thay đổi, từng lệnh CMD và cách kiểm tra bằng hai tài khoản.** Đã thêm đăng ký/đăng nhập JWT, Argon2, workspace CRUD và kiểm tra chủ sở hữu. Minh chứng mới: [week3](docs/evidence/week3/README.md). Tag week-02 và minh chứng week2 được giữ nguyên.
+**Bắt đầu tại [hướng dẫn tuần 4](docs/WEEK4.md): giải thích upload PDF, trích xuất văn bản, từng file thay đổi và từng lệnh CMD.** Có upload thật theo workspace, trạng thái, xem văn bản theo trang và retry. Cần cài thư viện backend mới và chạy Alembic upgrade head. Minh chứng mới: [week4](docs/evidence/week4/README.md). Giữ nguyên tag/minh chứng tuần 2–3; lịch sử thiết lập cơ bản ở dưới.
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
@@ -15,7 +15,7 @@ Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã
 - SQLAlchemy 2, cấu hình `.env`, session factory và Alembic migration đầu tiên.
 - Năm bảng nền tảng; documents và conversations gắn workspace, messages gắn conversation.
 
-Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Upload/parse PDF, pgvector, RAG, citation, gửi chat và mở nội dung hội thoại chưa triển khai. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
+Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Tuần 4 đã có upload và trích xuất văn bản PDF; pgvector, RAG, citation, gửi chat và mở nội dung hội thoại chưa triển khai. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
 
 ## 1. Chuẩn bị
 
@@ -66,7 +66,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --reload --host 127.0.0.1 --port 8000
 ```
 
-Không cần kích hoạt virtualenv hoặc đổi PowerShell execution policy. `check_db.py` phải in `SELECT 1: 1`, migration `0001_initial`, đủ 5 bảng và dòng PASS. Migration tạo cấu trúc bảng, không tạo tài khoản hoặc dữ liệu mẫu. Không dùng `create_all()` khi khởi động API.
+Không cần kích hoạt virtualenv hoặc đổi PowerShell execution policy. `check_db.py` phải in `SELECT 1: 1`, migration `0002_pdf_documents`, đủ 6 bảng và dòng PASS. Migration tạo cấu trúc bảng, không tạo tài khoản hoặc dữ liệu mẫu. Không dùng `create_all()` khi khởi động API.
 
 Swagger: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). API: [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
 

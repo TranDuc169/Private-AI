@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { getHealth } from './api.js';
 import { Login, WorkspacePicker, WorkspaceList } from './Account.jsx';
+import Documents from './Documents.jsx';
 
 function HealthStatus() {
   const [state, setState] = useState({ kind: 'loading', message: 'Đang kiểm tra kết nối…' });
@@ -92,11 +93,11 @@ export default function App() {
       <div className="team">Đức · Backend / Database<br />Khánh · Frontend / UI</div>
     </aside>
     <main>
-      <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 03</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài khoản và workspace</span></header>
+      <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 04</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài liệu PDF</span></header>
       <HealthStatus />
       {!session ? <Login onLogin={onLogin} notice={notice} /> : <Routes>
         <Route path="/" element={<Chat workspace={workspace} />} />
-        <Route path="/documents" element={workspace ? <WorkspaceList key={`${workspace.id}-documents`} token={session.access_token} workspace={workspace} kind="documents" onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem tài liệu.</EmptyState>} />
+        <Route path="/documents" element={workspace ? <Documents key={`${workspace.id}-documents`} token={session.access_token} workspace={workspace} onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem tài liệu.</EmptyState>} />
         <Route path="/history" element={workspace ? <WorkspaceList key={`${workspace.id}-history`} token={session.access_token} workspace={workspace} kind="conversations" onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem lịch sử.</EmptyState>} />
         <Route path="*" element={<EmptyState title="Không tìm thấy trang">Chọn Chat chung, Tài liệu hoặc Lịch sử ở thanh điều hướng.</EmptyState>} />
       </Routes>}

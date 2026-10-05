@@ -17,10 +17,10 @@ SECRET = "test-only-secret-at-least-32-characters"
 
 
 @pytest.fixture
-def client(monkeypatch):
+def client(monkeypatch, tmp_path):
     # Optional PostgreSQL run uses a unique schema, never application tables.
     url = os.environ.get("TEST_DATABASE_URL")
-    schema = "test_week3_" + uuid.uuid4().hex
+    schema = "test_private_ai_" + uuid.uuid4().hex
     if url:
         admin = create_engine(url)
         with admin.begin() as connection:
@@ -33,7 +33,7 @@ def client(monkeypatch):
             connection.execute("PRAGMA foreign_keys=ON")
     Base.metadata.create_all(engine)
     monkeypatch.setattr("app.main.make_engine", lambda _: engine)
-    settings = Settings(database_url="postgresql+psycopg://unused", jwt_secret=SECRET, _env_file=None)
+    settings = Settings(database_url="postgresql+psycopg://unused", jwt_secret=SECRET, storage_dir=tmp_path / "storage", max_upload_bytes=1024 * 1024, max_pdf_pages=3, _env_file=None)
     try:
         with TestClient(create_app(settings)) as test_client:
             yield test_client

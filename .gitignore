@@ -9,3 +9,4 @@ __pycache__/
 node_modules/
 dist/
 frontend/npm-install-log.txt
+backend/storage/

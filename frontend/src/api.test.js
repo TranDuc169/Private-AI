@@ -2,6 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getHealth, apiRequest } from './api.js';
 
+test('PDF upload sends FormData without overriding the multipart boundary', async () => {
+  const form = new FormData(); form.append('file', new Blob(['%PDF-1.7'], { type: 'application/pdf' }), 'sample.pdf');
+  await apiRequest('/workspaces/w/documents', { token: 'jwt', method: 'POST', body: form, fetchImpl: async (url, options) => {
+    assert.equal(options.body, form);
+    assert.equal(options.headers['Content-Type'], undefined);
+    assert.equal(options.headers.Authorization, 'Bearer jwt');
+    return Response.json({ status: 'uploaded' }, { status: 201 });
+  } });
+});
+
 test('authenticated requests send bearer and JSON; delete accepts empty 204', async () => {
   const result = await apiRequest('/workspaces', { token: 'test-token', method: 'POST', body: { name: 'A' }, fetchImpl: async (url, options) => {
     assert.ok(url.endsWith('/workspaces'));

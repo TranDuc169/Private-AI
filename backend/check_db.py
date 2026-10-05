@@ -10,12 +10,12 @@ try:
         print("SELECT 1:", connection.execute(text("SELECT 1")).scalar_one())
         print("Database:", connection.execute(text("SELECT current_database()")).scalar_one())
         revision = connection.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-        assert revision == "0001_initial", f"Unexpected migration: {revision}"
-        expected = {"users", "workspaces", "documents", "conversations", "messages"}
+        assert revision == "0002_pdf_documents", f"Unexpected migration: {revision}"
+        expected = {"users", "workspaces", "documents", "document_pages", "conversations", "messages"}
         actual = set(inspect(connection).get_table_names())
         assert expected <= actual, f"Missing tables: {expected - actual}"
         print("Migration:", revision)
         print("Tables:", ", ".join(sorted(expected)))
-        print("PASS: PostgreSQL query and initial migration verified.")
+        print("PASS: PostgreSQL query and week 4 migration verified.")
 finally:
     engine.dispose()

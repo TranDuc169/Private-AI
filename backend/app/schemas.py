@@ -46,6 +46,16 @@ class DocumentOut(BaseModel):
     workspace_id: UUID
     filename: str
     created_at: datetime
+    size_bytes: int
+    status: str
+    page_count: int | None
+    error_message: str | None
+
+
+class PageOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    page_number: int
+    text: str
 
 
 class ConversationOut(BaseModel):

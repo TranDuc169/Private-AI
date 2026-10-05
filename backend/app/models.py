@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, Text, func
+from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Integer, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
@@ -28,8 +28,20 @@ class Workspace(IdTimestampMixin, Base):
 
 class Document(IdTimestampMixin, Base):
     __tablename__ = "documents"
+    __table_args__ = (CheckConstraint("status IN ('uploaded', 'ready', 'failed')", name="ck_documents_status"),)
     workspace_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("workspaces.id"), index=True)
     filename: Mapped[str] = mapped_column(String(255))
+    size_bytes: Mapped[int] = mapped_column(Integer, server_default="0")
+    status: Mapped[str] = mapped_column(String(20), server_default="uploaded")
+    page_count: Mapped[int | None] = mapped_column(Integer)
+    error_message: Mapped[str | None] = mapped_column(String(500))
+
+
+class DocumentPage(Base):
+    __tablename__ = "document_pages"
+    document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("documents.id", ondelete="CASCADE"), primary_key=True)
+    page_number: Mapped[int] = mapped_column(Integer, primary_key=True)
+    text: Mapped[str] = mapped_column(Text)
 
 
 class Conversation(IdTimestampMixin, Base):

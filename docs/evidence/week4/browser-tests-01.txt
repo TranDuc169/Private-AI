@@ -1,0 +1,2 @@
+PASS: browser Edge + real FastAPI + isolated PostgreSQL schema
+Upload two-page PDF, extract text, preview pages 1 and 2; blank/scan PDF fails with OCR message; switch workspace clears preview and list; returning reloads saved documents; second account has no access via UI; mobile no horizontal overflow; no JS page errors.

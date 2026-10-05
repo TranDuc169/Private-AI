@@ -9,6 +9,6 @@ from app.config import Settings
 if __name__ == "__main__":
     environment = dict(os.environ, TEST_DATABASE_URL=Settings().database_url)
     raise SystemExit(subprocess.call(
-        [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "tests/test_auth_workspaces.py"],
+        [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "tests/test_auth_workspaces.py", "tests/test_documents.py", "tests/test_pdf_migration.py"],
         cwd=Path(__file__).resolve().parent, env=environment,
     ))

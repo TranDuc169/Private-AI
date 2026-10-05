@@ -1,0 +1,5 @@
+SELECT 1: 1
+Database: private_ai
+Migration: 0002_pdf_documents
+Tables: conversations, document_pages, documents, messages, users, workspaces
+PASS: PostgreSQL query and week 4 migration verified.

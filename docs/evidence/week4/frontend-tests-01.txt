@@ -1,0 +1,19 @@
+
+> private-ai-frontend@0.2.0 test
+> node --test src/api.test.js
+
+✔ PDF upload sends FormData without overriding the multipart boundary (27.8171ms)
+✔ authenticated requests send bearer and JSON; delete accepts empty 204 (0.4136ms)
+✔ 401 retains status for session reset; validation errors are readable (0.7324ms)
+✔ health calls backend and accepts only the agreed healthy response (0.356ms)
+✔ database outage is distinct from network failure (0.4624ms)
+✔ HTML fallback and unexpected JSON cannot report a healthy database (1.0899ms)
+✔ unexpected HTTP errors cannot report success (0.3759ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 167.0159

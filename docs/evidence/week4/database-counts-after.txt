@@ -1,0 +1,2 @@
+AFTER migration
+{'users': 2, 'workspaces': 1, 'documents': 0, 'conversations': 0, 'messages': 0}
