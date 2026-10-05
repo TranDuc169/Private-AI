@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getHealth, apiRequest } from './api.js';
+import { extractionNotice, uploadFailureNotice } from './pdfStatus.js';
+
+test('upload feedback distinguishes extraction failures from rejected or uncertain uploads', () => {
+  assert.equal(extractionNotice({ filename: 'notes.pdf', status: 'ready', page_count: 2 }).kind, 'success');
+  const failed = extractionNotice({ filename: 'scan.pdf', status: 'failed', error_message: 'OCR chưa hỗ trợ' });
+  assert.equal(failed.kind, 'warning');
+  assert.match(failed.title, /Tải lên thành công/);
+  assert.match(failed.message, /OCR/);
+  assert.equal(uploadFailureNotice({ status: 413, message: 'File quá lớn' }, null).title, 'Tải lên thất bại');
+  assert.match(uploadFailureNotice(new TypeError('Failed to fetch'), null).title, /chưa xác nhận/);
+  assert.match(uploadFailureNotice(new TypeError('Failed to fetch'), { id: 'saved' }).title, /File đã lưu/);
+});
 
 test('PDF upload sends FormData without overriding the multipart boundary', async () => {
   const form = new FormData(); form.append('file', new Blob(['%PDF-1.7'], { type: 'application/pdf' }), 'sample.pdf');

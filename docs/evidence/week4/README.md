@@ -20,3 +20,16 @@ Môi trường kiểm thử: Python 3.12.14 tại .venv-week3 ngoài repo (tái 
 Các bài thử kiểm tra quyền đọc/process/upload theo workspace, filename traversal, file trùng tên, file quá lớn (có và không Content-Length), PDF hỏng/mã hóa/không chữ/quá số trang, giới hạn ký tự, timeout, retry, mất file gốc và dọn file khi DB commit lỗi. Migration test riêng có bản ghi legacy documents để chứng minh giữ tài khoản/workspace/tài liệu cũ và đánh dấu đúng tài liệu thiếu file; database local thực tế chưa có tài liệu cũ.
 
 Không đánh giá chất lượng OCR hoặc RAG; hai chức năng đó chưa triển khai. Nguồn mô tả và lệnh chạy lại: ../../WEEK4.md.
+
+## Bổ sung nút đính kèm và phản hồi upload
+
+Người dùng đã báo chạy upload thành công trước khi yêu cầu bổ sung giao diện. Các kết quả cũ phía trên giữ nguyên để đối chiếu; chưa có xác nhận Khánh chạy thử hoặc tag week-04.
+
+- frontend-tests-upload-feedback.txt: 8 test pass, bổ sung phân biệt upload bị từ chối, mất kết nối chưa rõ kết quả, file đã lưu nhưng chưa đọc được chữ và thành công.
+- frontend-build-upload-feedback.txt: build thành công với configLoader runner.
+- browser-upload-feedback.txt: kiểm tra Edge với FastAPI/PostgreSQL schema tạm; upload từ Chat rồi xem trong Tài liệu, PDF không chữ, giả PDF, kéo thả, bỏ chọn, đổi workspace và mất kết nối giả lập. Nút AI vẫn bị khóa. Không lỗi JavaScript hoặc tràn ngang mobile.
+- 04-chat-attachment-success.png: upload và trích xuất từ Chat thành công.
+- 05-upload-success-parse-failure.png: file đã lưu nhưng không đọc được chữ.
+- 06-mobile-chat-upload-error.png: thông báo mất kết nối giả lập trên màn hình 390 px.
+
+Đã xem trực tiếp ảnh desktop và mobile. Chỉ dùng PDF thử nghiệm, tài khoản/schema và kho file tạm riêng. Bổ sung này không sửa backend, không thay đổi migration hoặc minh chứng tuần 2–3.

@@ -17,6 +17,20 @@ label { font-size: 13px; }
 .document-list button { white-space: normal; overflow-wrap: anywhere; }
 .text-preview pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 500px; overflow: auto; font: inherit; line-height: 1.6; }
 .page-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.pdf-upload { display: grid; gap: 12px; }
+.pdf-upload.compact { margin: 8px 0 18px; padding: 12px; border: 1px dashed #655675; border-radius: 10px; }
+.pdf-upload.dragging { outline: 2px solid #b291f5; background: #302440; }
+.attachment-controls, .selected-file { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.attachment-controls small, .selected-file span { overflow-wrap: anywhere; min-width: 0; }
+.selected-file { border: 1px solid #655675; border-radius: 9px; padding: 10px; }
+.selected-file span { flex: 1 1 160px; font-size: 13px; }
+.upload-notice { border: 1px solid #655675; border-radius: 10px; padding: 12px; overflow-wrap: anywhere; font-size: 13px; }
+.upload-notice p { margin: 6px 0 0; line-height: 1.6; }
+.upload-notice.success { background: #12392e; border-color: #33836b; }
+.upload-notice.warning { background: #3d311b; border-color: #a3843b; }
+.upload-notice.error { background: #422528; border-color: #be6a75; }
+.upload-notice.progress { background: #302440; }
+.document-link { color: #cbb6ff; font-size: 13px; }
 
 :root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #eeeaf5; background: #101016; font-synthesis: none; }
 * { box-sizing: border-box; }

@@ -3,6 +3,7 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import { getHealth } from './api.js';
 import { Login, WorkspacePicker, WorkspaceList } from './Account.jsx';
 import Documents from './Documents.jsx';
+import PdfUpload from './PdfUpload.jsx';
 
 function HealthStatus() {
   const [state, setState] = useState({ kind: 'loading', message: 'Đang kiểm tra kết nối…' });
@@ -51,20 +52,21 @@ function EmptyState({ title, children }) {
   </div>;
 }
 
-function Chat({ workspace }) {
+function Chat({ workspace, token, onUnauthorized }) {
   return <section className="chat">
     <EmptyState title="Tri thức riêng, trong một cuộc trò chuyện">
       Hỏi đáp, tóm tắt, roadmap, checklist và quiz sẽ cùng dùng một ô chat.
       {workspace ? ` Workspace hiện tại: ${workspace.name}.` : ' Hãy chọn hoặc tạo workspace.'} Chức năng trả lời AI chưa khả dụng.
     </EmptyState>
-    <form className="composer" onSubmit={(event) => event.preventDefault()}>
+    <div className="composer">
       <label htmlFor="message" className="sr-only">Nội dung chat</label>
-      <textarea id="message" rows={3} disabled placeholder="Chat sẽ khả dụng sau khi có workspace và API RAG." />
+      <textarea id="message" rows={3} disabled placeholder="Bạn có thể đính kèm PDF bên dưới. Chat AI sẽ có ở giai đoạn tiếp theo." />
+      <PdfUpload compact token={token} workspace={workspace} onUnauthorized={onUnauthorized} />
       <div className="flex items-center justify-between gap-4">
         <small>Chưa có chức năng trả lời AI</small>
         <button disabled>Gửi ↑</button>
       </div>
-    </form>
+    </div>
   </section>;
 }
 
@@ -96,7 +98,7 @@ export default function App() {
       <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 04</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài liệu PDF</span></header>
       <HealthStatus />
       {!session ? <Login onLogin={onLogin} notice={notice} /> : <Routes>
-        <Route path="/" element={<Chat workspace={workspace} />} />
+        <Route path="/" element={<Chat key={workspace?.id || 'no-workspace'} workspace={workspace} token={session.access_token} onUnauthorized={expire} />} />
         <Route path="/documents" element={workspace ? <Documents key={`${workspace.id}-documents`} token={session.access_token} workspace={workspace} onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem tài liệu.</EmptyState>} />
         <Route path="/history" element={workspace ? <WorkspaceList key={`${workspace.id}-history`} token={session.access_token} workspace={workspace} kind="conversations" onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem lịch sử.</EmptyState>} />
         <Route path="*" element={<EmptyState title="Không tìm thấy trang">Chọn Chat chung, Tài liệu hoặc Lịch sử ở thanh điều hướng.</EmptyState>} />

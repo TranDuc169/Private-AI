@@ -1,0 +1,2 @@
+PASS: Edge browser with live FastAPI/PostgreSQL isolated schema.
+Chat PDF attachment disabled without workspace; real PDF uploads from Chat and appears in Documents; AI send stays disabled. Scan PDF saved but extraction failure shown as warning. Fake PDF rejected as upload failure. Drag/drop selects file, remove selection works. Workspace change clears selection. Simulated network failure explicitly reports uncertain outcome; mobile no horizontal overflow; no JS page errors.

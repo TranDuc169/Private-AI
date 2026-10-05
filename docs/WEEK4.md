@@ -15,6 +15,17 @@ Upload và process là hai request riêng. Trong khi process chạy, giao diện
 
 ## Từng thay đổi trong code
 
+Bổ sung giao diện: nút **+ Đính kèm PDF** nằm ngay trong khung chat. Trang **Tài liệu** vẫn là nơi xem danh sách, đọc văn bản từng trang và thử trích xuất lại. Cả hai nơi dùng chung `frontend/src/PdfUpload.jsx`, nên cùng cách chọn/kéo thả và gọi API; không tạo hai luồng lưu file khác nhau. `frontend/src/pdfStatus.js` quyết định thông báo theo kết quả thật từ backend.
+
+- Chọn hoặc kéo thả PDF chỉ chọn file trên máy. Bấm **Tải lên và trích xuất** mới gửi file. **Bỏ chọn** không xóa tài liệu đã lưu.
+- Trong khi chạy, giao diện lần lượt báo đang tải lên và đang đọc văn bản.
+- Màu xanh: đã lưu và đọc được chữ. Màu vàng: đã lưu nhưng đọc chữ thất bại hoặc chưa xác nhận được kết quả đọc. Màu đỏ: bị từ chối tải lên hoặc mất kết nối; thông báo nêu rõ trường hợp nào.
+- Mất kết nối không chứng minh file chưa được lưu. Kiểm tra danh sách trước khi tải lại để tránh tạo bản sao.
+- Đổi workspace xóa lựa chọn file và thông báo cũ. File đã lưu vẫn thuộc workspace ban đầu. Chưa chọn workspace thì nút đính kèm bị khóa.
+- Nút gửi chat AI vẫn bị khóa: đọc PDF thành công chưa có nghĩa đã có RAG.
+
+Bản bổ sung này chỉ sửa frontend, không thêm thư viện hoặc migration. Nếu Vite đang chạy, giao diện tự cập nhật; nếu chưa, mở CMD tại thư mục frontend và chạy `npm.cmd run dev`. Lệnh này khởi động máy chủ giao diện để bạn kiểm tra trên trình duyệt. Khi tải lại trang, đăng nhập lại vì token hiện chỉ giữ trong bộ nhớ.
+
 | File | Vai trò |
 |---|---|
 | backend/app/models.py | Thêm dung lượng, trạng thái, số trang, lý do lỗi của Document; thêm DocumentPage lưu chữ theo trang. |
