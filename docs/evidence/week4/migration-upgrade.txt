@@ -1,0 +1,5 @@
+Execution record (not raw Alembic output), 2026-10-05:
+Ran python -m alembic upgrade head using the isolated test Python against the configured local application PostgreSQL database.
+The command completed with exit code 0 and produced no console output.
+Verified separately: database-after.txt reports 0002_pdf_documents; alembic-check.txt reports no new upgrade operations.
+database-before.txt and database-counts-after.txt show unchanged counts in all five pre-existing tables.
