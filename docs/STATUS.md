@@ -1,5 +1,9 @@
 # Đối chiếu hiện trạng — cập nhật 05/10/2026
 
+## Tuần 5
+
+Đã triển khai chia đoạn 1.200 ký tự/overlap 200 theo trang, gọi BGE-M3 qua Ollama, migration vector(1024), trạng thái index độc lập, retry, chi tiết đoạn và xóa tài liệu có xác nhận/cascade. Đã thử BGE-M3 thật qua UI trên SQLite tạm; PostgreSQL local chưa có extension vector tại thời điểm kiểm tra, chưa chạy migration hoặc xác minh lưu pgvector thật. Không coi SQLite hoặc SQL offline là nghiệm thu pgvector. Xem [WEEK5](WEEK5.md) và [minh chứng](evidence/week5/README.md). Chưa có RAG/tìm kiếm, chưa gắn tag week-05.
+
 ## Tuần 4
 
 Đã triển khai upload PDF thật theo workspace, lưu file riêng bằng UUID, metadata và trạng thái, trích xuất văn bản theo trang, xem văn bản và retry trên giao diện. Có giới hạn dung lượng/trang/ký tự/thời gian; kiểm tra quyền ở mọi API. Migration 0002_pdf_documents đã chạy trên DB local, số bản ghi cũ không đổi. Chưa có OCR, chunks, embedding, pgvector hoặc RAG. Xem [WEEK4](WEEK4.md) và [minh chứng tuần 4](evidence/week4/README.md). Chưa nghiệm thu bởi người dùng/Khánh, chưa gắn tag week-04. Các phần dưới mô tả các mốc trước.

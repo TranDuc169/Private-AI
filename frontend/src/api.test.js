@@ -4,7 +4,7 @@ import { getHealth, apiRequest } from './api.js';
 import { extractionNotice, uploadFailureNotice } from './pdfStatus.js';
 
 test('upload feedback distinguishes extraction failures from rejected or uncertain uploads', () => {
-  assert.equal(extractionNotice({ filename: 'notes.pdf', status: 'ready', page_count: 2 }).kind, 'success');
+  assert.equal(extractionNotice({ filename: 'notes.pdf', status: 'ready', page_count: 2 }).kind, 'warning');
   const failed = extractionNotice({ filename: 'scan.pdf', status: 'failed', error_message: 'OCR chưa hỗ trợ' });
   assert.equal(failed.kind, 'warning');
   assert.match(failed.title, /Tải lên thành công/);
@@ -64,4 +64,12 @@ test('HTML fallback and unexpected JSON cannot report a healthy database', async
 
 test('unexpected HTTP errors cannot report success', async () => {
   await assert.rejects(getHealth({ fetchImpl: async () => new Response('{"detail":"error"}', { status: 500 }) }), /HTTP 500/);
+});
+
+
+test('only completed indexing can mark a document ready for search', () => {
+  assert.equal(extractionNotice({ status: 'ready', index_status: 'pending' }).kind, 'warning');
+  assert.equal(extractionNotice({ status: 'ready', index_status: 'processing' }).kind, 'progress');
+  assert.equal(extractionNotice({ status: 'ready', index_status: 'failed', index_error: 'Ollama off' }).message, 'Ollama off');
+  assert.equal(extractionNotice({ status: 'ready', index_status: 'ready', chunk_count: 2 }).title, 'Tài liệu sẵn sàng tìm kiếm');
 });

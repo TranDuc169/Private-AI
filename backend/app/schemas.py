@@ -50,6 +50,25 @@ class DocumentOut(BaseModel):
     status: str
     page_count: int | None
     error_message: str | None
+    index_status: str
+    index_error: str | None
+    index_started_at: datetime | None
+    indexed_at: datetime | None
+    chunk_count: int
+    embedding_model: str | None
+
+
+class ChunkOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: UUID
+    document_id: UUID
+    chunk_index: int
+    page_number: int
+    start_char: int
+    end_char: int
+    text: str
+    embedding_model: str
+    embedding_dimensions: int = 1024
 
 
 class PageOut(BaseModel):

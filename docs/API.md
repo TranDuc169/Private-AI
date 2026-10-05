@@ -1,4 +1,16 @@
-# API contract v0.4
+# API contract v0.5
+
+## Index và quản lý tài liệu — tuần 5
+
+Các route này có cùng tiền tố `/workspaces/{workspace_id}/documents` và yêu cầu JWT + owner như API PDF.
+
+| Method / suffix | Kết quả |
+|---|---|
+| POST /{document_id}/index | Đồng bộ; 200 DocumentOut với index_status ready/failed; 409 nếu chưa đọc chữ hoặc lượt khác đang chạy; 503 nếu lưu DB lỗi. Tài liệu ready trả lại kết quả cũ, không tạo trùng. |
+| GET /{document_id}/chunks?offset=0&limit=5 | Tối đa 20 đoạn; 409 nếu chưa index ready; gồm id, document_id, chunk_index từ 0, page_number từ 1, start_char/end_char, text, embedding_model và embedding_dimensions=1024. Không trả vector thô. |
+| DELETE /{document_id} | 204 khi dọn xong; 404 nếu không thuộc workspace; 409 nếu đang xử lý; 503 nếu lỗi DB/file. Xóa dây chuyền pages/chunks và file PDF gốc. |
+
+DocumentOut bổ sung index_status (pending/processing/ready/failed), index_error, index_started_at, indexed_at, chunk_count, embedding_model. Không trả index_job_id nội bộ. Trường status=ready cũ chỉ là đọc chữ xong. Frontend hỏi lại GET danh sách mỗi 3 giây khi có processing. Lease 15 phút cho phép retry sau server crash; chưa có queue tự phục hồi.
 
 ## PDF — tuần 4
 
@@ -18,7 +30,7 @@ Upload trả 415 nếu tên/định dạng không phải PDF, 413 nếu quá dun
 
 Process đồng bộ, giới hạn 30 giây, 200 trang và 2 triệu ký tự; đọc ở subprocess. Không nhận password PDF, không OCR. Trạng thái uploaded/failed giữ nguyên trong transaction cho đến khi process kết thúc. Nếu request khác giữ khóa document, trả 409; nếu process ready đã xong, trả kết quả cũ, không tạo trang trùng. Không có durable queue. GET pages khi chưa ready trả 409. Văn bản chỉ là plain text, không giữ nguyên layout PDF.
 
-Lỗi parser/timeout được lưu failed và thông báo an toàn, không trả stacktrace hay đường dẫn máy chủ. Lỗi lưu file/DB trả 503; lỗi ràng buộc khi workspace thay đổi trong lúc upload trả 409. File upload dở được dọn khi thất bại thông thường; việc crash/ổ đĩa lỗi có thể cần đối soát file mồ côi. Chưa có API xóa tài liệu hoặc tải file gốc.
+Lỗi parser/timeout được lưu failed và thông báo an toàn, không trả stacktrace hay đường dẫn máy chủ. Lỗi lưu file/DB trả 503; lỗi ràng buộc khi workspace thay đổi trong lúc upload trả 409. File upload dở được dọn khi thất bại thông thường; việc crash/ổ đĩa lỗi có thể cần đối soát file mồ côi. API xóa tài liệu đã được bổ sung ở tuần 5; chưa có API tải file gốc.
 
 ## GET /health
 

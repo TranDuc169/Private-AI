@@ -1,3 +1,7 @@
+## Tuần 5 — xem kết quả mới
+
+Kiểm thử và giới hạn xác minh ghi tại [docs/evidence/week5](evidence/week5/README.md). BGE-M3 đã gọi thật trong browser test dùng SQLite tạm; kiểm thử pgvector/PostgreSQL còn chờ Docker image mới. Các kết quả tuần trước bên dưới là lịch sử, không phải kết quả tuần 5.
+
 # Biên bản kiểm tra — cập nhật 05/10/2026
 
 ## Tuần 4

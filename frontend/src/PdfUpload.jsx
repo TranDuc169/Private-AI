@@ -44,8 +44,15 @@ export default function PdfUpload({ token, workspace, onUnauthorized, onDocument
       if (!current()) return;
       onDocument?.(saved); setFile(null);
       setNotice({ kind: 'progress', title: 'Tải lên thành công · đang đọc văn bản…', message: `File “${saved.filename}” đã được lưu. Vui lòng chờ kết quả trích xuất.` });
-      const result = await apiRequest(`${base}/${saved.id}/process`, options);
+      let result = await apiRequest(`${base}/${saved.id}/process`, options);
       if (!current()) return;
+      onDocument?.(result);
+      if (result.status === 'ready') {
+        onDocument?.({ ...result, index_status: 'processing' });
+        setNotice({ kind: 'progress', title: 'Đã đọc văn bản · đang tạo vector BGE-M3…', message: 'File đã lưu. Bước này có thể mất vài phút; chưa thể hỏi đáp AI.' });
+        result = await apiRequest(`${base}/${saved.id}/index`, options);
+        if (!current()) return;
+      }
       onDocument?.(result); setNotice(extractionNotice(result));
     } catch (error) {
       if (current()) {
@@ -65,7 +72,7 @@ export default function PdfUpload({ token, workspace, onUnauthorized, onDocument
     <div className="attachment-controls"><button type="button" className="secondary attach-button" disabled={blocked} onClick={() => input.current.click()}>{compact ? '+ Đính kèm PDF' : 'Chọn PDF'}</button>
       <small>{workspace ? `Lưu vào: ${workspace.name}` : 'Chọn workspace trước khi đính kèm.'}</small>
     </div>
-    {file && <div className="selected-file"><span>📄 {file.name} · {(file.size / 1024).toFixed(1)} KB</span><button type="button" className="secondary" disabled={busy} onClick={() => setFile(null)}>Bỏ chọn</button><button type="button" disabled={blocked} onClick={upload}>Tải lên và trích xuất</button></div>}
+    {file && <div className="selected-file"><span>📄 {file.name} · {(file.size / 1024).toFixed(1)} KB</span><button type="button" className="secondary" disabled={busy} onClick={() => setFile(null)}>Bỏ chọn</button><button type="button" disabled={blocked} onClick={upload}>Tải lên và xử lý</button></div>}
     {workspace && <small>Kéo thả một PDF vào đây hoặc bấm chọn. Giới hạn mặc định 20 MB; chưa hỗ trợ OCR.</small>}
     <UploadNotice notice={notice} />
     {compact && notice && !busy && <Link className="document-link" to="/documents">Mở Tài liệu để kiểm tra →</Link>}

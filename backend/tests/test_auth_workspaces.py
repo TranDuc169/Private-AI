@@ -25,7 +25,7 @@ def client(monkeypatch, tmp_path):
         admin = create_engine(url)
         with admin.begin() as connection:
             connection.execute(text(f'CREATE SCHEMA "{schema}"'))
-        engine = create_engine(url, connect_args={"options": f"-csearch_path={schema}"})
+        engine = create_engine(url, connect_args={"options": f"-csearch_path={schema},public"})
     else:
         engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
         @event.listens_for(engine, "connect")

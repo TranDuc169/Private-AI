@@ -1,6 +1,6 @@
-# Private AI Knowledge Platform — Tuần 4
+# Private AI Knowledge Platform — Tuần 5
 
-**Bắt đầu tại [hướng dẫn tuần 4](docs/WEEK4.md): giải thích upload PDF, trích xuất văn bản, từng file thay đổi và từng lệnh CMD.** Có upload thật theo workspace, trạng thái, xem văn bản theo trang và retry. Cần cài thư viện backend mới và chạy Alembic upgrade head. Minh chứng mới: [week4](docs/evidence/week4/README.md). Giữ nguyên tag/minh chứng tuần 2–3; lịch sử thiết lập cơ bản ở dưới.
+**Bắt đầu tại [hướng dẫn tuần 5](docs/WEEK5.md)**: chia đoạn theo trang, BGE-M3, lưu pgvector, trạng thái xử lý, chi tiết đoạn và xóa tài liệu. Cần image PostgreSQL có pgvector và migration `0003_document_vectors`. [Minh chứng và giới hạn kiểm chứng](docs/evidence/week5/README.md). Các hướng dẫn thiết lập cũ ở dưới giữ bối cảnh lịch sử.
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
@@ -15,7 +15,7 @@ Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã
 - SQLAlchemy 2, cấu hình `.env`, session factory và Alembic migration đầu tiên.
 - Năm bảng nền tảng; documents và conversations gắn workspace, messages gắn conversation.
 
-Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Tuần 4 đã có upload và trích xuất văn bản PDF; pgvector, RAG, citation, gửi chat và mở nội dung hội thoại chưa triển khai. Hai model đã chạy thử độc lập; chưa tích hợp vào backend hoặc giao diện.
+Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Tuần 4 có upload và đọc PDF. Tuần 5 đã viết phần BGE-M3/pgvector và quản lý các đoạn; trạng thái kiểm chứng thực tế nằm trong minh chứng tuần 5. RAG, citation, gửi chat AI và mở nội dung hội thoại chưa triển khai.
 
 ## 1. Chuẩn bị
 
@@ -49,7 +49,7 @@ docker compose up -d --wait db
 docker compose ps
 ```
 
-Kỳ vọng service `db` healthy. Dữ liệu lưu trong Docker volume. Gói này dùng PostgreSQL 16 thường; extension pgvector và bảng chunks sẽ thêm bằng migration ở giai đoạn embedding.
+Kỳ vọng service `db` healthy. Dữ liệu lưu trong Docker volume. Tuần 5 dùng PostgreSQL 16 có pgvector; khi nâng cấp từ tuần 4, làm theo docs/WEEK5.md trước.
 
 ## 3. Khởi động backend — Đức
 
@@ -66,7 +66,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --reload --host 127.0.0.1 --port 8000
 ```
 
-Không cần kích hoạt virtualenv hoặc đổi PowerShell execution policy. `check_db.py` phải in `SELECT 1: 1`, migration `0002_pdf_documents`, đủ 6 bảng và dòng PASS. Migration tạo cấu trúc bảng, không tạo tài khoản hoặc dữ liệu mẫu. Không dùng `create_all()` khi khởi động API.
+Không cần kích hoạt virtualenv hoặc đổi PowerShell execution policy. `check_db.py` phải in `SELECT 1: 1`, migration `0003_document_vectors`, đủ 7 bảng và phiên bản pgvector và dòng PASS. Migration tạo cấu trúc bảng, không tạo tài khoản hoặc dữ liệu mẫu. Không dùng `create_all()` khi khởi động API.
 
 Swagger: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). API: [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
 

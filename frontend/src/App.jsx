@@ -95,7 +95,7 @@ export default function App() {
       <div className="team">Đức · Backend / Database<br />Khánh · Frontend / UI</div>
     </aside>
     <main>
-      <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 04</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài liệu PDF</span></header>
+      <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 05</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài liệu PDF</span></header>
       <HealthStatus />
       {!session ? <Login onLogin={onLogin} notice={notice} /> : <Routes>
         <Route path="/" element={<Chat key={workspace?.id || 'no-workspace'} workspace={workspace} token={session.access_token} onUnauthorized={expire} />} />

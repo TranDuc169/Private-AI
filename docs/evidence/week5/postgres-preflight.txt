@@ -1,0 +1,4 @@
+Migration: 0002_pdf_documents
+vector available: []
+vector installed: []
+Read-only preflight. No application migration performed.

@@ -1,0 +1,2 @@
+PASS: Edge + real FastAPI + real Ollama BGE-M3; isolated SQLite storage (NOT PostgreSQL/pgvector verification).
+Upload/extraction/indexing completed in 10.531 seconds. Two chunks, 1024 dimensions, page 1/2 detail; AI send disabled. Delete cancellation preserves item, confirmed delete removes item/detail. Mobile no horizontal overflow; no page errors.

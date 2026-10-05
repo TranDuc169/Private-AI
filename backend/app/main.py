@@ -12,6 +12,7 @@ from app.config import Settings
 from app.db import make_engine, make_session_factory
 from app.routes import router
 from app.documents import router as documents_router
+import app.indexing  # Registers indexing/detail/delete routes on documents_router.
 from app.upload_limit import UploadLimitMiddleware
 
 
@@ -34,7 +35,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             engine.dispose()
 
     # Resolve CORS configuration without requiring a database connection on import.
-    app = FastAPI(title="Private AI Knowledge Platform", version="0.4.0", lifespan=lifespan)
+    app = FastAPI(title="Private AI Knowledge Platform", version="0.5.0", lifespan=lifespan)
     app.state.settings = config
     app.include_router(router)
     app.include_router(documents_router)
