@@ -7,7 +7,7 @@ from alembic import command
 from alembic.config import Config
 from alembic.autogenerate import compare_metadata
 from alembic.migration import MigrationContext
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, inspect
 
 from app.db import Base
 
@@ -24,9 +24,12 @@ def test_migration_preserves_old_data_and_matches_models(monkeypatch):
     monkeypatch.setenv('JWT_SECRET', 'test-migration-only-secret-at-least-32-characters')
     monkeypatch.setenv('DATABASE_URL', url)
     config = Config(str(Path(__file__).resolve().parents[1] / 'alembic.ini'))
+    # Never discover public.alembic_version via search_path.
+    config.attributes['version_table_schema'] = schema
     user_id, workspace_id, doc_id = [uuid.uuid4() for _ in range(3)]
     try:
         command.upgrade(config, '0001_initial')
+        assert {'users', 'workspaces', 'documents', 'alembic_version'} <= set(inspect(engine).get_table_names(schema=schema))
         with engine.begin() as connection:
             connection.execute(text('INSERT INTO users (id,email,password_hash) VALUES (:id,:email,:hash)'), {'id': user_id, 'email': 'legacy@example.com', 'hash': 'test-only'})
             connection.execute(text('INSERT INTO workspaces (id,owner_id,name) VALUES (:id,:owner,:name)'), {'id': workspace_id, 'owner': user_id, 'name': 'Legacy'})

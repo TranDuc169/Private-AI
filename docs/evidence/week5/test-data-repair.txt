@@ -1,0 +1,2 @@
+Removed only verified test rows: 2 accounts, 2 workspaces, 2 metadata documents, 1 page.
+All non-test rows byte-for-byte unchanged; backup saved under ignored backups/.

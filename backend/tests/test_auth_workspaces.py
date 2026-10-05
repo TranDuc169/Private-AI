@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 import jwt
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine, event, select, text
+from sqlalchemy import create_engine, event, select, text, inspect
 from sqlalchemy.pool import StaticPool
 
 from app.config import Settings
@@ -31,7 +31,11 @@ def client(monkeypatch, tmp_path):
         @event.listens_for(engine, "connect")
         def foreign_keys(connection, record):
             connection.execute("PRAGMA foreign_keys=ON")
-    Base.metadata.create_all(engine)
+    # checkfirst=True sees same-named public tables through search_path and skips
+    # creating our tables. Force creation in this NEW schema, then verify isolation.
+    Base.metadata.create_all(engine, checkfirst=False)
+    if url:
+        assert set(Base.metadata.tables) <= set(inspect(engine).get_table_names(schema=schema))
     monkeypatch.setattr("app.main.make_engine", lambda _: engine)
     settings = Settings(database_url="postgresql+psycopg://unused", jwt_secret=SECRET, storage_dir=tmp_path / "storage", max_upload_bytes=1024 * 1024, max_pdf_pages=3, _env_file=None)
     try:

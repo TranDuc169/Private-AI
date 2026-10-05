@@ -1,0 +1,1 @@
+PASS: SQLite suite, PostgreSQL suite and live BGE-M3 smoke test. All public application rows and migration revision unchanged before/after each command.

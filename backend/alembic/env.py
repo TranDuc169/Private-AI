@@ -18,7 +18,8 @@ else:
     engine = make_engine(Settings().database_url)
     try:
         with engine.connect() as connection:
-            context.configure(connection=connection, target_metadata=target_metadata, compare_type=True)
+            context.configure(connection=connection, target_metadata=target_metadata, compare_type=True,
+                              version_table_schema=context.config.attributes.get("version_table_schema"))
             with context.begin_transaction():
                 context.run_migrations()
     finally:

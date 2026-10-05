@@ -130,3 +130,12 @@ Không thêm thư viện frontend nên không cần npm install lại. Mở http
 Minh chứng mới chỉ lưu `docs/evidence/week5/`; giữ nguyên week2/week3/week4 và các tag cũ. Không force-push hoặc viết lại lịch sử. Không đưa `.env`, PDF, database thử hoặc backups lên Git. Xem README trong thư mục minh chứng để biết kiểm tra nào đã chạy và mục nào còn chờ.
 
 Nguồn kỹ thuật: [Ollama /api/embed](https://docs.ollama.com/api/embed), [BGE-M3 model card](https://huggingface.co/BAAI/bge-m3), [pgvector và Docker images](https://github.com/pgvector/pgvector#docker).
+
+
+## Sửa lỗi kiểm thử trên Windows và cô lập schema
+
+Nếu log cũ có `PermissionError ... pytest-of-Admin`, pytest chưa tạo được nơi lưu PDF thử. `backend/conftest.py` hiện tạo thư mục tạm riêng cho từng lần chạy và dọn sau khi xong. Không cần chạy CMD bằng Administrator, xóa Temp chung hoặc đổi quyền Windows.
+
+Lỗi `legacy@example.com already exists` và smoke đăng ký thất bại đến từ harness cũ nhìn thấy bảng public qua search_path. Đã sửa việc tạo bảng test và chỉ định schema riêng cho alembic_version. Bản sửa xác minh các bảng thật sự tồn tại trong schema thử trước khi gửi request. Không giải quyết bằng đổi email ngẫu nhiên để che lỗi.
+
+Sau bản sửa chỉ cần chạy lại `python test_postgres.py` và `python smoke_week5.py` bằng Python .venv như các lệnh trên. Không cần cài thêm thư viện hoặc nâng cấp migration. Trợ lý đã chạy đạt trên PostgreSQL/pgvector local và kiểm tra các bảng ứng dụng không thay đổi sau mỗi lần chạy.

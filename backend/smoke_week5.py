@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, inspect
 
 import app.main
 from app.config import Settings
@@ -26,7 +26,8 @@ def main():
     engine = create_engine(config.database_url, connect_args={'options': f'-csearch_path={schema},public'})
     original = app.main.make_engine
     try:
-        Base.metadata.create_all(engine)
+        Base.metadata.create_all(engine, checkfirst=False)
+        assert set(Base.metadata.tables) <= set(inspect(engine).get_table_names(schema=schema))
         app.main.make_engine = lambda _: engine
         with TemporaryDirectory(prefix='private-ai-week5-') as folder:
             config.storage_dir = Path(folder)

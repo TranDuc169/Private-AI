@@ -1,0 +1,4 @@
+C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\.venv-week3\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{"model": "bge-m3:latest", "chunks": 2, "dimensions": 1024, "database_type": "pgvector", "seconds": 9.453}
+PASS: real BGE-M3 + PostgreSQL pgvector; metadata and delete cascade verified.

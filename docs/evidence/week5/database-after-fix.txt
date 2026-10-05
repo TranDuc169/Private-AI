@@ -1,0 +1,6 @@
+SELECT 1: 1
+Database: private_ai
+pgvector: 0.8.7
+Migration: 0003_document_vectors
+Tables: conversations, document_chunks, document_pages, documents, messages, users, workspaces
+PASS: PostgreSQL query and week 5 migration verified.

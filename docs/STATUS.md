@@ -2,7 +2,7 @@
 
 ## Tuần 5
 
-Đã triển khai chia đoạn 1.200 ký tự/overlap 200 theo trang, gọi BGE-M3 qua Ollama, migration vector(1024), trạng thái index độc lập, retry, chi tiết đoạn và xóa tài liệu có xác nhận/cascade. Đã thử BGE-M3 thật qua UI trên SQLite tạm; PostgreSQL local chưa có extension vector tại thời điểm kiểm tra, chưa chạy migration hoặc xác minh lưu pgvector thật. Không coi SQLite hoặc SQL offline là nghiệm thu pgvector. Xem [WEEK5](WEEK5.md) và [minh chứng](evidence/week5/README.md). Chưa có RAG/tìm kiếm, chưa gắn tag week-05.
+Đã triển khai chia đoạn 1.200 ký tự/overlap 200 theo trang, gọi BGE-M3 qua Ollama, migration vector(1024), trạng thái index độc lập, retry, chi tiết đoạn và xóa tài liệu có xác nhận/cascade. Đã thử BGE-M3 thật qua UI trên SQLite tạm. Sau khi người dùng cập nhật Docker/migration, đã sửa lỗi cô lập schema trong harness test và quyền thư mục tạm: 28 test PostgreSQL pass, smoke BGE-M3 + pgvector thật pass, Alembic khớp model. Đã đối chiếu public không thay đổi sau từng lệnh; dọn các bản ghi mẫu do harness cũ tạo nhầm sau khi sao lưu. Xem [WEEK5](WEEK5.md) và [minh chứng](evidence/week5/README.md). Chưa có RAG/tìm kiếm, chưa gắn tag week-05.
 
 ## Tuần 4
 
