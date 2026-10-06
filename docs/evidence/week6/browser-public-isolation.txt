@@ -1,0 +1,1 @@
+PASS: Public table hashes unchanged before/after browser test. Verified disposable week6 UI schema removed.

@@ -3,7 +3,7 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import { getHealth } from './api.js';
 import { Login, WorkspacePicker, WorkspaceList } from './Account.jsx';
 import Documents from './Documents.jsx';
-import PdfUpload from './PdfUpload.jsx';
+import Chat from './Chat.jsx';
 
 function HealthStatus() {
   const [state, setState] = useState({ kind: 'loading', message: 'Đang kiểm tra kết nối…' });
@@ -52,24 +52,6 @@ function EmptyState({ title, children }) {
   </div>;
 }
 
-function Chat({ workspace, token, onUnauthorized }) {
-  return <section className="chat">
-    <EmptyState title="Tri thức riêng, trong một cuộc trò chuyện">
-      Hỏi đáp, tóm tắt, roadmap, checklist và quiz sẽ cùng dùng một ô chat.
-      {workspace ? ` Workspace hiện tại: ${workspace.name}.` : ' Hãy chọn hoặc tạo workspace.'} Chức năng trả lời AI chưa khả dụng.
-    </EmptyState>
-    <div className="composer">
-      <label htmlFor="message" className="sr-only">Nội dung chat</label>
-      <textarea id="message" rows={3} disabled placeholder="Bạn có thể đính kèm PDF bên dưới. Chat AI sẽ có ở giai đoạn tiếp theo." />
-      <PdfUpload compact token={token} workspace={workspace} onUnauthorized={onUnauthorized} />
-      <div className="flex items-center justify-between gap-4">
-        <small>Chưa có chức năng trả lời AI</small>
-        <button disabled>Gửi ↑</button>
-      </div>
-    </div>
-  </section>;
-}
-
 export default function App() {
   // Keep JWT in memory: logout, reload and expiration clear private UI state.
   const [session, setSession] = useState(null);
@@ -92,10 +74,9 @@ export default function App() {
         <NavLink to="/history">Lịch sử hội thoại</NavLink>
       </nav>
       <p className="sidebar-note">Tài liệu và lịch sử sẽ được tải theo workspace đã chọn.</p>
-      <div className="team">Đức · Backend / Database<br />Khánh · Frontend / UI</div>
     </aside>
     <main>
-      <header><div><p className="eyebrow">ĐỒ ÁN 1 / TUẦN 05</p><h1>Private AI Knowledge Platform</h1></div><span className="badge">Tài liệu PDF</span></header>
+      <header><div><h1>Private AI Knowledge Platform</h1></div><span className="badge">Truy xuất tài liệu</span></header>
       <HealthStatus />
       {!session ? <Login onLogin={onLogin} notice={notice} /> : <Routes>
         <Route path="/" element={<Chat key={workspace?.id || 'no-workspace'} workspace={workspace} token={session.access_token} onUnauthorized={expire} />} />

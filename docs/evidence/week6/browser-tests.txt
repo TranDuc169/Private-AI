@@ -1,0 +1,2 @@
+PASS: Edge + actual FastAPI + PostgreSQL/pgvector + BGE-M3.
+PDF uploaded/indexed, Vietnamese query retrieves annual-leave source page 1 first; source filename/page/text rendered, mobile no overflow. No-workspace disabled, simulated 503 and retry draft, pending request cleared on workspace change, late results not shown in new workspace, empty workspace shown honestly. No JS errors.

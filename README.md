@@ -1,6 +1,8 @@
-# Private AI Knowledge Platform — Tuần 5
+# Private AI Knowledge Platform — Tuần 6
 
-**Bắt đầu tại [hướng dẫn tuần 5](docs/WEEK5.md)**: chia đoạn theo trang, BGE-M3, lưu pgvector, trạng thái xử lý, chi tiết đoạn và xóa tài liệu. Cần image PostgreSQL có pgvector và migration `0003_document_vectors`. [Minh chứng và giới hạn kiểm chứng](docs/evidence/week5/README.md). Các hướng dẫn thiết lập cũ ở dưới giữ bối cảnh lịch sử.
+**Tuần 6:** đã có tìm đoạn theo câu hỏi trong workspace bằng BGE-M3/pgvector và hiển thị nguồn trong Chat chung. Chưa sinh câu trả lời AI. Xem [hướng dẫn chạy và giải thích từng lệnh](docs/WEEK6.md), [minh chứng](docs/evidence/week6/README.md). Không cần migration mới sau tuần 5.
+
+**Mốc tuần 5 — [hướng dẫn tuần 5](docs/WEEK5.md)**: chia đoạn theo trang, BGE-M3, lưu pgvector, trạng thái xử lý, chi tiết đoạn và xóa tài liệu. Cần image PostgreSQL có pgvector và migration `0003_document_vectors`. [Minh chứng và giới hạn kiểm chứng](docs/evidence/week5/README.md). Các hướng dẫn thiết lập cũ ở dưới giữ bối cảnh lịch sử.
 
 Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã khởi đầu mới: repository `https://github.com/TranDuc169/Private-AI` hiển thị **This repository is empty** khi kiểm tra ngày 02/10/2026. Chưa có source HTML/CSS/JavaScript để chuyển đổi; bố cục và màu giao diện tham chiếu ảnh chat trong báo cáo tuần 1.
 
@@ -9,13 +11,13 @@ Bộ khung React → FastAPI → PostgreSQL cho Đức và Khánh. Đây là mã
 ## Đã có trong bộ mã
 
 - React + Vite + Tailwind, sidebar, routing Chat/Tài liệu/Lịch sử, trạng thái chưa chọn workspace.
-- Một ô chat chung, chưa kích hoạt gửi; không có bộ chọn tác vụ hay câu trả lời AI giả.
+- Một ô chat chung, gửi câu hỏi để tìm đoạn tài liệu; không có bộ chọn tác vụ hay câu trả lời AI giả.
 - API client gọi `GET /health`: loading, thành công, DB lỗi, mạng lỗi, timeout và thử lại.
 - FastAPI truy vấn PostgreSQL bằng `SELECT 1`; DB lỗi trả HTTP 503.
 - SQLAlchemy 2, cấu hình `.env`, session factory và Alembic migration đầu tiên.
 - Năm bảng nền tảng; documents và conversations gắn workspace, messages gắn conversation.
 
-Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Tuần 4 có upload và đọc PDF. Tuần 5 đã viết phần BGE-M3/pgvector và quản lý các đoạn; trạng thái kiểm chứng thực tế nằm trong minh chứng tuần 5. RAG, citation, gửi chat AI và mở nội dung hội thoại chưa triển khai.
+Tuần 3 có đăng ký/đăng nhập JWT, workspace CRUD, danh sách tài liệu/hội thoại theo workspace và kiểm tra quyền ở backend. Tuần 4 có upload và đọc PDF. Tuần 5 đã viết phần BGE-M3/pgvector và quản lý các đoạn; trạng thái kiểm chứng thực tế nằm trong minh chứng tuần 5. Tuần 6 đã có truy xuất nguồn theo câu hỏi, tên PDF và số trang. Sinh câu trả lời RAG bằng LLM và mở nội dung hội thoại chưa triển khai.
 
 ## 1. Chuẩn bị
 

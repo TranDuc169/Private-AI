@@ -1,5 +1,14 @@
 # API contract v0.5
 
+## Tuần 6 — POST /workspaces/{workspace_id}/retrieve
+
+Yêu cầu Bearer JWT và quyền sở hữu workspace (khác chủ hoặc không tồn tại: 404). Body: `{"question":"Tôi được nghỉ phép bao nhiêu ngày?","top_k":5}`. Câu hỏi được trim, dài 1–2000 ký tự; top_k nguyên 1–10, mặc định 5; trường thừa bị từ chối (422).
+
+Kết quả: workspace_id, question, top_k, embedding_model, elapsed_ms, results. Mỗi hit: chunk_id, document_id, filename, page_number, chunk_index, start_char, end_char, text, score. Score là 1 trừ khoảng cách cosine, không phải xác suất đúng. Không trả vector. Không có nguồn hợp lệ trả results rỗng và không gọi Ollama. Lỗi embedding/database trả 503.
+
+SQL lọc quyền, workspace, trạng thái extraction/index ready và model trước ORDER BY/LIMIT. Chưa dùng ngưỡng điểm; không có LLM hoặc ghi lịch sử trong endpoint này.
+
+
 ## Index và quản lý tài liệu — tuần 5
 
 Các route này có cùng tiền tố `/workspaces/{workspace_id}/documents` và yêu cầu JWT + owner như API PDF.

@@ -151,6 +151,6 @@ export default function Documents({ token, workspace, onUnauthorized }) {
       <div className="page-controls"><button disabled={chunkPreview.loading || chunkPreview.number === 0} onClick={() => viewChunk(chunkPreview.document, chunkPreview.number - 1)}>Đoạn trước</button><button disabled={chunkPreview.loading || chunkPreview.number + 1 >= chunkPreview.document.chunk_count} onClick={() => viewChunk(chunkPreview.document, chunkPreview.number + 1)}>Đoạn sau</button><button className="secondary" onClick={() => { pageRequest.current?.abort(); setChunkPreview(null); }}>Đóng chi tiết</button></div>
       {chunkPreview.loading ? <p role="status">Đang đọc đoạn…</p> : chunkPreview.error ? <p role="alert">{chunkPreview.error}</p> : chunkPreview.chunk && <><p>Trang {chunkPreview.chunk.page_number} · Ký tự {chunkPreview.chunk.start_char}–{chunkPreview.chunk.end_char} · Vector {chunkPreview.chunk.embedding_dimensions} chiều · {chunkPreview.chunk.embedding_model}</p><pre>{chunkPreview.chunk.text}</pre></>}
     </section>}
-    <p><small>Sẵn sàng tìm kiếm nghĩa là đã lưu đủ các đoạn và vector. Chưa có tìm kiếm hoặc trả lời AI trong tuần 5.</small></p>
+    <p><small>Sẵn sàng tìm kiếm nghĩa là đã lưu đủ các đoạn và vector. Có thể tìm các đoạn từ Chat chung. Chưa có trả lời AI.</small></p>
   </section>;
 }

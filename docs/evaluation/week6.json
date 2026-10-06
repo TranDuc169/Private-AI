@@ -1,0 +1,26 @@
+{
+  "description": "Tập khởi đầu tự tạo để kiểm tra retrieval, không phải benchmark chất lượng RAG. Trang là văn bản đã trích xuất giả lập; embedding và truy vấn dùng BGE-M3 thật.",
+  "documents": [
+    {"filename": "nhan-su.pdf", "pages": [
+      "Nhân viên mới có thời gian thử việc 60 ngày. Trong tuần đầu, bộ phận nhân sự cấp tài khoản, giới thiệu nội quy và phân công người hướng dẫn.",
+      "Nhân viên chính thức có 12 ngày nghỉ phép mỗi năm. Đơn nghỉ phép cần gửi cho quản lý trực tiếp trước ít nhất 3 ngày làm việc."
+    ]},
+    {"filename": "cong-tac.pdf", "pages": [
+      "Chi phí khách sạn khi đi công tác được hoàn tối đa 1.500.000 đồng mỗi đêm. Nhân viên phải cung cấp hóa đơn hợp lệ.",
+      "Hồ sơ hoàn ứng công tác phải nộp cho phòng kế toán trong vòng 7 ngày sau khi kết thúc chuyến đi. Hồ sơ gồm hóa đơn và quyết định cử đi công tác."
+    ]},
+    {"filename": "bao-mat.pdf", "pages": [
+      "Mật khẩu tài khoản nội bộ phải có ít nhất 12 ký tự. Người dùng phải bật xác thực hai yếu tố. Không được chia sẻ mật khẩu cho đồng nghiệp.",
+      "Khi nghi ngờ tài khoản bị lộ, nhân viên liên hệ bộ phận IT ngay lập tức. IT khóa phiên đăng nhập cũ và hỗ trợ đặt lại mật khẩu."
+    ]}
+  ],
+  "cases": [
+    {"id": "q01", "question": "Thời gian thử việc của nhân viên mới là bao lâu?", "expected_filename": "nhan-su.pdf", "expected_page": 1},
+    {"id": "q02", "question": "Một năm nhân viên được nghỉ phép mấy ngày?", "expected_filename": "nhan-su.pdf", "expected_page": 2},
+    {"id": "q03", "question": "Khách sạn công tác được hoàn tối đa bao nhiêu tiền mỗi đêm?", "expected_filename": "cong-tac.pdf", "expected_page": 1},
+    {"id": "q04", "question": "Sau chuyến công tác phải nộp hồ sơ hoàn ứng trong bao lâu?", "expected_filename": "cong-tac.pdf", "expected_page": 2},
+    {"id": "q05", "question": "Mật khẩu nội bộ cần dài tối thiểu bao nhiêu ký tự?", "expected_filename": "bao-mat.pdf", "expected_page": 1},
+    {"id": "q06", "question": "Tôi cần liên hệ ai khi nghi tài khoản bị lộ?", "expected_filename": "bao-mat.pdf", "expected_page": 2},
+    {"id": "q07", "question": "Giá vàng hôm nay bao nhiêu?", "expected_filename": null, "expected_page": null, "note": "Ngoài phạm vi. Top-K vẫn có thể trả đoạn gần nhất; chưa có bộ xác định đủ bằng chứng hoặc LLM trả lời."}
+  ]
+}

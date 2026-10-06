@@ -1,0 +1,191 @@
+{
+  "model": "bge-m3:latest",
+  "database": "PostgreSQL/pgvector",
+  "top_k": 3,
+  "answerable_questions": 6,
+  "hit_at_1": 1.0,
+  "hit_at_3": 1.0,
+  "mrr_at_3": 1.0,
+  "workspace_isolation": "PASS",
+  "foreign_owner": "404",
+  "empty_workspace": "empty results",
+  "cases": [
+    {
+      "id": "q01",
+      "question": "Th\u1eddi gian th\u1eed vi\u1ec7c c\u1ee7a nh\u00e2n vi\u00ean m\u1edbi l\u00e0 bao l\u00e2u?",
+      "expected_filename": "nhan-su.pdf",
+      "expected_page": 1,
+      "rank": 1,
+      "elapsed_ms": 67,
+      "hits": [
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 1,
+          "score": 0.772783
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 2,
+          "score": 0.558672
+        },
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 2,
+          "score": 0.510556
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "question": "M\u1ed9t n\u0103m nh\u00e2n vi\u00ean \u0111\u01b0\u1ee3c ngh\u1ec9 ph\u00e9p m\u1ea5y ng\u00e0y?",
+      "expected_filename": "nhan-su.pdf",
+      "expected_page": 2,
+      "rank": 1,
+      "elapsed_ms": 62,
+      "hits": [
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 2,
+          "score": 0.763955
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 1,
+          "score": 0.538136
+        },
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 1,
+          "score": 0.49817
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "question": "Kh\u00e1ch s\u1ea1n c\u00f4ng t\u00e1c \u0111\u01b0\u1ee3c ho\u00e0n t\u1ed1i \u0111a bao nhi\u00eau ti\u1ec1n m\u1ed7i \u0111\u00eam?",
+      "expected_filename": "cong-tac.pdf",
+      "expected_page": 1,
+      "rank": 1,
+      "elapsed_ms": 85,
+      "hits": [
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 1,
+          "score": 0.815649
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 2,
+          "score": 0.503155
+        },
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 2,
+          "score": 0.502218
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "question": "Sau chuy\u1ebfn c\u00f4ng t\u00e1c ph\u1ea3i n\u1ed9p h\u1ed3 s\u01a1 ho\u00e0n \u1ee9ng trong bao l\u00e2u?",
+      "expected_filename": "cong-tac.pdf",
+      "expected_page": 2,
+      "rank": 1,
+      "elapsed_ms": 50,
+      "hits": [
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 2,
+          "score": 0.787321
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 2,
+          "score": 0.567852
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 1,
+          "score": 0.545967
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "question": "M\u1eadt kh\u1ea9u n\u1ed9i b\u1ed9 c\u1ea7n d\u00e0i t\u1ed1i thi\u1ec3u bao nhi\u00eau k\u00fd t\u1ef1?",
+      "expected_filename": "bao-mat.pdf",
+      "expected_page": 1,
+      "rank": 1,
+      "elapsed_ms": 71,
+      "hits": [
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 1,
+          "score": 0.776726
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 1,
+          "score": 0.477806
+        },
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 2,
+          "score": 0.476441
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "question": "T\u00f4i c\u1ea7n li\u00ean h\u1ec7 ai khi nghi t\u00e0i kho\u1ea3n b\u1ecb l\u1ed9?",
+      "expected_filename": "bao-mat.pdf",
+      "expected_page": 2,
+      "rank": 1,
+      "elapsed_ms": 36,
+      "hits": [
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 2,
+          "score": 0.701965
+        },
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 1,
+          "score": 0.553708
+        },
+        {
+          "filename": "nhan-su.pdf",
+          "page_number": 1,
+          "score": 0.509629
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "question": "Gi\u00e1 v\u00e0ng h\u00f4m nay bao nhi\u00eau?",
+      "expected_filename": null,
+      "expected_page": null,
+      "rank": null,
+      "elapsed_ms": 53,
+      "hits": [
+        {
+          "filename": "cong-tac.pdf",
+          "page_number": 1,
+          "score": 0.40571
+        },
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 1,
+          "score": 0.363035
+        },
+        {
+          "filename": "bao-mat.pdf",
+          "page_number": 2,
+          "score": 0.322072
+        }
+      ]
+    }
+  ],
+  "limitations": "Small synthetic set; no LLM, no relevance threshold. Out-of-scope questions can still return nearest chunks.",
+  "public_data_unchanged": true
+}

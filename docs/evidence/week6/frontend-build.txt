@@ -1,0 +1,13 @@
+
+> private-ai-frontend@0.2.0 build
+> vite build --configLoader runner
+
+vite v6.4.3 building for production...
+transforming...
+✓ 47 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.41 kB │ gzip:  0.29 kB
+dist/assets/index-DAXX61DW.css   10.69 kB │ gzip:  3.19 kB
+dist/assets/index-sLLKzxAM.js   290.86 kB │ gzip: 91.66 kB
+✓ built in 3.05s

@@ -83,3 +83,30 @@ class ConversationOut(BaseModel):
     workspace_id: UUID
     title: str
     created_at: datetime
+
+
+class RetrievalInput(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    question: str = Field(min_length=1, max_length=2000)
+    top_k: int = Field(default=5, ge=1, le=10, strict=True)
+
+
+class RetrievalHit(BaseModel):
+    chunk_id: UUID
+    document_id: UUID
+    filename: str
+    page_number: int
+    chunk_index: int
+    start_char: int
+    end_char: int
+    text: str
+    score: float
+
+
+class RetrievalOut(BaseModel):
+    workspace_id: UUID
+    question: str
+    top_k: int
+    embedding_model: str
+    elapsed_ms: int
+    results: list[RetrievalHit]

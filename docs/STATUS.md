@@ -1,5 +1,10 @@
 # Đối chiếu hiện trạng — cập nhật 05/10/2026
 
+## Tuần 6 — 06/10/2026
+
+Đã thêm query embedding BGE-M3, tìm cosine trong PostgreSQL/pgvector có lọc workspace/chủ sở hữu trước Top-K, UI chat gửi/chờ/lỗi và nguồn PDF/trang. Kiểm thử PostgreSQL: 33 pass. BGE-M3 thật: 6/6 câu có nguồn đúng ở Top-1 trên bộ mẫu nhỏ; câu ngoài tài liệu vẫn trả đoạn gần nhất. Đã kiểm tra UI Edge và cách ly dữ liệu. Chưa gọi Qwen, chưa lưu lịch sử truy xuất. Xem [WEEK6](WEEK6.md) và [minh chứng](evidence/week6/README.md). Các mục tuần trước là lịch sử.
+
+
 ## Tuần 5
 
 Đã triển khai chia đoạn 1.200 ký tự/overlap 200 theo trang, gọi BGE-M3 qua Ollama, migration vector(1024), trạng thái index độc lập, retry, chi tiết đoạn và xóa tài liệu có xác nhận/cascade. Đã thử BGE-M3 thật qua UI trên SQLite tạm. Sau khi người dùng cập nhật Docker/migration, đã sửa lỗi cô lập schema trong harness test và quyền thư mục tạm: 28 test PostgreSQL pass, smoke BGE-M3 + pgvector thật pass, Alembic khớp model. Đã đối chiếu public không thay đổi sau từng lệnh; dọn các bản ghi mẫu do harness cũ tạo nhầm sau khi sao lưu. Xem [WEEK5](WEEK5.md) và [minh chứng](evidence/week5/README.md). Chưa có RAG/tìm kiếm, chưa gắn tag week-05.

@@ -1,0 +1,21 @@
+
+> private-ai-frontend@0.2.0 test
+> node --test src/api.test.js
+
+✔ upload feedback distinguishes extraction failures from rejected or uncertain uploads (2.2552ms)
+✔ PDF upload sends FormData without overriding the multipart boundary (33.8758ms)
+✔ authenticated requests send bearer and JSON; delete accepts empty 204 (0.5091ms)
+✔ 401 retains status for session reset; validation errors are readable (1.2547ms)
+✔ health calls backend and accepts only the agreed healthy response (0.7561ms)
+✔ database outage is distinct from network failure (0.5953ms)
+✔ HTML fallback and unexpected JSON cannot report a healthy database (2.7232ms)
+✔ unexpected HTTP errors cannot report success (0.9909ms)
+✔ only completed indexing can mark a document ready for search (0.5461ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 260.154

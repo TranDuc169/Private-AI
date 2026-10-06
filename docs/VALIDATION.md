@@ -1,5 +1,10 @@
 ## Tuần 5 — xem kết quả mới
 
+## Kiểm chứng tuần 6
+
+Kết quả và giới hạn được lưu riêng trong [evidence/week6](evidence/week6/README.md). Hướng dẫn chạy lại và giải thích lệnh: [WEEK6](WEEK6.md). Không thay đổi minh chứng tuần trước.
+
+
 Kiểm thử và giới hạn xác minh ghi tại [docs/evidence/week5](evidence/week5/README.md). BGE-M3 đã gọi thật trong browser test dùng SQLite tạm; kiểm thử PostgreSQL và smoke BGE-M3 + pgvector thật đã pass sau sửa harness test. Xem log mới và kiểm tra public không thay đổi trong thư mục minh chứng. Các kết quả tuần trước bên dưới là lịch sử, không phải kết quả tuần 5.
 
 # Biên bản kiểm tra — cập nhật 05/10/2026

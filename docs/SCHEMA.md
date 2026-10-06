@@ -1,5 +1,10 @@
 # Schema — tuần 5
 
+## Tuần 6
+
+Không thêm bảng hoặc migration. Truy vấn JOIN document_chunks → documents → workspaces, lọc workspace/chủ sở hữu, trạng thái ready và model, sau đó xếp khoảng cách cosine tăng dần và LIMIT Top-K. Dùng exact search; chưa có index HNSW/IVFFlat.
+
+
 ```mermaid
 erDiagram
     users ||--o{ workspaces : owns
