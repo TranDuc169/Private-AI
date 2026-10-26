@@ -1,0 +1,276 @@
+{
+  "mode": "models",
+  "chat_model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "configuration": {
+    "num_ctx": 8192,
+    "num_predict": 768,
+    "temperature": 0,
+    "think": false
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "corpus_version": "csdl-demo-v1-2026-10-27",
+  "human_review": "pending; source matches are not correctness scores",
+  "cases": [
+    {
+      "id": "q01",
+      "question": "Khóa chính có được NULL hoặc trùng không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 1,
+      "reference": "PRIMARY KEY yêu cầu duy nhất và không NULL; có thể gồm nhiều cột.",
+      "response": {
+        "status": "answered",
+        "answer": "Khóa chính không được phép có NULL và không được trùng. Theo tài liệu, khóa chính phải có giá trị duy nhất và không NULL. Mỗi bảng chỉ có tối đa một khóa chính, và giá trị của nó phải đảm bảo tính duy nhất và không rỗng. Do đó, khóa chính không thể có NULL hoặc trùng nhau. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "60a010b2-7fb7-4adc-8cdd-7877e3443592",
+            "document_id": "8695856e-5112-4db1-962b-dc6f4530a4a9",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6702102813506673
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.6702102813506673
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.6342464011418159
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.5298911059724036
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.5195465147703793
+        },
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.5135920916810899
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 20.664,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q02",
+      "question": "UNIQUE có cấm nhiều NULL như PRIMARY KEY không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 1,
+      "reference": "Không. PostgreSQL mặc định cho nhiều NULL với UNIQUE; NULLS NOT DISTINCT thay đổi cách xử lý. PRIMARY KEY không cho NULL.",
+      "response": {
+        "status": "answered",
+        "answer": "UNIQUE không cấm nhiều NULL như PRIMARY KEY. Theo tài liệu, UNIQUE \"mặc định xem các NULL là khác nhau\", nên có thể có nhiều NULL trong cột UNIQUE. Trong khi đó, PRIMARY KEY yêu cầu giá trị phải không NULL và duy nhất. Do đó, UNIQUE cho phép nhiều NULL, khác với PRIMARY KEY [1].",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "60a010b2-7fb7-4adc-8cdd-7877e3443592",
+            "document_id": "8695856e-5112-4db1-962b-dc6f4530a4a9",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6448561284860962
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.6448561284860962
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.5189199526673097
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.49215296845957585
+        },
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.4421396264712186
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4418330736958347
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 35.894,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q03",
+      "question": "CHECK điểm từ 0 đến 10 có tự cấm NULL không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 2,
+      "reference": "Không; CHECK chấp nhận true hoặc unknown. Cần NOT NULL nếu điểm bắt buộc.",
+      "response": {
+        "status": "answered",
+        "answer": "CHECK điểm từ 0 đến 10 không tự cấm NULL. Theo tài liệu, CHECK (diem >= 0 AND diem <= 10) chỉ giới hạn giá trị nhưng chấp nhận kết quả true hoặc unknown, do đó không tự cấm NULL. Nếu điểm bắt buộc nhập, cần thêm NOT NULL. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "2030191f-a2c0-47cf-b3ea-691d7d69d0ae",
+            "document_id": "8695856e-5112-4db1-962b-dc6f4530a4a9",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 694,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa ngoại và CHECK\nFOREIGN KEY (khóa ngoại) liên kết dữ liệu: giá trị khác NULL phải tham chiếu khóa hợp lệ\nở bảng đích. Ví dụ Lop(ma_lop PRIMARY KEY), SinhVien(ma_sv PRIMARY KEY, ma_lop\nREFERENCES Lop(ma_lop)). Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì\nthêm NOT NULL.\nCHECK kiểm tra điều kiện. CHECK (diem >= 0 AND diem <= 10) giới hạn điểm nhưng\nkhông tự cấm NULL, vì CHECK chấp nhận kết quả true hoặc unknown. Thêm NOT NULL\nnếu điểm bắt buộc nhập.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.5655704273008464
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.5655704273008464
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.4951882826046553
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.4946526158069779
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 2,
+          "score": 0.474548296642264
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4676842932831608
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 54.18,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    }
+  ],
+  "public_data_unchanged": null,
+  "ollama_version": {
+    "version": "0.40.8"
+  },
+  "model_inventory": {
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "modified_at": "2026-10-03T02:31:38.3732315+07:00",
+        "size": 1157672605,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16",
+          "context_length": 8192,
+          "embedding_length": 1024,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "modified_at": "2026-10-03T02:26:47.3121159+07:00",
+        "size": 2497293803,
+        "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      },
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "modified_at": "2026-10-03T02:02:43.6061896+07:00",
+        "size": 2497293931,
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "completion",
+          "tools",
+          "thinking"
+        ]
+      }
+    ]
+  },
+  "completed_cases": 3
+}

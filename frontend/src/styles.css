@@ -38,6 +38,8 @@ label { font-size: 13px; }
 .retrieval-results { list-style: none; padding: 0; display: grid; gap: 12px; }
 .retrieval-results li { border: 1px solid #393244; border-radius: 12px; padding: 16px; background: #17161f; }
 .source-text { white-space: pre-wrap; font-size: 14px; }
+.assistant-answer { white-space: pre-wrap; overflow-wrap: anywhere; padding: 16px; border-left: 3px solid #8655e8; background: #17161f; line-height: 1.8; }
+.answer-label { font-weight: 700; color: #cbb6ff; }
 .retrieval-results details { color: #aaa4ba; font-size: 12px; }
 summary { cursor: pointer; }
 summary:focus-visible { outline: 2px solid #b291f5; }

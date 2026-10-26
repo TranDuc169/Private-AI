@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     pdf_timeout_seconds: int = Field(default=30, ge=1, le=120)
     ollama_base_url: str = "http://127.0.0.1:11434"
     embedding_model: str = "bge-m3:latest"
+    chat_model: str = "qwen3:4b-instruct-2507-q4_K_M"
+    chat_timeout_seconds: int = Field(default=120, ge=5, le=120)
+    chat_num_predict: int = Field(default=768, ge=128, le=1024)
     embedding_timeout_seconds: int = Field(default=120, ge=1, le=120)
     embedding_batch_size: int = Field(default=8, ge=1, le=16)
     max_document_chunks: int = Field(default=3000, ge=1, le=5000)

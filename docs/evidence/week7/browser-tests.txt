@@ -1,0 +1,1 @@
+PASS: Chrome UI with MOCKED API responses. No workspace disabled; answer/source display; HTML escaped; 503 and retry draft; workspace switch cancels stale results; empty workspace; mobile no horizontal overflow; no JS errors. This does NOT verify a live database/model pipeline.

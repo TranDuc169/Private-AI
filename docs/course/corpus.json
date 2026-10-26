@@ -1,0 +1,57 @@
+{
+  "version": "csdl-demo-v1-2026-10-27",
+  "description": "Năm phiếu học tập tiếng Việt biên soạn cho demo, không phải giáo trình đầy đủ hoặc bản dịch chính thức. Ví dụ do dự án tạo; không có dữ liệu cá nhân.",
+  "documents": [
+    {
+      "filename": "01-quan-he-rang-buoc.pdf",
+      "topic": "Mô hình quan hệ và ràng buộc",
+      "references": [{"title": "PostgreSQL 16 - Constraints", "url": "https://www.postgresql.org/docs/16/ddl-constraints.html", "license": "PostgreSQL License", "author": "PostgreSQL Global Development Group", "version": "16"}],
+      "pages": [
+        {"title": "Khóa chính và tính duy nhất", "text": "Bảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị phải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một ràng buộc khóa chính.\n\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau, nên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\n\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng và không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL."},
+        {"title": "Khóa ngoại và CHECK", "text": "FOREIGN KEY (khóa ngoại) liên kết dữ liệu: giá trị khác NULL phải tham chiếu khóa hợp lệ ở bảng đích. Ví dụ Lop(ma_lop PRIMARY KEY), SinhVien(ma_sv PRIMARY KEY, ma_lop REFERENCES Lop(ma_lop)). Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì thêm NOT NULL.\n\nCHECK kiểm tra điều kiện. CHECK (diem >= 0 AND diem <= 10) giới hạn điểm nhưng không tự cấm NULL, vì CHECK chấp nhận kết quả true hoặc unknown. Thêm NOT NULL nếu điểm bắt buộc nhập."}
+      ]
+    },
+    {
+      "filename": "02-sql-join.pdf",
+      "topic": "SQL và JOIN",
+      "references": [{"title": "PostgreSQL 16 - Table Expressions", "url": "https://www.postgresql.org/docs/16/queries-table-expressions.html", "license": "PostgreSQL License", "author": "PostgreSQL Global Development Group", "version": "16"}],
+      "pages": [
+        {"title": "INNER JOIN và LEFT JOIN", "text": "INNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu không có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng khớp có thể xuất hiện nhiều lần.\n\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy An; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\n\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;"},
+        {"title": "WHERE, ON và HAVING", "text": "ON quyết định các cặp hàng khớp khi nối; WHERE lọc kết quả sau phép nối. Với LEFT JOIN, đặt WHERE d.mon = 'CSDL' sẽ loại hàng có d.mon NULL, nên không giữ được sinh viên chưa đăng ký. Muốn vẫn giữ mọi sinh viên, đưa điều kiện này vào ON.\n\nWHERE lọc hàng trước khi nhóm. HAVING lọc nhóm sau GROUP BY.\n\nVí dụ tự soạn: SELECT ma_sv, COUNT(*) FROM DangKy GROUP BY ma_sv HAVING COUNT(*) >= 2; tìm sinh viên có ít nhất hai hàng đăng ký."}
+      ]
+    },
+    {
+      "filename": "03-erd-chuan-hoa.pdf",
+      "topic": "Thiết kế ERD và chuẩn hóa",
+      "references": [
+        {"title": "Database Design, 2nd Edition - Chapter 8", "url": "https://opentextbc.ca/dbdesign01/chapter/chapter-8-entity-relationship-model/", "license": "CC BY 4.0", "author": "Adrienne Watt; book by Adrienne Watt and Nelson Eng", "version": "2nd edition, 2014"},
+        {"title": "Database Design, 2nd Edition - Chapter 12", "url": "https://opentextbc.ca/dbdesign01/chapter/chapter-12-normalization/", "license": "CC BY 4.0", "author": "Adrienne Watt; book by Adrienne Watt and Nelson Eng", "version": "2nd edition, 2014"}
+      ],
+      "pages": [
+        {"title": "ERD và quan hệ nhiều - nhiều", "text": "ERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham gia và quy tắc nghiệp vụ trước khi tạo bảng.\n\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn, một môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết DangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi môn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học hoặc học kỳ vào thiết kế khóa."},
+        {"title": "Chuẩn hóa từ 1NF đến 3NF", "text": "Chuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc hàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và thuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc bắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là thuộc tính khóa.\n\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv, ma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách SinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem). Không thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm."}
+      ]
+    },
+    {
+      "filename": "04-transaction.pdf",
+      "topic": "Transaction",
+      "references": [{"title": "PostgreSQL 16 - Transactions", "url": "https://www.postgresql.org/docs/16/tutorial-transactions.html", "license": "PostgreSQL License", "author": "PostgreSQL Global Development Group", "version": "16"}],
+      "pages": [
+        {"title": "BEGIN, COMMIT và ROLLBACK", "text": "Transaction gom nhiều bước thành một đơn vị tất cả hoặc không bước nào: đó là tính nguyên tử. BEGIN mở giao dịch, COMMIT xác nhận thay đổi, ROLLBACK hủy thay đổi chưa commit trong giao dịch.\n\nVí dụ tự soạn: chuyển tiền cần trừ ở tài khoản A và cộng ở B trong cùng giao dịch. Nếu chỉ trừ thành công còn cộng lỗi, phải rollback để tránh chuyển tiền dở dang. Ví dụ này minh họa nguyên tử, chưa xử lý đầy đủ kiểm tra số dư hoặc truy cập đồng thời."},
+        {"title": "SAVEPOINT và giao dịch ngầm", "text": "SAVEPOINT đặt mốc trong một giao dịch. ROLLBACK TO SAVEPOINT hủy các thay đổi sau mốc, giữ các thay đổi trước mốc; giao dịch vẫn có thể tiếp tục rồi COMMIT. Nó không tương đương ROLLBACK toàn bộ giao dịch.\n\nPostgreSQL thực thi mỗi câu lệnh trong một transaction. Khi không mở khối BEGIN rõ ràng, một câu lệnh thành công có giao dịch ngầm riêng; ứng dụng hoặc driver có thể quản lý khối giao dịch thay người dùng.\n\nCác thay đổi chưa commit không được giao dịch khác đọc như dữ liệu đã commit."}
+      ]
+    },
+    {
+      "filename": "05-index-explain.pdf",
+      "topic": "Index và kế hoạch truy vấn cơ bản",
+      "references": [
+        {"title": "PostgreSQL 16 - Indexes Introduction", "url": "https://www.postgresql.org/docs/16/indexes-intro.html", "license": "PostgreSQL License", "author": "PostgreSQL Global Development Group", "version": "16"},
+        {"title": "PostgreSQL 16 - Using EXPLAIN", "url": "https://www.postgresql.org/docs/16/using-explain.html", "license": "PostgreSQL License", "author": "PostgreSQL Global Development Group", "version": "16"}
+      ],
+      "pages": [
+        {"title": "Khi nào index có ích?", "text": "Index là cấu trúc hỗ trợ tìm hàng mà không nhất thiết quét toàn bộ bảng. Nó có thể giúp truy vấn lọc ít hàng trên bảng lớn. Có index không có nghĩa mọi truy vấn nhanh hơn hoặc planner luôn dùng nó. Bảng nhỏ hoặc truy vấn lấy phần lớn hàng có thể phù hợp với Seq Scan.\n\nIndex chiếm dung lượng và cần được cập nhật khi ghi dữ liệu, nên thêm quá nhiều index có thể làm thao tác ghi chậm hơn.\n\nVí dụ tự soạn: CREATE INDEX idx_dangky_ma_sv ON DangKy(ma_sv); có thể hỗ trợ truy vấn WHERE ma_sv = 101. Cần xem kế hoạch và đo trên dữ liệu thực tế."},
+        {"title": "Đọc EXPLAIN cơ bản", "text": "EXPLAIN hiển thị kế hoạch dự kiến; EXPLAIN ANALYZE thực sự chạy câu lệnh và bổ sung số liệu thực tế. Vì vậy ANALYZE với câu lệnh ghi có thể thay đổi dữ liệu. Ứng dụng trợ lý chỉ giải thích SQL, không thực thi SQL người dùng.\n\nTrong EXPLAIN, cost là đơn vị chi phí ước lượng của planner, không phải mili giây. rows là số hàng ước lượng mà nút xuất ra, không nhất thiết là toàn bộ số hàng đã quét.\n\nSeq Scan đọc tuần tự bảng; Index Scan dùng index. Không thể kết luận kế hoạch nào tốt hơn chỉ từ tên; phải xét điều kiện, lượng dữ liệu và thống kê."}
+      ]
+    }
+  ]
+}

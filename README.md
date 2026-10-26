@@ -1,4 +1,8 @@
-# Private AI Knowledge Platform — Tuần 6
+# Trợ lý AI hỗ trợ tự học môn Cơ sở dữ liệu bằng RAG
+
+**Tuần 7:** đã thêm API hỏi đáp với Qwen, giao diện theo môn CSDL, 5 PDF demo có nguồn và bộ 20 câu hỏi tham chiếu. Xem [hướng dẫn từng bước và giải thích](docs/WEEK7.md), [phạm vi đề tài](docs/TOPIC_CHANGE.md), [học liệu](docs/course/README.md), [minh chứng và giới hạn kiểm chứng](docs/evidence/week7/README.md). Chưa có roadmap/quiz/lưu lịch sử; không cần migration mới sau tuần 5.
+
+## Nền tảng và các mốc trước
 
 **Tuần 6:** đã có tìm đoạn theo câu hỏi trong workspace bằng BGE-M3/pgvector và hiển thị nguồn trong Chat chung. Chưa sinh câu trả lời AI. Xem [hướng dẫn chạy và giải thích từng lệnh](docs/WEEK6.md), [minh chứng](docs/evidence/week6/README.md). Không cần migration mới sau tuần 5.
 

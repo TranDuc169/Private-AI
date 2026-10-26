@@ -1,0 +1,4 @@
+Frontend checks on 2026-10-27:
+npm.cmd test: 9 passed, 0 failed.
+npm.cmd run build -- --configLoader runner: Vite 6.4.3 production build PASS; 47 modules.
+These test API client/status behavior; browser UI checks are separately documented and use mocked API responses.

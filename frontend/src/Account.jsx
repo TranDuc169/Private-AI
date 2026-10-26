@@ -97,6 +97,6 @@ export function WorkspaceList({ token, workspace, kind, onUnauthorized }) {
   }, [token, workspace.id, kind, onUnauthorized, attempt]);
   return <section className="data-panel"><h2>{kind === 'documents' ? 'Tài liệu' : 'Lịch sử hội thoại'} · {workspace.name}</h2>
     {state.loading ? <p role="status">Đang tải…</p> : state.error ? <><p role="alert">{state.error}</p><button onClick={() => setAttempt(n => n + 1)}>Thử lại</button></> : state.items.length ? <ul>{state.items.map(item => <li key={item.id}>{item.filename || item.title}</li>)}</ul> : <p>Workspace này chưa có {kind === 'documents' ? 'tài liệu' : 'hội thoại'}.</p>}
-    <small>{kind === 'documents' ? 'Chức năng tải PDF sẽ được bổ sung sau.' : 'Chat AI và mở nội dung hội thoại sẽ được bổ sung sau.'}</small>
+    <small>{kind === 'documents' ? 'Vào Tài liệu để upload và xử lý PDF.' : 'Các lượt chat hiện chỉ ở màn hình Chat chung. Lưu và mở lại hội thoại sẽ được bổ sung sau.'}</small>
   </section>;
 }

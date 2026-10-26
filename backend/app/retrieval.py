@@ -41,13 +41,8 @@ def search_statement(workspace_id, owner_id, model, vector, top_k):
       .order_by(distance, Document.id, DocumentChunk.chunk_index).limit(top_k))
 
 
-@router.post('/retrieve', response_model=RetrievalOut)
-def retrieve(data: RetrievalInput, request: Request, response: Response,
-             workspace: Workspace = Depends(owned_workspace), session: Session = Depends(get_session)):
-    response.headers['Cache-Control'] = 'no-store'
-    started = time.perf_counter()
-    config = request.app.state.settings
-    workspace_id, owner_id = workspace.id, workspace.owner_id
+def retrieve_hits(session, config, workspace_id, owner_id, question, top_k):
+    """Shared retrieval used by both the source-only and RAG endpoints."""
     results = []
     try:
         available = session.scalar(select(DocumentChunk.id).join(Document).join(Workspace)
@@ -56,8 +51,8 @@ def retrieve(data: RetrievalInput, request: Request, response: Response,
         if available is not None:
             if session.get_bind().dialect.name != 'postgresql':
                 raise HTTPException(503, 'Truy xuất cần PostgreSQL với pgvector.')
-            vector = embed_batch(config, [data.question])[0]
-            rows = session.execute(search_statement(workspace_id, owner_id, config.embedding_model, vector, data.top_k)).mappings()
+            vector = embed_batch(config, [question])[0]
+            rows = session.execute(search_statement(workspace_id, owner_id, config.embedding_model, vector, top_k)).mappings()
             for row in rows:
                 values = dict(row)
                 distance = values.pop('distance')
@@ -69,5 +64,17 @@ def retrieve(data: RetrievalInput, request: Request, response: Response,
     except SQLAlchemyError:
         session.rollback()
         raise HTTPException(503, 'Không truy xuất được database. Kiểm tra PostgreSQL/pgvector rồi thử lại.') from None
+    session.rollback()
+    return results
+
+
+@router.post('/retrieve', response_model=RetrievalOut)
+def retrieve(data: RetrievalInput, request: Request, response: Response,
+             workspace: Workspace = Depends(owned_workspace), session: Session = Depends(get_session)):
+    response.headers['Cache-Control'] = 'no-store'
+    started = time.perf_counter()
+    config = request.app.state.settings
+    workspace_id, owner_id = workspace.id, workspace.owner_id
+    results = retrieve_hits(session, config, workspace_id, owner_id, data.question, data.top_k)
     return RetrievalOut(workspace_id=workspace_id, question=data.question, top_k=data.top_k,
         embedding_model=config.embedding_model, elapsed_ms=round((time.perf_counter()-started)*1000), results=results)

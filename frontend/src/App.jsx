@@ -66,7 +66,7 @@ export default function App() {
   const onLogin = value => { setWorkspace(null); setNotice(''); setSession(value); };
   return <div className="app-shell">
     <aside className="sidebar">
-      <div className="brand"><span className="brand-icon">P</span><div>Private AI<small>Knowledge Platform</small></div></div>
+      <div className="brand"><span className="brand-icon">DB</span><div>Trợ lý CSDL<small>Học cùng tài liệu của bạn</small></div></div>
       {session ? <><p className="account-email">{session.user.email}</p><button className="secondary" onClick={() => { setSession(null); setWorkspace(null); setNotice('Đã đăng xuất.'); }}>Đăng xuất</button><WorkspacePicker key={session.access_token} token={session.access_token} selected={workspace} onSelect={setWorkspace} onUnauthorized={expire} /></> : <div className="workspace-box">Đăng nhập để quản lý workspace.</div>}
       <nav aria-label="Điều hướng chính">
         <NavLink to="/" end>Chat chung</NavLink>
@@ -76,7 +76,7 @@ export default function App() {
       <p className="sidebar-note">Tài liệu và lịch sử sẽ được tải theo workspace đã chọn.</p>
     </aside>
     <main>
-      <header><div><h1>Private AI Knowledge Platform</h1></div><span className="badge">Truy xuất tài liệu</span></header>
+      <header><div><h1>Trợ lý học Cơ sở dữ liệu</h1></div><span className="badge">Hỏi đáp có nguồn</span></header>
       <HealthStatus />
       {!session ? <Login onLogin={onLogin} notice={notice} /> : <Routes>
         <Route path="/" element={<Chat key={workspace?.id || 'no-workspace'} workspace={workspace} token={session.access_token} onUnauthorized={expire} />} />

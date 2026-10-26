@@ -1,0 +1,599 @@
+{
+  "mode": "models",
+  "chat_model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "configuration": {
+    "num_ctx": 8192,
+    "num_predict": 768,
+    "temperature": 0
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14",
+  "corpus_version": "csdl-demo-v1-2026-10-27",
+  "human_review": "pending; source matches are not correctness scores",
+  "cases": [
+    {
+      "id": "q01",
+      "question": "Khóa chính có được NULL hoặc trùng không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 1,
+      "reference": "PRIMARY KEY yêu cầu duy nhất và không NULL; có thể gồm nhiều cột.",
+      "response": {
+        "status": "answered",
+        "answer": "Khóa chính không được phép có NULL và không được trùng. Theo tài liệu, khóa chính phải có giá trị duy nhất và không NULL. Mỗi bảng chỉ có tối đa một khóa chính, và giá trị của nó phải đảm bảo tính duy nhất và không rỗng. Do đó, khóa chính không thể có NULL hoặc trùng nhau. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "25d9e9e1-2246-495a-857c-33879f69629c",
+            "document_id": "5e4ab73e-da6a-4b7b-ba58-c1707cb6ac92",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6702102813506673
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.6702102813506673
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.6342464011418159
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.5298911059724036
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.5195465147703793
+        },
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.5135920916810899
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 32.49,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q02",
+      "question": "UNIQUE có cấm nhiều NULL như PRIMARY KEY không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 1,
+      "reference": "Không. PostgreSQL mặc định cho nhiều NULL với UNIQUE; NULLS NOT DISTINCT thay đổi cách xử lý. PRIMARY KEY không cho NULL.",
+      "response": {
+        "status": "answered",
+        "answer": "UNIQUE không cấm nhiều NULL như PRIMARY KEY. Theo tài liệu, UNIQUE \"mặc định xem các NULL là khác nhau\", nên có thể có nhiều NULL trong cột UNIQUE. Trong khi đó, PRIMARY KEY yêu cầu giá trị phải không NULL và duy nhất. Do đó, UNIQUE cho phép nhiều NULL, khác với PRIMARY KEY [1].",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "25d9e9e1-2246-495a-857c-33879f69629c",
+            "document_id": "5e4ab73e-da6a-4b7b-ba58-c1707cb6ac92",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6448561284860962
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.6448561284860962
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.5189199526673097
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.49215296845957585
+        },
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.4421396264712186
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4418330736958347
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 47.665,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q03",
+      "question": "CHECK điểm từ 0 đến 10 có tự cấm NULL không?",
+      "expected_file": "01-quan-he-rang-buoc.pdf",
+      "expected_page": 2,
+      "reference": "Không; CHECK chấp nhận true hoặc unknown. Cần NOT NULL nếu điểm bắt buộc.",
+      "response": {
+        "status": "answered",
+        "answer": "CHECK điểm từ 0 đến 10 không tự cấm NULL. Theo tài liệu, CHECK (diem >= 0 AND diem <= 10) chỉ giới hạn giá trị nhưng chấp nhận kết quả true hoặc unknown, do đó không tự cấm NULL. Nếu điểm bắt buộc nhập, cần thêm NOT NULL. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "bd51a2d6-4786-4bb3-a84b-cae4540f8530",
+            "document_id": "5e4ab73e-da6a-4b7b-ba58-c1707cb6ac92",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 694,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa ngoại và CHECK\nFOREIGN KEY (khóa ngoại) liên kết dữ liệu: giá trị khác NULL phải tham chiếu khóa hợp lệ\nở bảng đích. Ví dụ Lop(ma_lop PRIMARY KEY), SinhVien(ma_sv PRIMARY KEY, ma_lop\nREFERENCES Lop(ma_lop)). Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì\nthêm NOT NULL.\nCHECK kiểm tra điều kiện. CHECK (diem >= 0 AND diem <= 10) giới hạn điểm nhưng\nkhông tự cấm NULL, vì CHECK chấp nhận kết quả true hoặc unknown. Thêm NOT NULL\nnếu điểm bắt buộc nhập.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.5655704273008464
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.5655704273008464
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.4951882826046553
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.4946526158069779
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 2,
+          "score": 0.474548296642264
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4676842932831608
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 46.555,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q04",
+      "question": "LEFT JOIN khác INNER JOIN như thế nào?",
+      "expected_file": "02-sql-join.pdf",
+      "expected_page": 1,
+      "reference": "INNER giữ cặp khớp; LEFT giữ mọi hàng trái, điền NULL phía phải khi không khớp.",
+      "response": {
+        "status": "answered",
+        "answer": "LEFT JOIN và INNER JOIN khác nhau ở việc giữ hàng trong phép nối. INNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối, tức là chỉ lấy những hàng có giá trị khớp ở cả hai bảng. Trong khi đó, LEFT JOIN giữ mọi hàng bên trái (bảng đầu tiên), và nếu không có hàng khớp bên phải, các cột từ bảng bên phải nhận giá trị NULL. Ví dụ: nếu SinhVien có An và Bình, nhưng chỉ có An đăng ký CSDL, thì INNER JOIN chỉ lấy An, còn LEFT JOIN sẽ lấy cả An và Bình, với thông tin đăng ký là NULL. Điều này cho phép giữ toàn bộ dữ liệu bên trái dù không có dữ liệu khớp bên phải. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "1bb87e3d-33b7-4978-b69c-262ebd45fb23",
+            "document_id": "67f85219-9c45-44d3-b7f3-83a35dd22ecd",
+            "filename": "02-sql-join.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 660,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6792274225110807
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.6792274225110807
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 2,
+          "score": 0.5004824998799255
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.48790072945904595
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.45801139394183155
+        },
+        {
+          "filename": "05-index-explain.pdf",
+          "page": 2,
+          "score": 0.4485484754695889
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 65.603,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q05",
+      "question": "Vì sao WHERE lọc bảng phải làm mất sinh viên chưa đăng ký trong LEFT JOIN?",
+      "expected_file": "02-sql-join.pdf",
+      "expected_page": 2,
+      "reference": "WHERE áp dụng sau nối; điều kiện so sánh loại NULL. Đưa điều kiện phù hợp vào ON để giữ hàng trái.",
+      "error": "Model trả nội dung hoặc mã nguồn không hợp lệ. Hãy thử lại hoặc hỏi cụ thể hơn.",
+      "http_status": 502,
+      "elapsed_seconds": 55.17,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q06",
+      "question": "WHERE và HAVING khác nhau ở đâu?",
+      "expected_file": "02-sql-join.pdf",
+      "expected_page": 2,
+      "reference": "WHERE lọc hàng trước nhóm; HAVING lọc nhóm sau GROUP BY.",
+      "response": {
+        "status": "answered",
+        "answer": "WHERE và HAVING khác nhau về thời điểm áp dụng trong truy vấn SQL. WHERE lọc các hàng trước khi nhóm dữ liệu (trước GROUP BY), còn HAVING lọc các nhóm sau khi đã thực hiện GROUP BY. Ví dụ: trong câu truy vấn SELECT ma_sv, COUNT(*) FROM DangKy GROUP BY ma_sv HAVING COUNT(*) >= 2, điều kiện HAVING chỉ áp dụng sau khi nhóm theo ma_sv, để tìm các sinh viên có ít nhất hai đăng ký. Điều này được nêu rõ trong tài liệu '02-sql-join.pdf' trang 2. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "11fbcb0a-80fc-4772-9649-d10095f49907",
+            "document_id": "67f85219-9c45-44d3-b7f3-83a35dd22ecd",
+            "filename": "02-sql-join.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 661,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nSQL VÀ JOIN\nWHERE, ON và HAVING\nON quyết định các cặp hàng khớp khi nối; WHERE lọc kết quả sau phép nối. Với LEFT\nJOIN, đặt WHERE d.mon = 'CSDL' sẽ loại hàng có d.mon NULL, nên không giữ được sinh\nviên chưa đăng ký. Muốn vẫn giữ mọi sinh viên, đưa điều kiện này vào ON.\nWHERE lọc hàng trước khi nhóm. HAVING lọc nhóm sau GROUP BY.\nVí dụ tự soạn: SELECT ma_sv, COUNT(*) FROM DangKy GROUP BY ma_sv HAVING\nCOUNT(*) >= 2; tìm sinh viên có ít nhất hai hàng đăng ký.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.5067201023357247
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 2,
+          "score": 0.5067201023357247
+        },
+        {
+          "filename": "05-index-explain.pdf",
+          "page": 3,
+          "score": 0.42259133110955094
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 3,
+          "score": 0.4091530269805606
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 3,
+          "score": 0.40754226069956623
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4071398113669515
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 63.159,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q07",
+      "question": "Quan hệ nhiều nhiều giữa sinh viên và môn học chuyển thành bảng thế nào?",
+      "expected_file": "03-erd-chuan-hoa.pdf",
+      "expected_page": 1,
+      "reference": "Tạo bảng DangKy chứa hai FK; cặp mã làm khóa nếu không học lại, nếu học lại cần bổ sung lần/học kỳ.",
+      "response": {
+        "status": "answered",
+        "answer": "Quan hệ nhiều - nhiều giữa sinh viên và môn học được chuyển thành bảng liên kết DangKy(ma_sv, ma_mon, diem), trong đó ma_sv và ma_mon là khóa ngoại, tham chiếu đến bảng SinhVien và MonHoc. Nếu mỗi sinh viên chỉ đăng ký mỗi môn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung thông tin về lần học hoặc học kỳ vào thiết kế khóa. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "23ef8baa-11fd-4ffd-8830-32db8c6540b4",
+            "document_id": "561c8fb5-f55b-472e-b91e-a4b6fb6d8d57",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 751,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.5847641931531391
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 1,
+          "score": 0.5847641931531391
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.5226405624463407
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 2,
+          "score": 0.45194955221598687
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.4381870613587987
+        },
+        {
+          "filename": "04-transaction.pdf",
+          "page": 1,
+          "score": 0.41322208705131996
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 55.652,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q08",
+      "question": "Vì sao DangKy chứa ten_sv và ten_mon có thể vi phạm 2NF?",
+      "expected_file": "03-erd-chuan-hoa.pdf",
+      "expected_page": 2,
+      "reference": "ten_sv phụ thuộc ma_sv và ten_mon phụ thuộc ma_mon, tức phụ thuộc một phần khóa ghép. Tách bảng SinhVien, MonHoc, DangKy.",
+      "response": {
+        "status": "answered",
+        "answer": "Bảng DangKy chứa cả ten_sv và ten_mon vi phạm 2NF vì hai thuộc tính này không phụ thuộc vào toàn bộ khóa ứng viên (ma_sv, ma_mon). Theo định nghĩa 2NF, các thuộc tính không khóa phải phụ thuộc hoàn toàn vào khóa ứng viên. Trong ví dụ, ma_sv → ten_sv và ma_mon → ten_mon cho thấy ten_sv và ten_mon phụ thuộc riêng biệt vào phần khóa (ma_sv hoặc ma_mon), không phụ thuộc vào cả hai phần cùng lúc. Điều này làm cho bảng vi phạm 2NF. Việc tách thành các bảng riêng như SinhVien và MonHoc sẽ đảm bảo tính đúng đắn của 2NF. [1]",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "327a7ad9-2371-49d8-a970-fb819d586eba",
+            "document_id": "561c8fb5-f55b-472e-b91e-a4b6fb6d8d57",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 928,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nChuẩn hóa từ 1NF đến 3NF\nChuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc\nhàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và\nthuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc\nbắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là\nthuộc tính khóa.\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv,\nma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách\nSinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem).\nKhông thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.5364061623801595
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.5364061623801595
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 2,
+          "score": 0.44362122058503684
+        },
+        {
+          "filename": "02-sql-join.pdf",
+          "page": 1,
+          "score": 0.4393328201873037
+        },
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 1,
+          "score": 0.42534271165185594
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.4001367603571547
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 73.973,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q09",
+      "question": "Nhìn vài hàng dữ liệu có đủ kết luận bảng đạt 3NF không?",
+      "expected_file": "03-erd-chuan-hoa.pdf",
+      "expected_page": 2,
+      "reference": "Không; phải biết khóa ứng viên, phụ thuộc hàm và quy tắc nghiệp vụ.",
+      "response": {
+        "status": "answered",
+        "answer": "Không, nhìn vài hàng dữ liệu không đủ để kết luận bảng đạt 3NF. Để xác định dạng chuẩn 3NF, cần phân tích các phụ thuộc hàm và biết rõ khóa chính. Ví dụ, nếu một thuộc tính không khóa phụ thuộc vào một phần khóa thì bảng vi phạm 2NF, và cần tách bảng. Việc kiểm tra từ vài hàng mẫu không thể phát hiện được các phụ thuộc hàm hoặc mối quan hệ phụ thuộc bắc cầu. Câu hỏi này được hỗ trợ bởi [1].",
+        "sources": [
+          {
+            "source_id": 1,
+            "chunk_id": "327a7ad9-2371-49d8-a970-fb819d586eba",
+            "document_id": "561c8fb5-f55b-472e-b91e-a4b6fb6d8d57",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 928,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nChuẩn hóa từ 1NF đến 3NF\nChuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc\nhàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và\nthuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc\nbắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là\nthuộc tính khóa.\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv,\nma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách\nSinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem).\nKhông thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.\n",
+            "score": 0.6616918092105142
+          }
+        ]
+      },
+      "retrieval": [
+        {
+          "filename": "03-erd-chuan-hoa.pdf",
+          "page": 2,
+          "score": 0.6616918092105142
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 1,
+          "score": 0.48748631661341735
+        },
+        {
+          "filename": "05-index-explain.pdf",
+          "page": 1,
+          "score": 0.47941687609012257
+        },
+        {
+          "filename": "05-index-explain.pdf",
+          "page": 2,
+          "score": 0.4721274612676545
+        },
+        {
+          "filename": "01-quan-he-rang-buoc.pdf",
+          "page": 2,
+          "score": 0.4690708966119645
+        }
+      ],
+      "expected_source_rank": 1,
+      "elapsed_seconds": 74.301,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    },
+    {
+      "id": "q10",
+      "question": "Transaction bảo vệ thao tác chuyển tiền như thế nào?",
+      "expected_file": "04-transaction.pdf",
+      "expected_page": 1,
+      "reference": "Gom trừ/cộng vào một giao dịch tất cả hoặc không; lỗi thì rollback. Không khẳng định ví dụ giải quyết toàn bộ đồng thời/số dư.",
+      "error": "Model trả nội dung hoặc mã nguồn không hợp lệ. Hãy thử lại hoặc hỏi cụ thể hơn.",
+      "http_status": 502,
+      "elapsed_seconds": 93.544,
+      "review": {
+        "answer_correct": null,
+        "sources_support_claims": null,
+        "notes": ""
+      }
+    }
+  ],
+  "public_data_unchanged": null,
+  "ollama_version": {
+    "version": "0.40.8"
+  },
+  "model_inventory": {
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "modified_at": "2026-10-03T02:31:38.3732315+07:00",
+        "size": 1157672605,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16",
+          "context_length": 8192,
+          "embedding_length": 1024,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "modified_at": "2026-10-03T02:26:47.3121159+07:00",
+        "size": 2497293803,
+        "digest": "0edcdef34593eac1aa2be9c7d06c432dcf81945adca5eca2f27662c18f168ba0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      },
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "modified_at": "2026-10-03T02:02:43.6061896+07:00",
+        "size": 2497293931,
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "completion",
+          "tools",
+          "thinking"
+        ]
+      }
+    ]
+  }
+}

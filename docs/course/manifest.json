@@ -1,0 +1,96 @@
+{
+  "version": "csdl-demo-v1-2026-10-27",
+  "accessed_on": "2026-10-27",
+  "review_status": "AI-assisted draft; source-checked, pending student/instructor review",
+  "documents": [
+    {
+      "filename": "01-quan-he-rang-buoc.pdf",
+      "topic": "Mô hình quan hệ và ràng buộc",
+      "references": [
+        {
+          "title": "PostgreSQL 16 - Constraints",
+          "url": "https://www.postgresql.org/docs/16/ddl-constraints.html",
+          "license": "PostgreSQL License",
+          "author": "PostgreSQL Global Development Group",
+          "version": "16"
+        }
+      ],
+      "path": "pdfs/01-quan-he-rang-buoc.pdf",
+      "sha256": "0263b0060d95c6e229ff9514689106a1bda775436728d34c2d1e472cb5ac5134"
+    },
+    {
+      "filename": "02-sql-join.pdf",
+      "topic": "SQL và JOIN",
+      "references": [
+        {
+          "title": "PostgreSQL 16 - Table Expressions",
+          "url": "https://www.postgresql.org/docs/16/queries-table-expressions.html",
+          "license": "PostgreSQL License",
+          "author": "PostgreSQL Global Development Group",
+          "version": "16"
+        }
+      ],
+      "path": "pdfs/02-sql-join.pdf",
+      "sha256": "2adf288784627a4b52b019f324cb866f8d69232ecec8acf0f07265a21434b23a"
+    },
+    {
+      "filename": "03-erd-chuan-hoa.pdf",
+      "topic": "Thiết kế ERD và chuẩn hóa",
+      "references": [
+        {
+          "title": "Database Design, 2nd Edition - Chapter 8",
+          "url": "https://opentextbc.ca/dbdesign01/chapter/chapter-8-entity-relationship-model/",
+          "license": "CC BY 4.0",
+          "author": "Adrienne Watt; book by Adrienne Watt and Nelson Eng",
+          "version": "2nd edition, 2014"
+        },
+        {
+          "title": "Database Design, 2nd Edition - Chapter 12",
+          "url": "https://opentextbc.ca/dbdesign01/chapter/chapter-12-normalization/",
+          "license": "CC BY 4.0",
+          "author": "Adrienne Watt; book by Adrienne Watt and Nelson Eng",
+          "version": "2nd edition, 2014"
+        }
+      ],
+      "path": "pdfs/03-erd-chuan-hoa.pdf",
+      "sha256": "aced5e909406b8940c1ab76259456c6abf64a87f836906e45b2764cb484d5377"
+    },
+    {
+      "filename": "04-transaction.pdf",
+      "topic": "Transaction",
+      "references": [
+        {
+          "title": "PostgreSQL 16 - Transactions",
+          "url": "https://www.postgresql.org/docs/16/tutorial-transactions.html",
+          "license": "PostgreSQL License",
+          "author": "PostgreSQL Global Development Group",
+          "version": "16"
+        }
+      ],
+      "path": "pdfs/04-transaction.pdf",
+      "sha256": "f5fa9f3c49ee46937c5c629e987276025c317f27ef0b0ee18074a089d73a2ff9"
+    },
+    {
+      "filename": "05-index-explain.pdf",
+      "topic": "Index và kế hoạch truy vấn cơ bản",
+      "references": [
+        {
+          "title": "PostgreSQL 16 - Indexes Introduction",
+          "url": "https://www.postgresql.org/docs/16/indexes-intro.html",
+          "license": "PostgreSQL License",
+          "author": "PostgreSQL Global Development Group",
+          "version": "16"
+        },
+        {
+          "title": "PostgreSQL 16 - Using EXPLAIN",
+          "url": "https://www.postgresql.org/docs/16/using-explain.html",
+          "license": "PostgreSQL License",
+          "author": "PostgreSQL Global Development Group",
+          "version": "16"
+        }
+      ],
+      "path": "pdfs/05-index-explain.pdf",
+      "sha256": "82127a8e1fd11e083c035c09d180bdf55d88224828ad00e9d74a0189b972b4db"
+    }
+  ]
+}

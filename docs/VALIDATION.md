@@ -1,5 +1,10 @@
 ## Tuần 5 — xem kết quả mới
 
+## Tuần 7
+
+Kết quả mới được lưu tại [evidence/week7](evidence/week7/README.md). Phân biệt unit test dùng mock, model thật tính cosine trong bộ nhớ, và toàn luồng PostgreSQL. Không dùng model-only để khẳng định API/DB đã được kiểm chứng. [Hướng dẫn chạy lại](WEEK7.md).
+
+
 ## Kiểm chứng tuần 6
 
 Kết quả và giới hạn được lưu riêng trong [evidence/week6](evidence/week6/README.md). Hướng dẫn chạy lại và giải thích lệnh: [WEEK6](WEEK6.md). Không thay đổi minh chứng tuần trước.

@@ -1,4 +1,17 @@
-# API contract v0.5
+# API contract v0.7
+
+## Tuần 7 — POST /workspaces/{workspace_id}/chat
+
+Yêu cầu JWT và workspace do tài khoản sở hữu. Body duy nhất: `{"question":"LEFT JOIN khác INNER JOIN thế nào?"}`; trim, 1–2000 ký tự, cấm trường thừa. Endpoint retrieve tuần 6 vẫn còn.
+
+Response: `workspace_id`, `question`, `status` (`answered`, `insufficient_context`, `no_documents`), `answer`, `sources`, `model`, `elapsed_ms`. Mỗi source có toàn bộ trường RetrievalHit và `source_id` khớp ký hiệu [n] trong câu trả lời. Có thể là [1] và [3], UI không tự đánh số lại. Workspace không có đoạn ready trả no_documents, không gọi Qwen.
+
+401: chưa đăng nhập; 404: không tồn tại/khác chủ; 422: input sai; 429: model bận (Retry-After 5); 409: nguồn bị thay đổi trong lúc sinh; 502: model trả dữ liệu/citation sai hoặc bị cắt; 503: Ollama/model/database không sẵn sàng; 504: generation timeout. Không trả traceback, credentials hoặc prompt nội bộ trong lỗi.
+
+Không giữ transaction DB khi model chạy. Backend lọc quyền trước Top-K, chỉ gửi nguồn được chọn; kiểm tra nguồn còn tồn tại sau generation. Giới hạn 1 pipeline đồng thời/process, chỉ khởi động 1 worker cho demo. Không lưu hội thoại hoặc thực thi SQL. Citation được kiểm tra ID, chưa tự động kiểm chứng nghĩa. Cache-Control no-store trên kết quả thành công.
+
+Nếu model có source_ids hợp lệ nhưng không chèn ký hiệu trong answer, backend thêm dòng “Nguồn tham khảo: [n]”. Đây là nguồn do model chọn, không phải xác nhận từng nhận định đúng.
+
 
 ## Tuần 6 — POST /workspaces/{workspace_id}/retrieve
 

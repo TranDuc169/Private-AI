@@ -1,5 +1,10 @@
 # Đối chiếu hiện trạng — cập nhật 05/10/2026
 
+## Tuần 7 — 27/10/2026
+
+Đã thêm hỏi đáp RAG theo môn CSDL: Qwen3 4B Instruct đọc nguồn từ retrieval theo workspace, đầu ra JSON/citation được kiểm tra, có timeout/lỗi/busy, UI trả lời và nguồn. Có 5 PDF demo có giấy phép/nguồn, script nạp qua API, 20 câu đánh giá phát triển. Chưa thêm migration, chưa lưu hội thoại, chưa roadmap/quiz. Xem [WEEK7](WEEK7.md), [TOPIC_CHANGE](TOPIC_CHANGE.md), [minh chứng](evidence/week7/README.md). Trạng thái nghiệm thu dựa trên minh chứng mới; các mục dưới là lịch sử.
+
+
 ## Tuần 6 — 06/10/2026
 
 Đã thêm query embedding BGE-M3, tìm cosine trong PostgreSQL/pgvector có lọc workspace/chủ sở hữu trước Top-K, UI chat gửi/chờ/lỗi và nguồn PDF/trang. Kiểm thử PostgreSQL: 33 pass. BGE-M3 thật: 6/6 câu có nguồn đúng ở Top-1 trên bộ mẫu nhỏ; câu ngoài tài liệu vẫn trả đoạn gần nhất. Đã kiểm tra UI Edge và cách ly dữ liệu. Chưa gọi Qwen, chưa lưu lịch sử truy xuất. Xem [WEEK6](WEEK6.md) và [minh chứng](evidence/week6/README.md). Các mục tuần trước là lịch sử.
