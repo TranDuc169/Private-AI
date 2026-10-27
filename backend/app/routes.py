@@ -5,7 +5,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.models import Conversation, Document, User, Workspace
+from app.models import Conversation, Document, User, Workspace, StudyPlan
 from app.schemas import Credentials, UserOut, TokenOut, WorkspaceInput, WorkspaceOut, DocumentOut, ConversationOut
 from app.security import current_user, dummy_hash, get_session, issue_token, password_hash
 
@@ -75,7 +75,7 @@ def rename_workspace(data: WorkspaceInput, workspace: Workspace = Depends(owned_
 
 @router.delete("/workspaces/{workspace_id}", status_code=204)
 def delete_workspace(workspace: Workspace = Depends(owned_workspace), session: Session = Depends(get_session)):
-    for model in (Document, Conversation):
+    for model in (Document, Conversation, StudyPlan):
         if session.scalar(select(func.count()).select_from(model).where(model.workspace_id == workspace.id)):
             raise HTTPException(409, "Workspace còn tài liệu hoặc hội thoại, chưa thể xóa.")
     session.delete(workspace)
@@ -92,5 +92,6 @@ def list_documents(workspace: Workspace = Depends(owned_workspace), session: Ses
 
 
 @router.get("/workspaces/{workspace_id}/conversations", response_model=list[ConversationOut])
-def list_conversations(workspace: Workspace = Depends(owned_workspace), session: Session = Depends(get_session)):
+def list_conversations(response: Response, workspace: Workspace = Depends(owned_workspace), session: Session = Depends(get_session)):
+    response.headers["Cache-Control"] = "no-store"
     return session.scalars(select(Conversation).where(Conversation.workspace_id == workspace.id).order_by(Conversation.created_at, Conversation.id)).all()

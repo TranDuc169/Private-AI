@@ -10,7 +10,7 @@ Nhấn Windows + E để mở File Explorer. Dán đường dẫn sau vào thanh
 C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2
 ```
 
-Đây là thư mục gốc, chứa `backend`, `frontend`, `compose.yaml` và file hướng dẫn này. Tên thư mục vẫn là week2 nhưng code đã phát triển đến tuần 7.
+Đây là thư mục gốc, chứa `backend`, `frontend`, `compose.yaml` và file hướng dẫn này. Tên thư mục vẫn là week2 nhưng code đã phát triển đến tuần 9.
 
 Mở VS Code → File → Open Folder → chọn thư mục trên. Nhấn Ctrl+P rồi gõ `HUONG_DAN_CHAY.md` để tìm nhanh file này. Nhấn Ctrl+Shift+V để xem bản trình bày dễ đọc.
 
@@ -65,7 +65,7 @@ Giải thích lệnh dài:
 - `--reload`: tự nạp lại backend khi bạn lưu thay đổi code, tiện lúc phát triển.
 - `--host 127.0.0.1`: chỉ phục vụ trên máy này. `--port 8000`: API dùng cổng 8000.
 
-Chờ dòng `Application startup complete`. **Giữ terminal này mở**. Không xuất hiện lại dòng để nhập lệnh là bình thường: server đang chạy và chờ yêu cầu.
+Nếu vừa cập nhật code tuần 8/9, chạy migration theo mục 10 trước khi bật backend. Chờ dòng `Application startup complete`. **Giữ terminal này mở**. Không xuất hiện lại dòng để nhập lệnh là bình thường: server đang chạy và chờ yêu cầu.
 
 Mở trình duyệt: http://127.0.0.1:8000/health
 
@@ -131,7 +131,7 @@ Script hỏi email/mật khẩu tài khoản đã đăng ký trên web. Khi gõ 
 
 Đó là RAG: tìm tài liệu trước, đưa nội dung tìm được cho model trả lời. Không phải huấn luyện lại Qwen mỗi khi upload PDF. BGE-M3 tìm nội dung; Qwen viết câu trả lời. Có nguồn trích dẫn vẫn cần đối chiếu, vì model có thể diễn đạt sai hoặc quá rộng.
 
-Ở phiên bản hiện tại, mỗi câu hỏi được xử lý độc lập; các lượt trước không gửi làm ngữ cảnh. Các lượt hiển thị trong chat chưa lưu thành lịch sử lâu dài. Ứng dụng giải thích SQL dưới dạng văn bản, không thực thi SQL mà người dùng nhập.
+Ở phiên bản hiện tại, mỗi câu hỏi được xử lý độc lập; các lượt trước không gửi làm ngữ cảnh. Các câu hỏi và câu trả lời hoàn tất được lưu lâu dài theo workspace; vào Lịch sử để mở lại. Reload cần đăng nhập lại vì token chỉ giữ trong bộ nhớ, nhưng hội thoại vẫn còn trong database. Ứng dụng giải thích SQL dưới dạng văn bản, không thực thi SQL mà người dùng nhập.
 
 ## 7. Tắt đúng cách và mở lại hôm sau
 
@@ -186,4 +186,37 @@ npm.cmd run build
 
 `test` chạy kiểm thử API client; `build` kiểm tra việc đóng gói giao diện. Build đạt không có nghĩa model trả lời đúng.
 
-Tuần 7 không thêm migration mới, nên không cần nâng schema chỉ để mở lại ứng dụng đã chạy tuần 6. Hướng dẫn đánh giá 20 câu với model/database thật và chi tiết code nằm trong [docs/WEEK7.md](docs/WEEK7.md); kết quả đã kiểm tra nằm trong [docs/evidence/week7/README.md](docs/evidence/week7/README.md).
+Tuần 8 có migration mới để lưu lịch sử; xem mục 10. Sau khi nâng cấp thành công không cần chạy migration mỗi lần mở máy. Hướng dẫn đánh giá 20 câu với model/database thật và chi tiết code nằm trong [docs/WEEK7.md](docs/WEEK7.md); kết quả đã kiểm tra nằm trong [docs/evidence/week7/README.md](docs/evidence/week7/README.md).
+
+
+## 10. Cập nhật database tuần 8/9 — làm một lần khi có migration mới
+
+Giữ Docker đang chạy. Nếu backend đang chạy, Ctrl+C ở terminal backend trước. Chạy trong CMD:
+
+```cmd
+cd /d "C:\Users\Admin\Documents\Codex\2026-10-02\t-i-ti-p-t-c\outputs\private-ai-week2\backend"
+.venv\Scripts\python.exe -m alembic upgrade head
+.venv\Scripts\python.exe -m alembic current
+.venv\Scripts\python.exe -m uvicorn app.main:create_app --factory --reload --host 127.0.0.1 --port 8000
+```
+
+`alembic upgrade head` bổ sung các cột để lưu thứ tự tin nhắn và bản chụp nguồn, giữ các bản ghi cũ. `head` nghĩa là migration mới nhất. `alembic current` xem phiên bản database: cần hiện `0005_study_plans (head)`. Chỉ chạy tiếp server khi migration thành công. Chạy lại upgrade khi đã ở head không thêm cột lần nữa.
+
+Bật frontend như mục 4. Gửi một câu hỏi, vào Lịch sử để mở lại; reload trang, đăng nhập và chọn đúng workspace rồi mở Lịch sử lần nữa. Thử nhập `Tóm tắt chủ đề transaction` trong cùng ô chat. Mở nguồn để xem bản trích đã lưu và đoạn nguồn hiện tại.
+
+Tóm tắt hỗ trợ 5 chủ đề CSDL theo từ khóa, tối đa 8 đoạn trải trên các trang; giao diện nêu phạm vi và số tài liệu chưa sẵn sàng. Nhập yêu cầu chung như `Tóm tắt giúp tôi` sẽ được hỏi rõ chủ đề. Model chưa đọc các lượt trước, nên câu tiếp theo cần ghi đủ chủ đề, ví dụ `Tóm tắt transaction` thay vì chỉ `transaction`.
+
+Chi tiết các thay đổi và bài thử tuần 8: [docs/WEEK8.md](docs/WEEK8.md).
+
+
+## 11. Chạy thử roadmap và checklist tuần 9
+
+Sau khi chạy migration ở mục 10 và bật backend/frontend, chọn workspace có đủ bộ PDF CSDL đã index. Nhập:
+
+> Lập roadmap SQL JOIN; nền tảng: mới bắt đầu; 4 buổi; 45 phút/buổi.
+
+Đọc thẻ bản nháp và nguồn từng bước → bấm Xác nhận kế hoạch này → đánh dấu một bước → reload, đăng nhập lại, chọn workspace và mở Lịch sử. Tiến độ phải còn. Nếu muốn thay thời gian/mục tiêu, gửi yêu cầu mới để tạo bản nháp khác.
+
+Lệnh `alembic upgrade head` tự chạy migration còn thiếu của cả tuần 8 và tuần 9 theo thứ tự. Tuần 9 tạo bảng kế hoạch và bảng checklist, không xóa tài khoản/tài liệu cũ. Không cần cài thêm thư viện hay tải model khác.
+
+Giải thích file, thuật toán, lệnh kiểm thử và giới hạn: [docs/WEEK9.md](docs/WEEK9.md).

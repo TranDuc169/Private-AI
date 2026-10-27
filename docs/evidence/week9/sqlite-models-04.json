@@ -1,0 +1,421 @@
+{
+  "mode": "sqlite + real BGE-M3/Qwen, isolated TestClient API",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "cases": [
+    {
+      "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "46e32978-8eee-4959-a9bf-4fef4f6ebae9",
+            "document_id": "44cd9674-f13e-4271-be6c-7c1435825ac6",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 749,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          },
+          {
+            "chunk_id": "a6b64197-d8bb-4446-aa35-dd54aa47d14d",
+            "document_id": "4edb27be-0dee-4030-91de-7b886bae6c25",
+            "filename": "02-sql-join.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 659,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 2
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 22463,
+        "conversation_id": "cc5e5fe5-f602-453c-b7f6-78125330c6cd",
+        "revision": 1,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "4484ae77-ea7a-4b39-989a-a09fb24b7581",
+        "planning_request": {
+          "goal": "sql",
+          "level": "beginner",
+          "sessions": 4,
+          "minutes_per_session": 45
+        }
+      },
+      "seconds": 22.504,
+      "plan": {
+        "id": "4484ae77-ea7a-4b39-989a-a09fb24b7581",
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "sql",
+            "level": "beginner",
+            "sessions": 4,
+            "minutes_per_session": 45
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "relations",
+              "title": "Mô hình quan hệ và ràng buộc",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 45
+                },
+                {
+                  "session": 2,
+                  "minutes": 15
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu được vai trò của khóa chính và ràng buộc UNIQUE trong một bảng quan hệ.",
+              "activity": "Đọc tài liệu để hiểu khái niệm khóa chính và ràng buộc UNIQUE trong mô hình quan hệ."
+            },
+            {
+              "key": "sql",
+              "title": "SQL và JOIN",
+              "minutes": 60,
+              "prerequisites": [
+                "relations"
+              ],
+              "schedule": [
+                {
+                  "session": 2,
+                  "minutes": 30
+                },
+                {
+                  "session": 3,
+                  "minutes": 30
+                }
+              ],
+              "source_ids": [
+                2
+              ],
+              "objective": "Biết cách sử dụng LEFT JOIN để giữ tất cả các hàng từ bảng bên trái và hiển thị NULL cho các hàng không khớp.",
+              "activity": "Viết câu SQL sử dụng LEFT JOIN để kết hợp hai bảng, ví dụ như SinhVien và DangKy, và giải thích kết quả."
+            }
+          ],
+          "budget_minutes": 180,
+          "planned_minutes": 120,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "46e32978-8eee-4959-a9bf-4fef4f6ebae9",
+              "document_id": "44cd9674-f13e-4271-be6c-7c1435825ac6",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 749,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "a6b64197-d8bb-4446-aa35-dd54aa47d14d",
+              "document_id": "4edb27be-0dee-4030-91de-7b886bae6c25",
+              "filename": "02-sql-join.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 659,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        },
+        "progress": {
+          "relations": false,
+          "sql": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    },
+    {
+      "question": "Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "question": "Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "a4b4aab7-ddd4-4c87-81ea-f5940adcaf1f",
+            "document_id": "3391ccf4-2564-4fc4-956d-91aab07d3404",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 927,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nChuẩn hóa từ 1NF đến 3NF\nChuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc\nhàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và\nthuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc\nbắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là\nthuộc tính khóa.\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv,\nma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách\nSinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem).\nKhông thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 5669,
+        "conversation_id": "cc5e5fe5-f602-453c-b7f6-78125330c6cd",
+        "revision": 2,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "e00d177b-e7fc-4289-8ee0-038109e5c3e1",
+        "planning_request": {
+          "goal": "erd",
+          "level": "basic",
+          "sessions": 3,
+          "minutes_per_session": 40
+        }
+      },
+      "seconds": 5.678,
+      "plan": {
+        "id": "e00d177b-e7fc-4289-8ee0-038109e5c3e1",
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "erd",
+            "level": "basic",
+            "sessions": 3,
+            "minutes_per_session": 40
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "erd",
+              "title": "ERD và chuẩn hóa",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 40
+                },
+                {
+                  "session": 2,
+                  "minutes": 20
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu rõ các bước chuẩn hóa dữ liệu từ 1NF đến 3",
+              "activity": "Đọc và hiểu định nghĩa chuẩn hóa từ 1NF đến 3NF, đặc biệt là điều kiện của 2NF và 3NF."
+            }
+          ],
+          "budget_minutes": 120,
+          "planned_minutes": 60,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "a4b4aab7-ddd4-4c87-81ea-f5940adcaf1f",
+              "document_id": "3391ccf4-2564-4fc4-956d-91aab07d3404",
+              "filename": "03-erd-chuan-hoa.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 927,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nChuẩn hóa từ 1NF đến 3NF\nChuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc\nhàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và\nthuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc\nbắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là\nthuộc tính khóa.\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv,\nma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách\nSinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem).\nKhông thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            }
+          ]
+        },
+        "progress": {
+          "erd": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    },
+    {
+      "question": "Lập roadmap index; đã biết cơ bản; 4 buổi; 45 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "question": "Lập roadmap index; đã biết cơ bản; 4 buổi; 45 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "a6b64197-d8bb-4446-aa35-dd54aa47d14d",
+            "document_id": "4edb27be-0dee-4030-91de-7b886bae6c25",
+            "filename": "02-sql-join.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 659,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          },
+          {
+            "chunk_id": "4c8e6273-4e53-456d-a769-24ecf2658019",
+            "document_id": "210dc96c-226a-4026-b31e-de0bebbe5253",
+            "filename": "05-index-explain.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 793,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nINDEX VÀ KẾ HOẠCH TRUY VẤN CƠ BẢN\nKhi nào index có ích?\nIndex là cấu trúc hỗ trợ tìm hàng mà không nhất thiết quét toàn bộ bảng. Nó có thể giúp truy\nvấn lọc ít hàng trên bảng lớn. Có index không có nghĩa mọi truy vấn nhanh hơn hoặc\nplanner luôn dùng nó. Bảng nhỏ hoặc truy vấn lấy phần lớn hàng có thể phù hợp với Seq\nScan.\nIndex chiếm dung lượng và cần được cập nhật khi ghi dữ liệu, nên thêm quá nhiều index có\nthể làm thao tác ghi chậm hơn.\nVí dụ tự soạn: CREATE INDEX idx_dangky_ma_sv ON DangKy(ma_sv); có thể hỗ trợ truy\nvấn WHERE ma_sv = 101. Cần xem kế hoạch và đo trên dữ liệu thực tế.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 2
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 12612,
+        "conversation_id": "cc5e5fe5-f602-453c-b7f6-78125330c6cd",
+        "revision": 3,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "09b3eb56-90eb-4bd6-9869-bfc9416593ed",
+        "planning_request": {
+          "goal": "index",
+          "level": "basic",
+          "sessions": 4,
+          "minutes_per_session": 45
+        }
+      },
+      "seconds": 12.624,
+      "plan": {
+        "id": "09b3eb56-90eb-4bd6-9869-bfc9416593ed",
+        "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "index",
+            "level": "basic",
+            "sessions": 4,
+            "minutes_per_session": 45
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "sql",
+              "title": "SQL và JOIN",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 45
+                },
+                {
+                  "session": 2,
+                  "minutes": 15
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu sự khác biệt giữa INNER JOIN và LEFT JOIN trong việc trả về dữ liệu từ hai bảng.",
+              "activity": "Đọc ví dụ về INNER JOIN và LEFT JOIN trong tài liệu, ghi lại cách hoạt động của từng loại JOIN trên giấy."
+            },
+            {
+              "key": "index",
+              "title": "Index và kế hoạch truy vấn",
+              "minutes": 60,
+              "prerequisites": [
+                "sql"
+              ],
+              "schedule": [
+                {
+                  "session": 2,
+                  "minutes": 30
+                },
+                {
+                  "session": 3,
+                  "minutes": 30
+                }
+              ],
+              "source_ids": [
+                2
+              ],
+              "objective": "Hiểu nguyên lý hoạt động của index và điều kiện sử dụng phù hợp.",
+              "activity": "Đọc tài liệu về index và kế hoạch truy vấn để hiểu khi nào index hữu ích và tác động của việc tạo index đến hiệu suất truy vấn."
+            }
+          ],
+          "budget_minutes": 180,
+          "planned_minutes": 120,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "a6b64197-d8bb-4446-aa35-dd54aa47d14d",
+              "document_id": "4edb27be-0dee-4030-91de-7b886bae6c25",
+              "filename": "02-sql-join.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 659,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "4c8e6273-4e53-456d-a769-24ecf2658019",
+              "document_id": "210dc96c-226a-4026-b31e-de0bebbe5253",
+              "filename": "05-index-explain.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 793,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nINDEX VÀ KẾ HOẠCH TRUY VẤN CƠ BẢN\nKhi nào index có ích?\nIndex là cấu trúc hỗ trợ tìm hàng mà không nhất thiết quét toàn bộ bảng. Nó có thể giúp truy\nvấn lọc ít hàng trên bảng lớn. Có index không có nghĩa mọi truy vấn nhanh hơn hoặc\nplanner luôn dùng nó. Bảng nhỏ hoặc truy vấn lấy phần lớn hàng có thể phù hợp với Seq\nScan.\nIndex chiếm dung lượng và cần được cập nhật khi ghi dữ liệu, nên thêm quá nhiều index có\nthể làm thao tác ghi chậm hơn.\nVí dụ tự soạn: CREATE INDEX idx_dangky_ma_sv ON DangKy(ma_sv); có thể hỗ trợ truy\nvấn WHERE ma_sv = 101. Cần xem kế hoạch và đo trên dữ liệu thực tế.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        },
+        "progress": {
+          "sql": false,
+          "index": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    }
+  ],
+  "human_review": "pending",
+  "public_data_unchanged": null,
+  "saved_messages": 6,
+  "source_and_history_roundtrip": "passed",
+  "infeasible_budget": {
+    "workspace_id": "8be37675-456e-452c-9b71-02305121ea44",
+    "question": "Roadmap SQL; mới bắt đầu; 1 buổi; 15 phút/buổi",
+    "status": "insufficient_context",
+    "answer": "Quỹ thời gian chưa khả thi: cần ít nhất 40 phút theo định mức demo 20 phút/bước. Hãy tăng số buổi hoặc phút/buổi; đây không phải cam kết đạt trình độ.",
+    "sources": [],
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "elapsed_ms": 2,
+    "conversation_id": "0611ab47-2128-4344-93a3-0554b5571458",
+    "revision": 1,
+    "kind": "roadmap",
+    "coverage": null,
+    "roadmap_id": null,
+    "planning_request": {
+      "goal": "sql",
+      "level": "beginner",
+      "sessions": 1,
+      "minutes_per_session": 15
+    }
+  }
+}

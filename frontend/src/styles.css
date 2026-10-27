@@ -85,3 +85,9 @@ h2 { font-weight: 600; font-size: 25px; margin: 23px 0 12px; }
 textarea { display: block; width: 100%; border: 0; resize: none; background: transparent; font-size: 14px; }
 .composer small { color: #aaa4ba; font-size: 11px; }
 @media (max-width: 760px) { .app-shell { grid-template-columns: 1fr; }.sidebar { padding: 16px; }.workspace-box { margin: 15px 0; }nav { grid-template-columns: repeat(3, 1fr); }nav a { text-align: center; padding: 10px 4px; }.sidebar-note { display: none; }main { padding: 22px 16px; }h1 { font-size: 18px; }.badge { display: none; }.health { align-items: flex-start; flex-direction: column; }.chat { min-height: 500px; }.empty { padding: 45px 10px; }h2 { font-size: 21px; } }
+
+.plan-card { margin: 20px 0; padding: 18px; border: 1px solid #605078; border-radius: 14px; overflow-wrap: anywhere; }
+.plan-steps { padding-left: 0; list-style: none; }
+.plan-steps > li { padding: 12px 0; border-top: 1px solid #34303f; }
+.plan-check { display: flex; align-items: center; gap: 10px; }
+.plan-check input { width: auto; flex: 0 0 auto; }

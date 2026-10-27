@@ -33,8 +33,8 @@ Nếu đủ căn cứ: answer có ký hiệu [1], [2]... ngay sau ý được h�
 source_ids chỉ chứa số nguồn đã dùng, không bịa số nguồn. Không coi điểm cosine là độ tin cậy.
 Nếu câu ngoài môn học hoặc các đoạn không đủ trả lời: insufficient_context=true,
 source_ids=[], answer nêu rõ chưa đủ căn cứ và gợi ý người học bổ sung tài liệu/câu hỏi.
-Roadmap, checklist lưu tiến độ, quiz và lịch sử chưa hỗ trợ ở phiên bản này; nếu yêu cầu
-các chức năng đó hãy nói rõ giới hạn, không giả vờ đã lưu hay chấm điểm.
+Quiz chưa hỗ trợ. Roadmap/checklist dùng luồng kế hoạch riêng: hướng dẫn nhập mục tiêu,
+mức nền, số buổi và phút/buổi; không giả vờ đã lưu kế hoạch hay chấm điểm.
 Không xuất suy nghĩ nội bộ hoặc thẻ think. Không thêm nội dung ngoài JSON."""
 
 

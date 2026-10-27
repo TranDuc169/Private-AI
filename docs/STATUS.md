@@ -1,3 +1,11 @@
+# Trạng thái tuần 9
+
+Đã thêm roadmap theo 5 nhóm đề cương CSDL, hỏi bổ sung đầu vào, phân bổ quỹ thời gian bằng code, nguồn từng bước, xác nhận và checklist lưu/reload. Cần chạy migration 0005_study_plans trên database dùng hằng ngày. Xem [minh chứng](evidence/week9/README.md) để phân biệt kiểm thử giả lập, SQLite/model thật và PostgreSQL chưa kiểm chứng. Chưa có quiz hoặc đánh giá thành thạo. Tuần 8–9 đang chưa commit.
+
+# Trạng thái tuần 8
+
+Đã có code lưu/mở hội thoại, nguồn hiện tại kiểm tra quyền và tóm tắt 5 chủ đề theo tập đoạn trải trang. PostgreSQL/migration thử nghiệm và ba câu với model thật đã chạy; xem [minh chứng tuần 8](evidence/week8/README.md). **Database public chưa nâng lên 0004; người dùng chạy migration trước khi dùng.** Không có roadmap/checklist/quiz hoặc ngữ cảnh nhiều lượt. Những ghi chú tuần 7 trở về trước dưới đây mang tính lịch sử.
+
 # Đối chiếu hiện trạng — cập nhật 05/10/2026
 
 ## Tuần 7 — 27/10/2026

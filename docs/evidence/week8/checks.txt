@@ -1,0 +1,37 @@
+Observed commands, summarized (not fabricated raw logs):
+
+python -m pytest -q -p no:cacheprovider
+55 passed, 8 skipped, 1 warning in 22.22s.
+Run before adding the final late-generation revision test.
+
+python test_postgres.py
+60 passed, 5 warnings in 39.38s.
+Real PostgreSQL, isolated temporary schemas, mocked model. Includes migration/data preservation.
+Run before adding the final late-generation revision test and list-history no-store header.
+
+python -m pytest -q -p no:cacheprovider tests/test_history_summary.py
+6 passed, 1 warning in 4.11s on final version (SQLite).
+Includes late-generation revision conflict without partial message writes.
+A subsequent targeted PostgreSQL rerun did not finish and was interrupted; not counted as passed.
+
+npm.cmd test
+9 passed, 0 failed.
+
+npm.cmd run build
+PASS on final UI: 49 modules transformed, Vite 6.4.3, 1.15s.
+
+node docs/evidence/week8/browser-test.cjs
+PASS with mocked API, Chrome desktop/mobile. Screenshots visually inspected.
+
+python evaluate_week8.py --output ../docs/evidence/week8/live-01.json
+3 HTTP 200 responses; 6 persisted messages; source/history roundtrip passed;
+public_data_unchanged=true. Uses real PostgreSQL + BGE-M3 + Qwen in isolated schema.
+
+python -m alembic current
+Connection timeout on two later attempts. No production migration applied.
+
+git diff --check
+PASS (Windows LF/CRLF warnings only). No changes in old evidence directories.
+
+Warnings: Starlette httpx TestClient deprecation; Alembic path_separator deprecation.
+No commit, push or tag created.

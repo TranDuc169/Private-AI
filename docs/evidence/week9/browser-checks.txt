@@ -1,0 +1,1 @@
+PASS Chrome with MOCK API: draft disables checklist; confirm; check; reload/login/history retains progress; uncheck saves; mobile no overflow; workspace switch ignores late plan mutation response; no JS errors.

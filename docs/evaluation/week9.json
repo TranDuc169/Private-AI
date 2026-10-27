@@ -1,0 +1,9 @@
+{
+  "purpose": "Development cases, independent human review pending",
+  "cases": [
+    {"goal":"SQL/JOIN beginner", "question":"Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi", "expected_keys":["relations","sql"], "budget":180},
+    {"goal":"ERD basic", "question":"Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi", "expected_keys":["erd"], "budget":120},
+    {"goal":"Index basic", "question":"Lập roadmap index; đã biết cơ bản; 4 buổi; 45 phút/buổi", "expected_keys":["sql","index"], "budget":180},
+    {"goal":"Insufficient budget", "question":"Lập roadmap SQL; mới bắt đầu; 1 buổi; 15 phút/buổi", "expected":"clarification, no saved plan"}
+  ]
+}

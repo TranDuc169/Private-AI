@@ -1,3 +1,11 @@
+# Kiểm tra tuần 9
+
+Hướng dẫn: [WEEK9.md](WEEK9.md). Kết quả và giới hạn: [evidence/week9/README.md](evidence/week9/README.md). Mẫu 3 mục tiêu và quỹ thời gian ngắn: [evaluation/week9.json](evaluation/week9.json). Không suy ra độ chính xác chung từ bộ demo; bài PostgreSQL bị timeout không tính là pass.
+
+# Kiểm tra tuần 8
+
+Kết quả, giới hạn và hướng dẫn tái lập: [evidence/week8/README.md](evidence/week8/README.md) và [WEEK8.md](WEEK8.md). Có kiểm thử PostgreSQL thật với model giả lập, Chrome giả lập API, và ba câu API với BGE/Qwen/PostgreSQL thật — không gộp chúng thành một tỷ lệ chính xác. Chưa nâng schema public. Giữ nguyên kết quả các tuần trước bên dưới.
+
 ## Tuần 5 — xem kết quả mới
 
 ## Tuần 7

@@ -1,0 +1,11 @@
+Observed checks (summary, not a raw transcript):
+python -m pytest -q -p no:cacheprovider: 76 passed, 8 skipped, 1 warning in 22.44s (before final planner schema change).
+python -m pytest -q -p no:cacheprovider tests/test_plans.py: 25 passed, 1 warning in 2.75s (final planner).
+npm.cmd test: 9 passed, 0 failed.
+npm.cmd run build: 50 modules; successful in 1.02s (final UI).
+Chrome browser-test.cjs: PASS mocked API, screenshots visually inspected.
+evaluate_week9.py --mode sqlite --output .../sqlite-models-04.json: 3 real-model plans; confirm/progress/history/source checks passed; short-budget rejection passed.
+PostgreSQL test/evaluation: connection timeout, NOT passed. No public migration applied.
+git diff --check: passed, LF/CRLF warning only.
+Old week7/week8 evidence: unchanged. No commit/push/tag.
+Alembic offline SQL generation 0004_chat_history:head: PASS; renders CREATE TABLE/index/FK SQL. This does not execute a PostgreSQL migration.

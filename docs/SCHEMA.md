@@ -1,3 +1,20 @@
+# Bổ sung schema tuần 9
+
+Migration 0005_study_plans nối sau 0004_chat_history, tạo hai bảng mới:
+- study_plans: id, created_at, workspace_id, conversation_id, status (draft/confirmed), revision, spec JSON.
+- study_steps: id, created_at, plan_id (FK ON DELETE CASCADE), step_key, done BOOLEAN DEFAULT false. Unique(plan_id, step_key).
+
+Kế hoạch gắn workspace và hội thoại; API luôn kiểm tra chủ sở hữu qua workspace. Revision tăng khi xác nhận/cập nhật checklist để chặn ghi từ tab cũ. Nguồn trong spec là snapshot, không bị xóa khi PDF gốc bị xóa. Không sửa schema/migration cũ. Downgrade 0005 sẽ xóa kế hoạch/tiến độ, không dùng để tắt app.
+
+# Bổ sung schema tuần 8
+
+Migration `0004_chat_history` nối sau `0003_document_vectors`:
+- conversations.revision INTEGER NOT NULL DEFAULT 0: số lượt đã lưu và kiểm tra cập nhật đồng thời.
+- messages.position INTEGER NULL: thứ tự câu hỏi/câu trả lời mới; bản ghi cũ NULL được đọc trước, theo created_at/id.
+- messages.payload JSON NULL: bản chụp kết quả assistant gồm nguồn, phạm vi, model, thời gian; user và tin cũ không có payload.
+
+Không xóa bảng hoặc sửa nội dung cũ. Nguồn snapshot không có khóa ngoại tới chunk nên vẫn đọc được khi PDF đã bị xóa. Conversation vẫn gắn workspace; API kiểm tra quyền qua workspace. Downgrade làm mất metadata mới, không dùng để tắt ứng dụng hằng ngày.
+
 # Schema — tuần 5
 
 ## Tuần 6

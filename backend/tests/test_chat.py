@@ -111,7 +111,7 @@ def populated(client,monkeypatch):
     return headers,wid,docid
 
 
-def test_chat_citations_and_no_persisted_history(client,monkeypatch):
+def test_chat_citations_and_persisted_history(client,monkeypatch):
     headers,wid,docid=populated(client,monkeypatch)
     monkeypatch.setattr('app.chat.generate_answer',lambda *args:ModelAnswer(**response_body()))
     result=post(client,headers,wid)
@@ -119,7 +119,8 @@ def test_chat_citations_and_no_persisted_history(client,monkeypatch):
     assert result.json()['sources'][0]['document_id']==docid
     assert result.json()['sources'][0]['source_id']==1
     with client.app.state.session_factory() as session:
-        for table in (Conversation,Message): assert session.scalar(select(func.count()).select_from(table))==0
+        assert session.scalar(select(func.count()).select_from(Conversation)) == 1
+        assert session.scalar(select(func.count()).select_from(Message)) == 2
 
 
 def test_chat_insufficient_context_no_fake_sources(client,monkeypatch):

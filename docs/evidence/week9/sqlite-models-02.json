@@ -1,0 +1,243 @@
+{
+  "mode": "sqlite + real BGE-M3/Qwen, isolated TestClient API",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "cases": [
+    {
+      "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "d3e36f4a-ef08-4259-9cc5-d68688ca2083",
+        "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "3d94a5fe-bfb6-4835-bbd4-708a32ab2e2b",
+            "document_id": "2ad1d075-f7af-4b4f-8e51-a1f566dab324",
+            "filename": "01-quan-he-rang-buoc.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 749,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 17460,
+        "conversation_id": "dc241460-6e89-4e02-9ad6-ac4a9b209e65",
+        "revision": 1,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "f3cae87a-bf83-4013-9e71-2989c7760c87",
+        "planning_request": {
+          "goal": "sql",
+          "level": "beginner",
+          "sessions": 4,
+          "minutes_per_session": 45
+        }
+      },
+      "seconds": 17.486,
+      "plan": {
+        "id": "f3cae87a-bf83-4013-9e71-2989c7760c87",
+        "workspace_id": "d3e36f4a-ef08-4259-9cc5-d68688ca2083",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "sql",
+            "level": "beginner",
+            "sessions": 4,
+            "minutes_per_session": 45
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "relations",
+              "title": "Mô hình quan hệ và ràng buộc",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 45
+                },
+                {
+                  "session": 2,
+                  "minutes": 15
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu được vai trò của khóa chính và ràng buộc UNIQUE trong một bảng quan hệ.",
+              "activity": "Đọc phần mô tả về khái niệm khóa chính và ràng buộc duy nhất trong mô hình quan hệ."
+            },
+            {
+              "key": "sql",
+              "title": "SQL và JOIN",
+              "minutes": 60,
+              "prerequisites": [
+                "relations"
+              ],
+              "schedule": [
+                {
+                  "session": 2,
+                  "minutes": 30
+                },
+                {
+                  "session": 3,
+                  "minutes": 30
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Áp dụng kiến thức về khóa chính và ràng buộc UNIQUE để thiết kế cấu trúc bảng đơn giản.",
+              "activity": "Viết ví dụ về một bảng SinhVien với khóa chính và ràng buộc UNIQUE trên cột email trên giấy."
+            }
+          ],
+          "budget_minutes": 180,
+          "planned_minutes": 120,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "3d94a5fe-bfb6-4835-bbd4-708a32ab2e2b",
+              "document_id": "2ad1d075-f7af-4b4f-8e51-a1f566dab324",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 749,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            }
+          ]
+        },
+        "progress": {
+          "relations": false,
+          "sql": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    },
+    {
+      "question": "Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "d3e36f4a-ef08-4259-9cc5-d68688ca2083",
+        "question": "Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "d6a1b0e1-bb4d-41bf-a9bb-2b1c602dd23b",
+            "document_id": "4e948e81-61b1-4078-b0ab-9871d20ff8e2",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 5860,
+        "conversation_id": "dc241460-6e89-4e02-9ad6-ac4a9b209e65",
+        "revision": 2,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "a8f248c0-dcfc-41ec-a4b3-cd22c614215b",
+        "planning_request": {
+          "goal": "erd",
+          "level": "basic",
+          "sessions": 3,
+          "minutes_per_session": 40
+        }
+      },
+      "seconds": 5.872,
+      "plan": {
+        "id": "a8f248c0-dcfc-41ec-a4b3-cd22c614215b",
+        "workspace_id": "d3e36f4a-ef08-4259-9cc5-d68688ca2083",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "erd",
+            "level": "basic",
+            "sessions": 3,
+            "minutes_per_session": 40
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "erd",
+              "title": "ERD và chuẩn hóa",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 40
+                },
+                {
+                  "session": 2,
+                  "minutes": 20
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu cách mô tả thực thể, thuộc tính và quan hệ giữa các thực thể trong ERD.",
+              "activity": "Đọc tài liệu về thiết kế ERD và chuẩn hóa, đặc biệt là phần quan hệ nhiều - nhiều giữa thực thể SinhVien và MonHoc."
+            }
+          ],
+          "budget_minutes": 120,
+          "planned_minutes": 60,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "d6a1b0e1-bb4d-41bf-a9bb-2b1c602dd23b",
+              "document_id": "4e948e81-61b1-4078-b0ab-9871d20ff8e2",
+              "filename": "03-erd-chuan-hoa.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 750,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            }
+          ]
+        },
+        "progress": {
+          "erd": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    },
+    {
+      "question": "Lập roadmap index; đã biết cơ bản; 4 buổi; 45 phút/buổi",
+      "http_status": 502,
+      "response": {
+        "detail": "Roadmap do model trả không đúng cấu trúc/nguồn. Chưa lưu kế hoạch; hãy thử lại."
+      },
+      "seconds": 10.123
+    }
+  ],
+  "human_review": "pending",
+  "public_data_unchanged": null,
+  "model_errors": [
+    {
+      "type": "ValueError",
+      "reason": "missing/reordered steps"
+    }
+  ]
+}

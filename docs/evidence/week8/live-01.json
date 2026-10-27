@@ -1,0 +1,124 @@
+{
+  "mode": "real PostgreSQL + Ollama, isolated TestClient API",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "cases": [
+    {
+      "question": "COMMIT và ROLLBACK khác nhau thế nào?",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "a83519f4-a92d-4af2-9df5-af6599c0ff2d",
+        "question": "COMMIT và ROLLBACK khác nhau thế nào?",
+        "status": "answered",
+        "answer": "COMMIT xác nhận tất cả thay đổi trong giao dịch, làm cho chúng trở thành dữ liệu bền vững. ROLLBACK hủy tất cả thay đổi chưa được commit, tránh tình trạng dữ liệu không hoàn chỉnh. Hai lệnh này đảm bảo tính nguyên tử của giao dịch, đảm bảo thay đổi hoặc không thay đổi toàn bộ.\n\nNguồn tham khảo: [1], [2].",
+        "sources": [
+          {
+            "chunk_id": "51f21ac8-a32a-4d7d-acba-86ec0940614e",
+            "document_id": "0527bec8-12b1-4251-9d50-2a12536438e7",
+            "filename": "04-transaction.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 680,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTRANSACTION\nBEGIN, COMMIT và ROLLBACK\nTransaction gom nhiều bước thành một đơn vị tất cả hoặc không bước nào: đó là tính\nnguyên tử. BEGIN mở giao dịch, COMMIT xác nhận thay đổi, ROLLBACK hủy thay đổi\nchưa commit trong giao dịch.\nVí dụ tự soạn: chuyển tiền cần trừ ở tài khoản A và cộng ở B trong cùng giao dịch. Nếu chỉ\ntrừ thành công còn cộng lỗi, phải rollback để tránh chuyển tiền dở dang. Ví dụ này minh họa\nnguyên tử, chưa xử lý đầy đủ kiểm tra số dư hoặc truy cập đồng thời.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.637899,
+            "source_id": 1
+          },
+          {
+            "chunk_id": "5b98b645-180e-4a11-9aa3-a2960b18d391",
+            "document_id": "0527bec8-12b1-4251-9d50-2a12536438e7",
+            "filename": "04-transaction.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 729,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTRANSACTION\nSAVEPOINT và giao dịch ngầm\nSAVEPOINT đặt mốc trong một giao dịch. ROLLBACK TO SAVEPOINT hủy các thay đổi\nsau mốc, giữ các thay đổi trước mốc; giao dịch vẫn có thể tiếp tục rồi COMMIT. Nó không\ntương đương ROLLBACK toàn bộ giao dịch.\nPostgreSQL thực thi mỗi câu lệnh trong một transaction. Khi không mở khối BEGIN rõ ràng,\nmột câu lệnh thành công có giao dịch ngầm riêng; ứng dụng hoặc driver có thể quản lý khối\ngiao dịch thay người dùng.\nCác thay đổi chưa commit không được giao dịch khác đọc như dữ liệu đã commit.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.55922,
+            "source_id": 2
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 20504,
+        "conversation_id": "2f6fc8dd-3a3a-488a-88d2-87a699b5948c",
+        "revision": 1,
+        "kind": "answer",
+        "coverage": null
+      },
+      "seconds": 20.537
+    },
+    {
+      "question": "Tóm tắt chủ đề transaction",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "a83519f4-a92d-4af2-9df5-af6599c0ff2d",
+        "question": "Tóm tắt chủ đề transaction",
+        "status": "answered",
+        "answer": "• Một giao dịch bao gồm nhiều bước, được coi là nguyên tử: tất cả hoặc không có bước nào được thực hiện.\n• BEGIN mở giao dịch, COMMIT xác nhận thay đổi, ROLLBACK hủy thay đổi chưa commit.\n• SAVEPOINT đặt mốc trong giao dịch, cho phép rollback chỉ đến điểm đó mà không ảnh hưởng đến phần trước.\n• Trong PostgreSQL, mỗi câu lệnh được thực thi trong một giao dịch ngầm nếu không có BEGIN rõ ràng.\n• Thay đổi chưa commit không được giao dịch khác đọc như dữ liệu đã commit.\n\nChưa đủ thông tin về các tính chất khác của giao dịch như nhất quán, bền vững, hoặc kiểm soát đồng thời.\n\nNguồn tham khảo: [1], [2].",
+        "sources": [
+          {
+            "chunk_id": "51f21ac8-a32a-4d7d-acba-86ec0940614e",
+            "document_id": "0527bec8-12b1-4251-9d50-2a12536438e7",
+            "filename": "04-transaction.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 680,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTRANSACTION\nBEGIN, COMMIT và ROLLBACK\nTransaction gom nhiều bước thành một đơn vị tất cả hoặc không bước nào: đó là tính\nnguyên tử. BEGIN mở giao dịch, COMMIT xác nhận thay đổi, ROLLBACK hủy thay đổi\nchưa commit trong giao dịch.\nVí dụ tự soạn: chuyển tiền cần trừ ở tài khoản A và cộng ở B trong cùng giao dịch. Nếu chỉ\ntrừ thành công còn cộng lỗi, phải rollback để tránh chuyển tiền dở dang. Ví dụ này minh họa\nnguyên tử, chưa xử lý đầy đủ kiểm tra số dư hoặc truy cập đồng thời.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          },
+          {
+            "chunk_id": "5b98b645-180e-4a11-9aa3-a2960b18d391",
+            "document_id": "0527bec8-12b1-4251-9d50-2a12536438e7",
+            "filename": "04-transaction.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 729,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTRANSACTION\nSAVEPOINT và giao dịch ngầm\nSAVEPOINT đặt mốc trong một giao dịch. ROLLBACK TO SAVEPOINT hủy các thay đổi\nsau mốc, giữ các thay đổi trước mốc; giao dịch vẫn có thể tiếp tục rồi COMMIT. Nó không\ntương đương ROLLBACK toàn bộ giao dịch.\nPostgreSQL thực thi mỗi câu lệnh trong một transaction. Khi không mở khối BEGIN rõ ràng,\nmột câu lệnh thành công có giao dịch ngầm riêng; ứng dụng hoặc driver có thể quản lý khối\ngiao dịch thay người dùng.\nCác thay đổi chưa commit không được giao dịch khác đọc như dữ liệu đã commit.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 2
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 15577,
+        "conversation_id": "2f6fc8dd-3a3a-488a-88d2-87a699b5948c",
+        "revision": 2,
+        "kind": "summary",
+        "coverage": {
+          "topic": "Transaction",
+          "matched_chunks": 2,
+          "selected_chunks": 2,
+          "unavailable_documents": 0,
+          "selected_pages": 2,
+          "scan_truncated": false,
+          "partial": false,
+          "limitation": "Chọn theo từ khóa và trải theo tài liệu/trang, tối đa 8 đoạn; có thể bỏ sót cách diễn đạt khác. Không phải tóm tắt toàn bộ giáo trình."
+        }
+      },
+      "seconds": 15.6
+    },
+    {
+      "question": "Lịch thi môn CSDL của trường tôi ngày nào?",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "a83519f4-a92d-4af2-9df5-af6599c0ff2d",
+        "question": "Lịch thi môn CSDL của trường tôi ngày nào?",
+        "status": "insufficient_context",
+        "answer": "Các nguồn cung cấp không chứa thông tin về lịch thi môn CSDL của trường. Không đủ căn cứ để xác định ngày thi.",
+        "sources": [],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 25858,
+        "conversation_id": "2f6fc8dd-3a3a-488a-88d2-87a699b5948c",
+        "revision": 3,
+        "kind": "answer",
+        "coverage": null
+      },
+      "seconds": 25.878
+    }
+  ],
+  "human_review": "pending",
+  "public_data_unchanged": true,
+  "saved_messages": 6,
+  "source_and_history_roundtrip": "passed"
+}

@@ -1,3 +1,26 @@
+# Bổ sung API tuần 9
+
+`POST /workspaces/{id}/chat` giữ body tuần 8. Response thêm kind=`roadmap`, `roadmap_id` (null khi thiếu đầu vào/nguồn/quỹ thời gian), `planning_request` (các trường đã thu thập). Khi câu trả lời trước là yêu cầu làm rõ roadmap, lượt tiếp theo có thể bổ sung các trường còn thiếu. Không nhận spec kế hoạch do client dựng; code và model tạo kế hoạch ở server.
+
+- `GET /workspaces/{id}/plans/{plan_id}`: id, workspace_id, status (draft/confirmed), revision, spec, progress (step_key → boolean).
+- `POST /workspaces/{id}/plans/{plan_id}/confirm`: body `{"revision":0}`; đổi draft thành confirmed và tăng revision.
+- `PATCH /workspaces/{id}/plans/{plan_id}/steps/{step_key}`: body `{"revision":1,"done":true}`; lưu done và tăng revision. Có thể bỏ dấu bằng false.
+
+Mọi route cần JWT/quyền workspace. 401 chưa xác thực; 404 không thuộc quyền hoặc ID/bước không tồn tại; 409 revision cũ/chưa xác nhận; 422 body sai hoặc thừa trường. Trả Cache-Control no-store. Tiến độ là tự báo cáo, không chấm điểm. Khi mở lịch sử, client dùng roadmap_id để đọc trạng thái mới nhất qua GET thay vì ghi đè tiến độ từ snapshot tin nhắn.
+
+Spec gồm request(goal/level/sessions/minutes_per_session), curriculum_version, steps(key/title/objective/activity/prerequisites/minutes/schedule/source_ids), sources, budget_minutes, planned_minutes, assumptions, limitations. Model chỉ viết objective/activity/source_ids; cấu trúc, thứ tự và lịch do code quyết định. Kế hoạch và lượt chat cùng transaction. Không tạo kế hoạch khi model lỗi.
+
+# Bổ sung API tuần 8
+
+- `POST /workspaces/{id}/chat`: ngoài question, nhận `conversation_id` (UUID hoặc null) và `revision` (số nguyên >=0, mặc định 0). Hội thoại mới dùng null/0; hội thoại cũ dùng revision đọc từ API. Response thêm conversation_id, revision, kind (`answer`/`summary`), coverage (null hoặc phạm vi tóm tắt). Chỉ lưu cặp user/assistant khi xử lý thành công. 409 khi revision cũ, nguồn thay đổi hoặc đạt 50 lượt. Giữ các mã lỗi tuần 7.
+- `GET /workspaces/{id}/conversations`: danh sách hội thoại workspace, Cache-Control no-store.
+- `GET /workspaces/{id}/conversations/{conversation_id}`: id, workspace_id, title, revision, messages theo thứ tự; mỗi message có id, role, content, created_at, result (bản chụp ChatOut hoặc null với tin nhắn cũ/user).
+- `GET /workspaces/{id}/sources/{chunk_id}`: đoạn hiện tại gồm chunk_id, document_id, filename, page_number, chunk_index, text. 404 nếu không thuộc workspace hoặc tài liệu không còn sẵn sàng.
+
+Mọi route đều cần JWT và workspace thuộc chủ sở hữu; thiếu JWT 401, tài nguyên không thuộc quyền hoặc không tồn tại 404. Lịch sử/nguồn trả no-store. Không trả vector. Xóa PDF không xóa bản chụp nguồn đã lưu trong hội thoại.
+
+Tóm tắt nhận diện từ khóa trong câu hỏi, không nhận mode từ client. coverage gồm topic, matched_chunks, selected_chunks, selected_pages, unavailable_documents, scan_truncated, partial, limitation. Tối đa 8 đoạn từ 3.000 đoạn quét, 2 lần gọi model; không dùng điểm cosine để xếp hạng tóm tắt. score=0 trong nguồn tóm tắt chỉ là giá trị tương thích schema, UI không trình bày nó như điểm tương đồng. Mỗi câu hỏi độc lập; lịch sử không được gửi cho model. Các mô tả tuần 7 dưới đây là hợp đồng trước khi có persistence.
+
 # API contract v0.7
 
 ## Tuần 7 — POST /workspaces/{workspace_id}/chat

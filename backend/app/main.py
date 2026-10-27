@@ -16,6 +16,8 @@ from app.documents import router as documents_router
 import app.indexing  # Registers indexing/detail/delete routes on documents_router.
 from app.retrieval import router as retrieval_router
 from app.chat import router as chat_router
+from app.history import router as history_router
+from app.plans import router as plans_router
 from app.upload_limit import UploadLimitMiddleware
 
 
@@ -38,13 +40,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             engine.dispose()
 
     # Resolve CORS configuration without requiring a database connection on import.
-    app = FastAPI(title="Trợ lý học Cơ sở dữ liệu", version="0.7.0", lifespan=lifespan)
+    app = FastAPI(title="Trợ lý học Cơ sở dữ liệu", version="0.9.0", lifespan=lifespan)
     app.state.settings = config
     app.state.chat_slot = BoundedSemaphore(1)
     app.include_router(router)
     app.include_router(documents_router)
     app.include_router(retrieval_router)
     app.include_router(chat_router)
+    app.include_router(history_router)
+    app.include_router(plans_router)
     app.add_middleware(UploadLimitMiddleware, maximum=config.max_upload_bytes)
     app.add_middleware(
         CORSMiddleware,

@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Integer, String, Text, func, JSON, UniqueConstraint
+from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Integer, String, Text, func, JSON, UniqueConstraint
 from pgvector.sqlalchemy import Vector
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -72,6 +72,7 @@ class Conversation(IdTimestampMixin, Base):
     __tablename__ = "conversations"
     workspace_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("workspaces.id"), index=True)
     title: Mapped[str] = mapped_column(String(200))
+    revision: Mapped[int] = mapped_column(Integer, server_default="0")
 
 
 class Message(IdTimestampMixin, Base):
@@ -80,3 +81,23 @@ class Message(IdTimestampMixin, Base):
     conversation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("conversations.id"), index=True)
     role: Mapped[str] = mapped_column(String(20))
     content: Mapped[str] = mapped_column(Text)
+    position: Mapped[int | None] = mapped_column(Integer)
+    payload: Mapped[dict | None] = mapped_column(JSON)
+
+
+class StudyPlan(IdTimestampMixin, Base):
+    __tablename__ = 'study_plans'
+    __table_args__ = (CheckConstraint("status IN ('draft', 'confirmed')", name='ck_study_plan_status'),)
+    workspace_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('workspaces.id'), index=True)
+    conversation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('conversations.id'), index=True)
+    status: Mapped[str] = mapped_column(String(20), server_default='draft')
+    revision: Mapped[int] = mapped_column(Integer, server_default='0')
+    spec: Mapped[dict] = mapped_column(JSON)
+
+
+class StudyStep(IdTimestampMixin, Base):
+    __tablename__ = 'study_steps'
+    __table_args__ = (UniqueConstraint('plan_id', 'step_key', name='uq_study_step_key'),)
+    plan_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('study_plans.id', ondelete='CASCADE'), index=True)
+    step_key: Mapped[str] = mapped_column(String(40))
+    done: Mapped[bool] = mapped_column(Boolean, server_default='false')

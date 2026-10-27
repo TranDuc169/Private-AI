@@ -39,6 +39,12 @@ def test_migration_preserves_old_data_and_matches_models(monkeypatch):
         with engine.begin() as connection:
             connection.execute(text("INSERT INTO documents (id,workspace_id,filename,status,size_bytes,page_count) VALUES (:id,:workspace,'week4.pdf','ready',123,1)"), {'id': ready_id, 'workspace': workspace_id})
             connection.execute(text("INSERT INTO document_pages (document_id,page_number,text) VALUES (:id,1,'Existing week 4 text')"), {'id': ready_id})
+        conversation_id, message_id = uuid.uuid4(), uuid.uuid4()
+        with engine.begin() as connection:
+            connection.execute(text('INSERT INTO conversations (id,workspace_id,title) VALUES (:id,:wid,:title)'),
+                {'id': conversation_id, 'wid': workspace_id, 'title': 'Legacy conversation'})
+            connection.execute(text("INSERT INTO messages (id,conversation_id,role,content) VALUES (:id,:cid,'user','Legacy question')"),
+                {'id': message_id, 'cid': conversation_id})
         command.upgrade(config, 'head')
         with engine.connect() as connection:
             assert connection.scalar(text('SELECT count(*) FROM users')) == 1
@@ -49,7 +55,9 @@ def test_migration_preserves_old_data_and_matches_models(monkeypatch):
             ready = connection.execute(text('SELECT status,index_status,chunk_count FROM documents WHERE id=:id'), {'id':ready_id}).one()
             assert tuple(ready) == ('ready','pending',0)
             assert connection.scalar(text('SELECT text FROM document_pages WHERE document_id=:id'), {'id':ready_id}) == 'Existing week 4 text'
-            assert connection.scalar(text('SELECT version_num FROM alembic_version')) == '0003_document_vectors'
+            assert connection.scalar(text('SELECT version_num FROM alembic_version')) == '0005_study_plans'
+            assert connection.scalar(text('SELECT content FROM messages WHERE id=:id'), {'id':message_id}) == 'Legacy question'
+            assert connection.scalar(text('SELECT revision FROM conversations WHERE id=:id'), {'id':conversation_id}) == 0
             assert compare_metadata(MigrationContext.configure(connection, opts={'compare_type': True}), Base.metadata) == []
         command.upgrade(config, 'head')  # Safe repeated upgrade.
     finally:

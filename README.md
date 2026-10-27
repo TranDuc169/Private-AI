@@ -1,3 +1,11 @@
+# Cập nhật tuần 9 — Lộ trình học và checklist
+
+Nhập mục tiêu, mức nền, số buổi và phút/buổi trong Chat chung để tạo bản nháp có nguồn; xác nhận rồi đánh dấu tiến độ. Cần migration **0005_study_plans**. Xem [WEEK9.md](docs/WEEK9.md) và [minh chứng tuần 9](docs/evidence/week9/README.md). Giữ các mốc triển khai trước bên dưới.
+
+# Cập nhật tuần 8
+
+Đã bổ sung lưu/mở hội thoại theo workspace, nguồn trích dẫn có kiểm tra quyền và tóm tắt chủ đề trong ô chat. **Cần chạy migration `0004_chat_history` trước khi dùng code mới**. Xem [hướng dẫn tuần 8](docs/WEEK8.md), [cách chạy từ đầu](HUONG_DAN_CHAY.md) và [minh chứng](docs/evidence/week8/README.md). Các phần tuần trước bên dưới được giữ làm lịch sử triển khai.
+
 # Trợ lý AI hỗ trợ tự học môn Cơ sở dữ liệu bằng RAG
 
 **Tuần 7:** đã thêm API hỏi đáp với Qwen, giao diện theo môn CSDL, 5 PDF demo có nguồn và bộ 20 câu hỏi tham chiếu. Xem [hướng dẫn từng bước và giải thích](docs/WEEK7.md), [phạm vi đề tài](docs/TOPIC_CHANGE.md), [học liệu](docs/course/README.md), [minh chứng và giới hạn kiểm chứng](docs/evidence/week7/README.md). Chưa có roadmap/quiz/lưu lịch sử; không cần migration mới sau tuần 5.

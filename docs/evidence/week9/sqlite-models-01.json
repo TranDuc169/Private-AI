@@ -1,0 +1,139 @@
+{
+  "mode": "sqlite + real BGE-M3/Qwen, isolated TestClient API",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "cases": [
+    {
+      "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+      "http_status": 200,
+      "response": {
+        "workspace_id": "aa497f6a-2fd6-44d8-8080-ca79110df944",
+        "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+        "status": "answered",
+        "answer": "Đã tạo bản nháp lộ trình có nguồn. Hãy đọc từng bước và xác nhận kế hoạch trước khi đánh dấu tiến độ.",
+        "sources": [
+          {
+            "chunk_id": "411ed9d2-1b84-472c-bab3-8a7f1431005a",
+            "document_id": "4f8735b8-cf96-4179-8ec6-1aa1a78f74b0",
+            "filename": "03-erd-chuan-hoa.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 750,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          }
+        ],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 18360,
+        "conversation_id": "6d99bdc8-5312-4844-8e1c-70cf17baac02",
+        "revision": 1,
+        "kind": "roadmap",
+        "coverage": null,
+        "roadmap_id": "5d37fe9e-af75-4de2-97c8-03ff0e532655",
+        "planning_request": {
+          "goal": "sql",
+          "level": "beginner",
+          "sessions": 4,
+          "minutes_per_session": 45
+        }
+      },
+      "seconds": 18.383,
+      "plan": {
+        "id": "5d37fe9e-af75-4de2-97c8-03ff0e532655",
+        "workspace_id": "aa497f6a-2fd6-44d8-8080-ca79110df944",
+        "status": "draft",
+        "revision": 0,
+        "spec": {
+          "request": {
+            "goal": "sql",
+            "level": "beginner",
+            "sessions": 4,
+            "minutes_per_session": 45
+          },
+          "curriculum_version": "csdl-v1",
+          "steps": [
+            {
+              "key": "relations",
+              "title": "Mô hình quan hệ và ràng buộc",
+              "minutes": 60,
+              "prerequisites": [],
+              "schedule": [
+                {
+                  "session": 1,
+                  "minutes": 45
+                },
+                {
+                  "session": 2,
+                  "minutes": 15
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Hiểu cách thiết kế ERD với quan hệ nhiều - nhiều và quy tắc tham gia.",
+              "activity": "Đọc tài liệu để hiểu về mô hình ERD và cách biểu diễn quan hệ nhiều - nhiều giữa các thực thể."
+            },
+            {
+              "key": "sql",
+              "title": "SQL và JOIN",
+              "minutes": 60,
+              "prerequisites": [
+                "relations"
+              ],
+              "schedule": [
+                {
+                  "session": 2,
+                  "minutes": 30
+                },
+                {
+                  "session": 3,
+                  "minutes": 30
+                }
+              ],
+              "source_ids": [
+                1
+              ],
+              "objective": "Xác định cấu trúc bảng liên kết dựa trên quan hệ nhiều - nhiều và điều kiện học lại.",
+              "activity": "Viết ra ví dụ về bảng liên kết DangKy với hai khóa ngoại và điều kiện xác định khóa chính."
+            }
+          ],
+          "budget_minutes": 180,
+          "planned_minutes": 120,
+          "assumptions": "Thứ tự theo đề cương demo. Mức cơ bản do người học tự khai, giả định đã học phần quan hệ/ràng buộc.",
+          "limitations": "Mỗi bước dùng một đoạn nguồn phù hợp từ workspace. Thời lượng là gợi ý 20–60 phút/bước, không bảo đảm thành thạo; checklist chỉ là tự báo cáo hoàn thành.",
+          "sources": [
+            {
+              "chunk_id": "411ed9d2-1b84-472c-bab3-8a7f1431005a",
+              "document_id": "4f8735b8-cf96-4179-8ec6-1aa1a78f74b0",
+              "filename": "03-erd-chuan-hoa.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 750,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            }
+          ]
+        },
+        "progress": {
+          "relations": false,
+          "sql": false
+        }
+      },
+      "confirmed_and_progress_reloaded": true
+    },
+    {
+      "question": "Lập roadmap ERD chuẩn hóa; đã biết cơ bản; 3 buổi; 40 phút/buổi",
+      "http_status": 502,
+      "response": {
+        "detail": "Roadmap do model trả không đúng cấu trúc/nguồn. Chưa lưu kế hoạch; hãy thử lại."
+      },
+      "seconds": 17.008
+    }
+  ],
+  "human_review": "pending",
+  "public_data_unchanged": null
+}

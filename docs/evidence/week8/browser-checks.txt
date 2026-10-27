@@ -1,0 +1,1 @@
+PASS mocked API UI: saved navigation; history after reload/login; scope display; current source; deleted-source snapshot; workspace switch ignores late response; mobile no overflow; no JS errors. Not a live model browser test.

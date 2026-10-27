@@ -1,0 +1,23 @@
+{
+  "mode": "sqlite + real BGE-M3/Qwen, isolated TestClient API",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "embedding_model": "bge-m3:latest",
+  "cases": [
+    {
+      "question": "Lập roadmap SQL JOIN; mới bắt đầu; 4 buổi; 45 phút/buổi",
+      "http_status": 502,
+      "response": {
+        "detail": "Roadmap do model trả không đúng cấu trúc/nguồn. Chưa lưu kế hoạch; hãy thử lại."
+      },
+      "seconds": 18.026
+    }
+  ],
+  "human_review": "pending",
+  "public_data_unchanged": null,
+  "model_errors": [
+    {
+      "type": "ValueError",
+      "reason": "missing/duplicate steps"
+    }
+  ]
+}
