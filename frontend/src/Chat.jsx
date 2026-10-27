@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { apiRequest } from './api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import SourceCard from './SourceCard.jsx';
+import QuizCard from './QuizCard.jsx';
 import PlanCard from './PlanCard.jsx';
 import PdfUpload from './PdfUpload.jsx';
 
@@ -78,7 +79,7 @@ export default function Chat({ workspace, token, onUnauthorized, conversationId 
     <p><Link to="/">+ Hội thoại mới</Link> · <Link to="/history">Mở lịch sử</Link></p>
     {loading && <p role="status">Đang mở hội thoại…</p>}
     {loadError && <div role="alert"><p>{loadError}</p><button onClick={() => setAttempt(n => n + 1)}>Tải lại hội thoại</button></div>}
-    {turns.length === 0 && !loading && !loadError ? <div className="empty"><span className="empty-icon" aria-hidden="true">◇</span><h2>Bạn muốn hiểu phần nào về Cơ sở dữ liệu?</h2><p>Hỏi về khóa chính, JOIN, chuẩn hóa, transaction hoặc index. Trợ lý dùng PDF đã tạo vector trong workspace để giải thích và dẫn nguồn.</p><p className="retrieval-note">Ví dụ: LEFT JOIN khác INNER JOIN thế nào?<br />Ví dụ: “Lập roadmap học SQL JOIN; nền tảng: mới bắt đầu; 4 buổi; 45 phút/buổi.” Hoặc “Tóm tắt chủ đề transaction”. Lịch sử được lưu; mỗi yêu cầu vẫn cần viết đủ ý vì model chưa đọc các lượt trước.</p></div>
+    {turns.length === 0 && !loading && !loadError ? <div className="empty"><span className="empty-icon" aria-hidden="true">◇</span><h2>Bạn muốn hiểu phần nào về Cơ sở dữ liệu?</h2><p>Hỏi về khóa chính, JOIN, chuẩn hóa, transaction hoặc index. Trợ lý dùng PDF đã tạo vector trong workspace để giải thích và dẫn nguồn.</p><p className="retrieval-note">Ví dụ: LEFT JOIN khác INNER JOIN thế nào?<br />Ví dụ: “Lập roadmap học SQL JOIN; nền tảng: mới bắt đầu; 4 buổi; 45 phút/buổi.” Hoặc “Tóm tắt chủ đề transaction”, “Quiz SQL JOIN”, “Sinh mới quiz transaction”. Lịch sử được lưu; mỗi yêu cầu vẫn cần viết đủ ý vì model chưa đọc các lượt trước.</p></div>
       : <div className="retrieval-turns" aria-label="Câu hỏi và các đoạn truy xuất">{turns.map(turn => <article className="retrieval-turn" key={turn.id}>
         {turn.question && <p className="user-question"><strong>Bạn</strong><br />{turn.question}</p>}
         {turn.state === 'loading' && <p role="status">Đang tìm tài liệu và soạn câu trả lời… Lần đầu tải model có thể lâu hơn.</p>}
@@ -86,6 +87,7 @@ export default function Chat({ workspace, token, onUnauthorized, conversationId 
         {turn.state === 'done' && <div>
           <p className="answer-label">{turn.result.status === 'answered' ? 'Trợ lý Cơ sở dữ liệu' : 'Cần thêm thông tin'}</p>
           <div className="assistant-answer">{turn.result.answer}</div>
+          {turn.result.quiz_id && <QuizCard id={turn.result.quiz_id} workspace={workspace} token={token} onUnauthorized={onUnauthorized} />}
           {turn.result.roadmap_id && <PlanCard id={turn.result.roadmap_id} workspace={workspace} token={token} onUnauthorized={onUnauthorized} />}
           {turn.result.sources.length > 0 && <p className="retrieval-note">Nguồn được ghi trong từng phần trả lời. Nội dung do AI tạo có thể sai; hãy đối chiếu tài liệu.</p>}
           {turn.result.coverage && <div className="summary-scope"><strong>Phạm vi tóm tắt: {turn.result.coverage.topic}</strong><p>{turn.result.coverage.selected_chunks}/{turn.result.coverage.matched_chunks} đoạn khớp từ khóa · {turn.result.coverage.selected_pages} trang. {turn.result.coverage.partial ? 'Chỉ bao phủ một phần.' : 'Đã dùng các đoạn khớp trong phạm vi quét.'}</p><p>{turn.result.coverage.limitation}</p><p>{turn.result.coverage.unavailable_documents || 0} tài liệu trong workspace chưa sẵn sàng để xét.</p>{turn.result.coverage.scan_truncated && <p>Đã chạm giới hạn quét 3.000 đoạn; còn tài liệu chưa xét.</p>}</div>}

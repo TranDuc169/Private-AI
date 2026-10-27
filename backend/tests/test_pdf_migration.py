@@ -55,7 +55,7 @@ def test_migration_preserves_old_data_and_matches_models(monkeypatch):
             ready = connection.execute(text('SELECT status,index_status,chunk_count FROM documents WHERE id=:id'), {'id':ready_id}).one()
             assert tuple(ready) == ('ready','pending',0)
             assert connection.scalar(text('SELECT text FROM document_pages WHERE document_id=:id'), {'id':ready_id}) == 'Existing week 4 text'
-            assert connection.scalar(text('SELECT version_num FROM alembic_version')) == '0005_study_plans'
+            assert connection.scalar(text('SELECT version_num FROM alembic_version')) == '0006_quizzes'
             assert connection.scalar(text('SELECT content FROM messages WHERE id=:id'), {'id':message_id}) == 'Legacy question'
             assert connection.scalar(text('SELECT revision FROM conversations WHERE id=:id'), {'id':conversation_id}) == 0
             assert compare_metadata(MigrationContext.configure(connection, opts={'compare_type': True}), Base.metadata) == []

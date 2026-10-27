@@ -9,10 +9,11 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.generation import GenerationError, generate_answer
-from app.models import Document, DocumentChunk, Workspace, Conversation, Message, StudyPlan, StudyStep
+from app.models import Document, DocumentChunk, Workspace, Conversation, Message, StudyPlan, StudyStep, Quiz
 from app.retrieval import candidate_filters, retrieve_hits
 from app.routes import owned_workspace
 from app.history import get_conversation
+from app.quizzes import is_quiz_request, prepare_quiz
 from app.planning import is_plan_request, parse_request, prepare_plan
 from app.summaries import summary_topic, collect_topic, summarize, TOPICS
 from app.schemas import RetrievalHit
@@ -43,8 +44,9 @@ class ChatOut(BaseModel):
     elapsed_ms: int
     conversation_id: UUID
     revision: int
-    kind: Literal["answer", "summary", "roadmap"] = "answer"
+    kind: Literal["answer", "summary", "roadmap", "quiz"] = "answer"
     coverage: dict | None = None
+    quiz_id: UUID | None = None
     roadmap_id: UUID | None = None
     planning_request: dict | None = None
 
@@ -75,9 +77,21 @@ def chat(data: ChatInput, request: Request, response: Response,
     if not slot.acquire(blocking=False):
         raise HTTPException(429, 'Model đang xử lý câu hỏi khác. Vui lòng thử lại sau.', headers={'Retry-After': '5'})
     try:
-        plan_spec, planning_request = None, None
+        plan_spec, planning_request, quiz_spec = None, None, None
         plan_mode = is_plan_request(data.question) or (previous_plan is not None and parse_request(data.question, previous_plan)[0] != previous_plan)
-        if plan_mode:
+        if is_quiz_request(data.question):
+            quiz_spec, hits, answer = prepare_quiz(session, config, workspace_id, owner_id, data.question)
+            kind, coverage = 'quiz', None
+            status = 'answered' if quiz_spec else 'insufficient_context'
+            # Private quiz sources/keys must never enter the chat/history payload.
+            sources = []
+            if hits:
+                current = set(session.scalars(select(DocumentChunk.id).join(Document).join(Workspace).where(
+                    *candidate_filters(workspace_id, owner_id, config.embedding_model), DocumentChunk.id.in_([h.chunk_id for h in hits]))))
+                session.rollback()
+                if current != {h.chunk_id for h in hits}:
+                    raise HTTPException(409, 'Nguồn đã thay đổi trong lúc tạo quiz. Hãy gửi lại.')
+        elif plan_mode:
             plan_spec, hits, planning_request, answer = prepare_plan(session, config, workspace_id, owner_id, data.question, previous_plan)
             kind, coverage = 'roadmap', None
             status = 'answered' if plan_spec else 'insufficient_context'
@@ -135,6 +149,11 @@ def chat(data: ChatInput, request: Request, response: Response,
             conversation = Conversation(workspace_id=workspace_id, title=data.question[:200], revision=1)
             session.add(conversation); session.flush()
             conversation_id = conversation.id
+        quiz_id = None
+        if quiz_spec:
+            quiz_spec['sources'] = [ChatSource(**h.model_dump(), source_id=i).model_dump(mode='json') for i,h in enumerate(hits,1)]
+            quiz = Quiz(workspace_id=workspace_id, conversation_id=conversation_id, status=quiz_spec['status'], spec=quiz_spec)
+            session.add(quiz); session.flush(); quiz_id = quiz.id
         roadmap_id = None
         if plan_spec:
             plan_spec['sources'] = [source.model_dump(mode='json') for source in sources]
@@ -142,8 +161,8 @@ def chat(data: ChatInput, request: Request, response: Response,
             session.add(plan); session.flush(); roadmap_id = plan.id
             session.add_all([StudyStep(plan_id=plan.id, step_key=step['key'], done=False) for step in plan_spec['steps']])
         output = ChatOut(workspace_id=workspace_id, question=data.question, status=status,
-            answer=answer, sources=sources, model=config.chat_model, kind=kind, coverage=coverage,
-            conversation_id=conversation_id, revision=data.revision+1, roadmap_id=roadmap_id, planning_request=planning_request,
+            answer=answer, sources=sources, model=('Bộ demo ' + quiz_spec['bank_version'] if quiz_spec and quiz_spec.get('bank_version') else config.chat_model), kind=kind, coverage=coverage,
+            conversation_id=conversation_id, revision=data.revision+1, quiz_id=quiz_id, roadmap_id=roadmap_id, planning_request=planning_request,
             elapsed_ms=round((time.perf_counter()-started)*1000))
         session.add_all([
             Message(conversation_id=conversation_id, role='user', content=data.question, position=data.revision*2),

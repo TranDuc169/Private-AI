@@ -1,0 +1,10 @@
+Observed command results (summary, not raw console transcript):
+pytest -q -p no:cacheprovider: 97 passed, 8 skipped, 1 warning, 17.19s (initial full suite).
+python test_postgres.py: 106 passed, 5 warnings, 35.53s (before final source selector/schema adjustments).
+pytest tests/test_quizzes.py with TEST_DATABASE_URL: 21 passed, 1 warning, 10.68s (final quiz implementation).
+npm.cmd test: 9 passed.
+npm.cmd run build: successful, 51 modules, 1.29s (final UI).
+node docs/evidence/week10/browser-test.cjs: PASS mock API, final screenshots visually reviewed.
+evaluate_week10.py --mode postgres --output ../docs/evidence/week10/live-05.json: 5 demo quiz roundtrips pass; Qwen draft generated, grading blocked; public data unchanged true.
+alembic upgrade head on local application: 0003_document_vectors -> 0006_quizzes; old-column hashes/row counts unchanged (local-migration.json).
+git diff --check: no whitespace errors; LF/CRLF warnings only.

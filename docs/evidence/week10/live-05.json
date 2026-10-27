@@ -1,0 +1,729 @@
+{
+  "mode": "postgres",
+  "real_embeddings": true,
+  "real_qwen": true,
+  "cases": [
+    {
+      "topic": "relations",
+      "chat": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Quiz Mô hình quan hệ và ràng buộc",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 38,
+        "conversation_id": "e8bee3c5-d695-4ab5-ae0b-f3a41f73ad19",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "367d6c05-0e6e-4801-95ff-acb90aac96a4",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "367d6c05-0e6e-4801-95ff-acb90aac96a4",
+        "status": "approved",
+        "topic": "Mô hình quan hệ và ràng buộc",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "PRIMARY KEY yêu cầu điều gì?",
+            "choices": [
+              "Duy nhất và không NULL",
+              "Cho phép mọi giá trị NULL",
+              "Chỉ cần sắp xếp tăng",
+              "Chỉ dùng cho văn bản"
+            ]
+          },
+          {
+            "question": "Muốn khóa ngoại bắt buộc có giá trị, cần thêm gì?",
+            "choices": [
+              "ORDER BY",
+              "NOT NULL",
+              "HAVING",
+              "SAVEPOINT"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "367d6c05-0e6e-4801-95ff-acb90aac96a4",
+        "status": "approved",
+        "topic": "Mô hình quan hệ và ràng buộc",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "PRIMARY KEY yêu cầu điều gì?",
+            "choices": [
+              "Duy nhất và không NULL",
+              "Cho phép mọi giá trị NULL",
+              "Chỉ cần sắp xếp tăng",
+              "Chỉ dùng cho văn bản"
+            ]
+          },
+          {
+            "question": "Muốn khóa ngoại bắt buộc có giá trị, cần thêm gì?",
+            "choices": [
+              "ORDER BY",
+              "NOT NULL",
+              "HAVING",
+              "SAVEPOINT"
+            ]
+          }
+        ],
+        "result": {
+          "score": 1,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:58:22.080298+00:00",
+          "feedback": [
+            {
+              "correct": 0,
+              "explanation": "giá trị phải duy nhất và không NULL.",
+              "source_id": 1
+            },
+            {
+              "correct": 1,
+              "explanation": "Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì thêm NOT NULL.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "c3a1aacb-64d1-46ef-a49c-dff368f00756",
+              "document_id": "250e1ac9-810c-438a-baae-8618bb6ae93b",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 749,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "f5bd55e6-c27b-4d8a-8f2d-44a0c758b85d",
+              "document_id": "250e1ac9-810c-438a-baae-8618bb6ae93b",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 693,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa ngoại và CHECK\nFOREIGN KEY (khóa ngoại) liên kết dữ liệu: giá trị khác NULL phải tham chiếu khóa hợp lệ\nở bảng đích. Ví dụ Lop(ma_lop PRIMARY KEY), SinhVien(ma_sv PRIMARY KEY, ma_lop\nREFERENCES Lop(ma_lop)). Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì\nthêm NOT NULL.\nCHECK kiểm tra điều kiện. CHECK (diem >= 0 AND diem <= 10) giới hạn điểm nhưng\nkhông tự cấm NULL, vì CHECK chấp nhận kết quả true hoặc unknown. Thêm NOT NULL\nnếu điểm bắt buộc nhập.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.117
+    },
+    {
+      "topic": "sql",
+      "chat": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Quiz SQL và JOIN",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 24,
+        "conversation_id": "f0ad23f6-c8b9-4536-bfe8-555a5ea1c268",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "97f1e2b8-d8df-4d07-9dc0-fb887eee8adf",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "97f1e2b8-d8df-4d07-9dc0-fb887eee8adf",
+        "status": "approved",
+        "topic": "SQL và JOIN",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "LEFT JOIN xử lý hàng trái không có hàng phải khớp thế nào?",
+            "choices": [
+              "Loại hàng trái",
+              "Báo lỗi",
+              "Giữ hàng trái, cột bên phải là NULL",
+              "Tạo hàng mới trong bảng phải"
+            ]
+          },
+          {
+            "question": "Mệnh đề nào lọc nhóm sau GROUP BY?",
+            "choices": [
+              "WHERE",
+              "ON",
+              "ORDER BY",
+              "HAVING"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "97f1e2b8-d8df-4d07-9dc0-fb887eee8adf",
+        "status": "approved",
+        "topic": "SQL và JOIN",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "LEFT JOIN xử lý hàng trái không có hàng phải khớp thế nào?",
+            "choices": [
+              "Loại hàng trái",
+              "Báo lỗi",
+              "Giữ hàng trái, cột bên phải là NULL",
+              "Tạo hàng mới trong bảng phải"
+            ]
+          },
+          {
+            "question": "Mệnh đề nào lọc nhóm sau GROUP BY?",
+            "choices": [
+              "WHERE",
+              "ON",
+              "ORDER BY",
+              "HAVING"
+            ]
+          }
+        ],
+        "result": {
+          "score": 0,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:58:22.166650+00:00",
+          "feedback": [
+            {
+              "correct": 2,
+              "explanation": "LEFT JOIN giữ mọi hàng bên trái; nếu không có hàng khớp bên phải, các cột phía phải nhận NULL.",
+              "source_id": 1
+            },
+            {
+              "correct": 3,
+              "explanation": "HAVING lọc nhóm sau GROUP BY.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "0432157a-da73-4db9-a3b9-7b1a321170e8",
+              "document_id": "4cc152b1-41d2-48d0-ab7e-7fc2233bbd9e",
+              "filename": "02-sql-join.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 659,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "c6d0fd3c-e255-495f-851f-ad5ea17267e6",
+              "document_id": "4cc152b1-41d2-48d0-ab7e-7fc2233bbd9e",
+              "filename": "02-sql-join.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 660,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nSQL VÀ JOIN\nWHERE, ON và HAVING\nON quyết định các cặp hàng khớp khi nối; WHERE lọc kết quả sau phép nối. Với LEFT\nJOIN, đặt WHERE d.mon = 'CSDL' sẽ loại hàng có d.mon NULL, nên không giữ được sinh\nviên chưa đăng ký. Muốn vẫn giữ mọi sinh viên, đưa điều kiện này vào ON.\nWHERE lọc hàng trước khi nhóm. HAVING lọc nhóm sau GROUP BY.\nVí dụ tự soạn: SELECT ma_sv, COUNT(*) FROM DangKy GROUP BY ma_sv HAVING\nCOUNT(*) >= 2; tìm sinh viên có ít nhất hai hàng đăng ký.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.086
+    },
+    {
+      "topic": "erd",
+      "chat": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Quiz ERD và chuẩn hóa",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 31,
+        "conversation_id": "de7ebef1-3803-42f7-a54a-29acab0ff516",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "db4ba43c-0558-4e21-b5c3-369347823cbd",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "db4ba43c-0558-4e21-b5c3-369347823cbd",
+        "status": "approved",
+        "topic": "ERD và chuẩn hóa",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "Quan hệ nhiều–nhiều SinhVien–MonHoc trong ví dụ được chuyển sang bảng thế nào?",
+            "choices": [
+              "Tạo bảng liên kết DangKy",
+              "Xóa MonHoc",
+              "Gộp mọi môn vào một ô",
+              "Không cần khóa ngoại"
+            ]
+          },
+          {
+            "question": "Vì sao không xác định dạng chuẩn chỉ từ vài hàng mẫu?",
+            "choices": [
+              "Luôn cần index",
+              "Cần biết khóa và phụ thuộc hàm",
+              "Mọi bảng đều ở 3NF",
+              "Phải chạy COMMIT"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "db4ba43c-0558-4e21-b5c3-369347823cbd",
+        "status": "approved",
+        "topic": "ERD và chuẩn hóa",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "Quan hệ nhiều–nhiều SinhVien–MonHoc trong ví dụ được chuyển sang bảng thế nào?",
+            "choices": [
+              "Tạo bảng liên kết DangKy",
+              "Xóa MonHoc",
+              "Gộp mọi môn vào một ô",
+              "Không cần khóa ngoại"
+            ]
+          },
+          {
+            "question": "Vì sao không xác định dạng chuẩn chỉ từ vài hàng mẫu?",
+            "choices": [
+              "Luôn cần index",
+              "Cần biết khóa và phụ thuộc hàm",
+              "Mọi bảng đều ở 3NF",
+              "Phải chạy COMMIT"
+            ]
+          }
+        ],
+        "result": {
+          "score": 1,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:58:22.260805+00:00",
+          "feedback": [
+            {
+              "correct": 0,
+              "explanation": "tạo bảng liên kết DangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại.",
+              "source_id": 1
+            },
+            {
+              "correct": 1,
+              "explanation": "Không thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "2f1e73cf-daf8-4777-a489-3f388a4f499a",
+              "document_id": "7790f17f-a55d-4188-9f6b-88778df927ed",
+              "filename": "03-erd-chuan-hoa.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 750,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nERD và quan hệ nhiều - nhiều\nERD mô tả kiểu thực thể, thuộc tính và quan hệ giữa chúng; cần xác định số lượng tham\ngia và quy tắc nghiệp vụ trước khi tạo bảng.\nVí dụ tự soạn: SinhVien và MonHoc có quan hệ nhiều - nhiều: một sinh viên học nhiều môn,\nmột môn có nhiều sinh viên. Khi chuyển sang bảng quan hệ, tạo bảng liên kết\nDangKy(ma_sv, ma_mon, diem), hai mã là khóa ngoại. Nếu mỗi sinh viên chỉ đăng ký mỗi\nmôn một lần, cặp (ma_sv, ma_mon) là khóa chính. Nếu có học lại, cần bổ sung lần học\nhoặc học kỳ vào thiết kế khóa.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "2fb22eec-31dc-4089-b5b5-f70820a0e999",
+              "document_id": "7790f17f-a55d-4188-9f6b-88778df927ed",
+              "filename": "03-erd-chuan-hoa.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 927,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTHIẾT KẾ ERD VÀ CHUẨN HÓA\nChuẩn hóa từ 1NF đến 3NF\nChuẩn hóa giảm dư thừa và bất thường khi thêm, sửa, xóa dữ liệu; cần phân tích phụ thuộc\nhàm. 1NF không có nhóm lặp, mỗi ô có một giá trị theo miền đã chọn. 2NF yêu cầu 1NF và\nthuộc tính không khóa không phụ thuộc vào một phần khóa ứng viên. 3NF loại phụ thuộc\nbắc cầu không phù hợp; với phụ thuộc không tầm thường X -> A, X là siêu khóa hoặc A là\nthuộc tính khóa.\nVí dụ tự soạn: DangKy(ma_sv, ma_mon, ten_sv, ten_mon, diem) có khóa (ma_sv,\nma_mon). Nếu ma_sv -> ten_sv và ma_mon -> ten_mon, bảng vi phạm 2NF. Tách\nSinhVien(ma_sv, ten_sv), MonHoc(ma_mon, ten_mon), DangKy(ma_sv, ma_mon, diem).\nKhông thể kết luận dạng chuẩn chỉ từ vài hàng mẫu; cần biết khóa và phụ thuộc hàm.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.099
+    },
+    {
+      "topic": "transaction",
+      "chat": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Quiz Transaction",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 24,
+        "conversation_id": "1d758092-8ed0-4567-862d-a4a0b30f9f37",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "3256894b-81d0-4a1f-bcab-fbe031b50565",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "3256894b-81d0-4a1f-bcab-fbe031b50565",
+        "status": "approved",
+        "topic": "Transaction",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "ROLLBACK toàn bộ giao dịch có tác dụng gì?",
+            "choices": [
+              "Xác nhận thay đổi",
+              "Tạo index",
+              "Hủy thay đổi chưa commit trong giao dịch",
+              "Xóa mọi bảng đã commit"
+            ]
+          },
+          {
+            "question": "ROLLBACK TO SAVEPOINT làm gì?",
+            "choices": [
+              "Hủy giao dịch đã commit",
+              "Luôn kết thúc kết nối",
+              "Xác nhận toàn bộ giao dịch",
+              "Hủy thay đổi sau mốc, giữ thay đổi trước mốc"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "3256894b-81d0-4a1f-bcab-fbe031b50565",
+        "status": "approved",
+        "topic": "Transaction",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "ROLLBACK toàn bộ giao dịch có tác dụng gì?",
+            "choices": [
+              "Xác nhận thay đổi",
+              "Tạo index",
+              "Hủy thay đổi chưa commit trong giao dịch",
+              "Xóa mọi bảng đã commit"
+            ]
+          },
+          {
+            "question": "ROLLBACK TO SAVEPOINT làm gì?",
+            "choices": [
+              "Hủy giao dịch đã commit",
+              "Luôn kết thúc kết nối",
+              "Xác nhận toàn bộ giao dịch",
+              "Hủy thay đổi sau mốc, giữ thay đổi trước mốc"
+            ]
+          }
+        ],
+        "result": {
+          "score": 0,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:58:22.352387+00:00",
+          "feedback": [
+            {
+              "correct": 2,
+              "explanation": "ROLLBACK hủy thay đổi chưa commit trong giao dịch.",
+              "source_id": 1
+            },
+            {
+              "correct": 3,
+              "explanation": "ROLLBACK TO SAVEPOINT hủy các thay đổi sau mốc, giữ các thay đổi trước mốc.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "82ba8fd7-ca69-4e19-a08f-3828b8c82136",
+              "document_id": "245981d2-562c-4ddb-aa8b-248144abaad0",
+              "filename": "04-transaction.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 680,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nTRANSACTION\nBEGIN, COMMIT và ROLLBACK\nTransaction gom nhiều bước thành một đơn vị tất cả hoặc không bước nào: đó là tính\nnguyên tử. BEGIN mở giao dịch, COMMIT xác nhận thay đổi, ROLLBACK hủy thay đổi\nchưa commit trong giao dịch.\nVí dụ tự soạn: chuyển tiền cần trừ ở tài khoản A và cộng ở B trong cùng giao dịch. Nếu chỉ\ntrừ thành công còn cộng lỗi, phải rollback để tránh chuyển tiền dở dang. Ví dụ này minh họa\nnguyên tử, chưa xử lý đầy đủ kiểm tra số dư hoặc truy cập đồng thời.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "f11f6f43-2a1d-4b02-844b-e77f91ec3529",
+              "document_id": "245981d2-562c-4ddb-aa8b-248144abaad0",
+              "filename": "04-transaction.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 729,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nTRANSACTION\nSAVEPOINT và giao dịch ngầm\nSAVEPOINT đặt mốc trong một giao dịch. ROLLBACK TO SAVEPOINT hủy các thay đổi\nsau mốc, giữ các thay đổi trước mốc; giao dịch vẫn có thể tiếp tục rồi COMMIT. Nó không\ntương đương ROLLBACK toàn bộ giao dịch.\nPostgreSQL thực thi mỗi câu lệnh trong một transaction. Khi không mở khối BEGIN rõ ràng,\nmột câu lệnh thành công có giao dịch ngầm riêng; ứng dụng hoặc driver có thể quản lý khối\ngiao dịch thay người dùng.\nCác thay đổi chưa commit không được giao dịch khác đọc như dữ liệu đã commit.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.083
+    },
+    {
+      "topic": "index",
+      "chat": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Quiz Index và kế hoạch truy vấn",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 21,
+        "conversation_id": "ca1d1b70-e1e6-4893-af1f-6b1fea5f9c19",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "e6aececf-a82f-4c56-9112-4114e4d2c313",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "e6aececf-a82f-4c56-9112-4114e4d2c313",
+        "status": "approved",
+        "topic": "Index và kế hoạch truy vấn",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "Nhận định nào đúng về index?",
+            "choices": [
+              "Không bảo đảm mọi truy vấn nhanh hơn",
+              "Luôn được planner sử dụng",
+              "Không chiếm dung lượng",
+              "Không cần cập nhật khi ghi"
+            ]
+          },
+          {
+            "question": "EXPLAIN ANALYZE khác EXPLAIN ở điểm nào?",
+            "choices": [
+              "Không hiển thị kế hoạch",
+              "Thực sự chạy câu lệnh và bổ sung số liệu thực tế",
+              "Chỉ đổi tên bảng",
+              "Luôn chạy nhanh hơn truy vấn gốc"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "e6aececf-a82f-4c56-9112-4114e4d2c313",
+        "status": "approved",
+        "topic": "Index và kế hoạch truy vấn",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "Nhận định nào đúng về index?",
+            "choices": [
+              "Không bảo đảm mọi truy vấn nhanh hơn",
+              "Luôn được planner sử dụng",
+              "Không chiếm dung lượng",
+              "Không cần cập nhật khi ghi"
+            ]
+          },
+          {
+            "question": "EXPLAIN ANALYZE khác EXPLAIN ở điểm nào?",
+            "choices": [
+              "Không hiển thị kế hoạch",
+              "Thực sự chạy câu lệnh và bổ sung số liệu thực tế",
+              "Chỉ đổi tên bảng",
+              "Luôn chạy nhanh hơn truy vấn gốc"
+            ]
+          }
+        ],
+        "result": {
+          "score": 1,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:58:22.427522+00:00",
+          "feedback": [
+            {
+              "correct": 0,
+              "explanation": "Có index không có nghĩa mọi truy vấn nhanh hơn hoặc planner luôn dùng nó.",
+              "source_id": 1
+            },
+            {
+              "correct": 1,
+              "explanation": "EXPLAIN ANALYZE thực sự chạy câu lệnh và bổ sung số liệu thực tế.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "df6ae0c4-b3f2-48c1-87e4-fb4b9279833f",
+              "document_id": "84ca430d-06bc-43c1-98b2-fd50eabcf2b4",
+              "filename": "05-index-explain.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 793,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nINDEX VÀ KẾ HOẠCH TRUY VẤN CƠ BẢN\nKhi nào index có ích?\nIndex là cấu trúc hỗ trợ tìm hàng mà không nhất thiết quét toàn bộ bảng. Nó có thể giúp truy\nvấn lọc ít hàng trên bảng lớn. Có index không có nghĩa mọi truy vấn nhanh hơn hoặc\nplanner luôn dùng nó. Bảng nhỏ hoặc truy vấn lấy phần lớn hàng có thể phù hợp với Seq\nScan.\nIndex chiếm dung lượng và cần được cập nhật khi ghi dữ liệu, nên thêm quá nhiều index có\nthể làm thao tác ghi chậm hơn.\nVí dụ tự soạn: CREATE INDEX idx_dangky_ma_sv ON DangKy(ma_sv); có thể hỗ trợ truy\nvấn WHERE ma_sv = 101. Cần xem kế hoạch và đo trên dữ liệu thực tế.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "a0730deb-c965-422a-b888-36dcf864ebda",
+              "document_id": "84ca430d-06bc-43c1-98b2-fd50eabcf2b4",
+              "filename": "05-index-explain.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 796,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nINDEX VÀ KẾ HOẠCH TRUY VẤN CƠ BẢN\nĐọc EXPLAIN cơ bản\nEXPLAIN hiển thị kế hoạch dự kiến; EXPLAIN ANALYZE thực sự chạy câu lệnh và bổ sung\nsố liệu thực tế. Vì vậy ANALYZE với câu lệnh ghi có thể thay đổi dữ liệu. Ứng dụng trợ lý\nchỉ giải thích SQL, không thực thi SQL người dùng.\nTrong EXPLAIN, cost là đơn vị chi phí ước lượng của planner, không phải mili giây. rows là\nsố hàng ước lượng mà nút xuất ra, không nhất thiết là toàn bộ số hàng đã quét.\nSeq Scan đọc tuần tự bảng; Index Scan dùng index. Không thể kết luận kế hoạch nào tốt\nhơn chỉ từ tên; phải xét điều kiện, lượng dữ liệu và thống kê.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.074
+    }
+  ],
+  "drafts": [
+    {
+      "http_status": 200,
+      "response": {
+        "workspace_id": "17b18b0c-ace0-4a77-8a3d-48ca03a2b902",
+        "question": "Sinh mới quiz SQL JOIN",
+        "status": "answered",
+        "answer": "Đã lưu bản nháp quiz AI. Chưa được duyệt nên chưa thể nộp/chấm.",
+        "sources": [],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 66421,
+        "conversation_id": "7df6243f-7b41-4394-acf3-8bf5c0a01373",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "56d1076e-c301-4b22-b35e-2a5f5a7c95b3",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "seconds": 66.434,
+      "review_only_private_spec": {
+        "topic": "SQL và JOIN",
+        "topic_key": "sql",
+        "questions": [
+          {
+            "question": "Trong SQL, điều nào sau đây đúng về INNER JOIN và LEFT JOIN?",
+            "choices": [
+              "INNER JOIN giữ tất cả các hàng từ bảng bên trái, kể cả khi không có dữ liệu khớp bên phải.",
+              "LEFT JOIN chỉ giữ các hàng có dữ liệu khớp trong bảng bên phải.",
+              "INNER JOIN chỉ lấy các hàng có dữ liệu khớp giữa hai bảng.",
+              "LEFT JOIN loại bỏ hoàn toàn các hàng không có dữ liệu khớp bên phải."
+            ],
+            "correct": 2,
+            "explanation": "INNER JOIN chỉ lấy các hàng có dữ liệu khớp giữa hai bảng, trong khi LEFT JOIN giữ tất cả hàng từ bảng bên trái và điền NULL cho các trường bên phải nếu không có dữ liệu khớp.",
+            "source_id": 1,
+            "evidence": "INNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu không có hàng khớp bên phải, các cột phía phải nhận NULL."
+          },
+          {
+            "question": "Khi sử dụng LEFT JOIN, điều nào sau đây đúng về việc đặt điều kiện trong WHERE và ON?",
+            "choices": [
+              "Điều kiện trong WHERE được áp dụng trước khi thực hiện phép nối.",
+              "Điều kiện trong ON được sử dụng để lọc dữ liệu sau khi nối.",
+              "Điều kiện trong WHERE có thể loại bỏ các hàng có giá trị NULL từ bảng bên phải trong LEFT JOIN.",
+              "Điều kiện trong ON được đặt để đảm bảo rằng tất cả các hàng từ bảng bên trái đều được giữ, kể cả khi không có dữ liệu khớp bên phải."
+            ],
+            "correct": 2,
+            "explanation": "Điều kiện trong WHERE lọc kết quả sau khi nối, nên nếu đặt trong WHERE với LEFT JOIN, nó sẽ loại bỏ các hàng có giá trị NULL từ bảng bên phải. Để giữ tất cả sinh viên, điều kiện cần được đặt trong ON.",
+            "source_id": 2,
+            "evidence": "ON quyết định các cặp hàng khớp khi nối; WHERE lọc kết quả sau phép nối. Với LEFT JOIN, đặt WHERE d.mon = 'CSDL' sẽ loại hàng có d.mon NULL, nên không giữ được sinh viên chưa đăng ký. Muốn vẫn giữ mọi sinh viên, đưa điều kiện này vào ON."
+          },
+          {
+            "question": "Trong truy vấn SQL, điều nào sau đây đúng về việc sử dụng WHERE và HAVING?",
+            "choices": [
+              "HAVING được sử dụng để lọc các hàng trước khi nhóm dữ liệu.",
+              "WHERE được sử dụng để lọc dữ liệu sau khi nhóm dữ liệu.",
+              "HAVING được sử dụng để lọc các nhóm sau khi thực hiện GROUP BY.",
+              "WHERE và HAVING đều được sử dụng để lọc dữ liệu trước khi nhóm."
+            ],
+            "correct": 2,
+            "explanation": "WHERE được áp dụng trước khi nhóm dữ liệu, còn HAVING được sử dụng để lọc các nhóm sau khi đã thực hiện GROUP BY.",
+            "source_id": 2,
+            "evidence": "WHERE lọc hàng trước khi nhóm. HAVING lọc nhóm sau GROUP BY."
+          }
+        ],
+        "status": "draft",
+        "review": "AI sinh mới; chưa rà soát, không được chấm.",
+        "bank_version": null,
+        "related_plan": null,
+        "sources": [
+          {
+            "chunk_id": "0432157a-da73-4db9-a3b9-7b1a321170e8",
+            "document_id": "4cc152b1-41d2-48d0-ab7e-7fc2233bbd9e",
+            "filename": "02-sql-join.pdf",
+            "page_number": 1,
+            "chunk_index": 0,
+            "start_char": 0,
+            "end_char": 659,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nSQL VÀ JOIN\nINNER JOIN và LEFT JOIN\nINNER JOIN chỉ giữ các cặp hàng thỏa điều kiện nối. LEFT JOIN giữ mọi hàng bên trái; nếu\nkhông có hàng khớp bên phải, các cột phía phải nhận NULL. Một hàng trái có nhiều hàng\nkhớp có thể xuất hiện nhiều lần.\nVí dụ tự soạn: SinhVien gồm An, Bình; DangKy chỉ có An đăng ký CSDL. INNER JOIN lấy\nAn; LEFT JOIN còn lấy Bình với thông tin đăng ký NULL.\nSELECT s.ten, d.mon FROM SinhVien s LEFT JOIN DangKy d ON s.ma_sv = d.ma_sv;\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 1
+          },
+          {
+            "chunk_id": "c6d0fd3c-e255-495f-851f-ad5ea17267e6",
+            "document_id": "4cc152b1-41d2-48d0-ab7e-7fc2233bbd9e",
+            "filename": "02-sql-join.pdf",
+            "page_number": 2,
+            "chunk_index": 1,
+            "start_char": 0,
+            "end_char": 660,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nSQL VÀ JOIN\nWHERE, ON và HAVING\nON quyết định các cặp hàng khớp khi nối; WHERE lọc kết quả sau phép nối. Với LEFT\nJOIN, đặt WHERE d.mon = 'CSDL' sẽ loại hàng có d.mon NULL, nên không giữ được sinh\nviên chưa đăng ký. Muốn vẫn giữ mọi sinh viên, đưa điều kiện này vào ON.\nWHERE lọc hàng trước khi nhóm. HAVING lọc nhóm sau GROUP BY.\nVí dụ tự soạn: SELECT ma_sv, COUNT(*) FROM DangKy GROUP BY ma_sv HAVING\nCOUNT(*) >= 2; tìm sinh viên có ít nhất hai hàng đăng ký.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+            "score": 0.0,
+            "source_id": 2
+          },
+          {
+            "chunk_id": "e54fb8a7-fdf0-42d6-8d63-bb4effb397ea",
+            "document_id": "4cc152b1-41d2-48d0-ab7e-7fc2233bbd9e",
+            "filename": "02-sql-join.pdf",
+            "page_number": 3,
+            "chunk_index": 2,
+            "start_char": 0,
+            "end_char": 1200,
+            "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n3\nNguồn và quyền sử dụng\nBản tóm lược tiếng Việt và ví dụ được biên soạn cho dự án; không phải bản dịch chính thức. Thay đổi: rút gọn, diễn giải và thêm ví dụ\nsinh viên/môn học. Tra cứu nguồn ngày 27/10/2026.\nPostgreSQL 16 - Table Expressions | PostgreSQL Global Development Group | 16 | PostgreSQL License\nhttps://www.postgresql.org/docs/16/queries-table-expressions.html\nPostgreSQL Database Management System\nPortions Copyright (c) 1996-2026, The PostgreSQL Global Development Group\nPortions Copyright (c) 1994, The Regents of the University of California\nPermission to use, copy, modify, and distribute this software and its documentation for any purpose, without fee, and without a written\nagreement is hereby granted, provided that the above copyright notice and this paragraph and the following two paragraphs appear in all\ncopies.\nIN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL,\nINCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE\nAND ITS DOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH\nDAMAGE.\nTHE UN",
+            "score": 0.0,
+            "source_id": 3
+          }
+        ]
+      },
+      "grading_blocked": true
+    }
+  ],
+  "public_data_unchanged": true,
+  "bank_roundtrip_passed": true
+}

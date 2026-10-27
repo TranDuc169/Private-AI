@@ -1,3 +1,7 @@
+## Tuần 10
+
+Xem [evidence/week10/README.md](evidence/week10/README.md) cho test/API/PostgreSQL, model thật và ảnh UI mock. [QUIZ_BANK_REVIEW.md](QUIZ_BANK_REVIEW.md) ghi đáp án/căn cứ và lỗi nội dung Qwen. Không suy rộng 10 câu demo thành độ chính xác toàn môn.
+
 # Kiểm tra tuần 9
 
 Hướng dẫn: [WEEK9.md](WEEK9.md). Kết quả và giới hạn: [evidence/week9/README.md](evidence/week9/README.md). Mẫu 3 mục tiêu và quỹ thời gian ngắn: [evaluation/week9.json](evaluation/week9.json). Không suy ra độ chính xác chung từ bộ demo; bài PostgreSQL bị timeout không tính là pass.

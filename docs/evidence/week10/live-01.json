@@ -1,0 +1,28 @@
+{
+  "mode": "postgres",
+  "real_embeddings": true,
+  "real_qwen": true,
+  "cases": [
+    {
+      "topic": "relations",
+      "chat": {
+        "workspace_id": "3725236c-060f-4970-b92f-7e5b190f82ec",
+        "question": "Quiz Mô hình quan hệ và ràng buộc",
+        "status": "insufficient_context",
+        "answer": "Bộ quiz demo cần đủ đoạn gốc trong bộ PDF mẫu CSDL (đã tạo vector). Chưa đủ căn cứ để mở bài. Bạn có thể yêu cầu “sinh mới quiz Mô hình quan hệ và ràng buộc” để tạo bản nháp.",
+        "sources": [],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 46,
+        "conversation_id": "796d6e9f-87fe-46aa-8b52-57035aafc505",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": null,
+        "roadmap_id": null,
+        "planning_request": null
+      }
+    }
+  ],
+  "drafts": [],
+  "public_data_unchanged": true
+}

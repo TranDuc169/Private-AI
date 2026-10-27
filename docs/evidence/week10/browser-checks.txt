@@ -1,0 +1,1 @@
+PASS Chrome MOCK API: answers hidden before submit; requires every answer; submits choices only; score/feedback shown; reload/history persists result; draft disabled; mobile no overflow; workspace switch ignores late result; no JS errors.

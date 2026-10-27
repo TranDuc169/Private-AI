@@ -1,3 +1,11 @@
+## Tuần 10 — Quiz
+
+POST `/workspaces/{wid}/chat` nhận “Quiz SQL JOIN” (bank) hoặc “Sinh mới quiz SQL JOIN” (draft); trả `kind: quiz`, `quiz_id`, `sources: []`. Không đưa khóa đáp án vào chat/history.
+
+GET `/workspaces/{wid}/quizzes/{qid}` trả id, status, topic, review, related_plan, questions (chỉ question/choices), result null trước nộp. Sau nộp, result có score, total, answers, submitted_at, feedback và sources.
+
+POST `/workspaces/{wid}/quizzes/{qid}/submit`, body `{"answers":[2,3]}`. Chỉ số lựa chọn 0–3; phải đủ số câu; strict integer, không nhận score/correct từ client. Chỉ approved mới chấm. Mỗi quiz một attempt; lặp cùng lựa chọn trả cùng kết quả, đổi lựa chọn trả 409. Unique constraint chặn nộp đồng thời. 401 chưa đăng nhập, 404 sai chủ/workspace, 422 sai input, 409 draft/đã nộp, 503 lỗi lưu. Tất cả phản hồi quiz bình thường có Cache-Control no-store. Không có API duyệt cho người học.
+
 # Bổ sung API tuần 9
 
 `POST /workspaces/{id}/chat` giữ body tuần 8. Response thêm kind=`roadmap`, `roadmap_id` (null khi thiếu đầu vào/nguồn/quỹ thời gian), `planning_request` (các trường đã thu thập). Khi câu trả lời trước là yêu cầu làm rõ roadmap, lượt tiếp theo có thể bổ sung các trường còn thiếu. Không nhận spec kế hoạch do client dựng; code và model tạo kế hoạch ở server.

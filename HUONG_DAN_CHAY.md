@@ -1,3 +1,7 @@
+## Mới nhất: tuần 10 — Quiz
+
+Làm theo [docs/WEEK10.md](docs/WEEK10.md) để cập nhật database và chạy thử; tài liệu này giải thích từng lệnh CMD. Phiên bản database mới nhất là `0006_quizzes`, thay cho head tuần 9 ở hướng dẫn lịch sử bên dưới. Không cần cài thêm thư viện.
+
 # Mở lại dự án và chạy — dành cho người mới
 
 Tài liệu dành cho máy Windows của bạn đã cài môi trường và chạy dự án trước đây. Không cần cài lại Python, Node, Docker hoặc tải model mỗi lần mở máy. Các lệnh dưới đây dùng **CMD (Command Prompt)**, không dùng PowerShell.

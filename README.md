@@ -1,3 +1,7 @@
+## Cập nhật tuần 10: quiz trong chat
+
+Dùng `Quiz SQL JOIN` cho bộ demo đã đối chiếu nguồn (2 câu/chủ đề); `Sinh mới quiz SQL JOIN` tạo bản nháp Qwen chưa được chấm. Server chấm và lưu lần nộp, mở lại từ Lịch sử. Migration mới: `0006_quizzes`. Xem [hướng dẫn tuần 10](docs/WEEK10.md), [ngân hàng và rà soát](docs/QUIZ_BANK_REVIEW.md).
+
 # Cập nhật tuần 9 — Lộ trình học và checklist
 
 Nhập mục tiêu, mức nền, số buổi và phút/buổi trong Chat chung để tạo bản nháp có nguồn; xác nhận rồi đánh dấu tiến độ. Cần migration **0005_study_plans**. Xem [WEEK9.md](docs/WEEK9.md) và [minh chứng tuần 9](docs/evidence/week9/README.md). Giữ các mốc triển khai trước bên dưới.

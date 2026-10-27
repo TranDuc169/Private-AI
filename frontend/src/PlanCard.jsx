@@ -18,6 +18,11 @@ export default function PlanCard({ id, workspace, token, onUnauthorized }) {
       .finally(() => { if (!controller.signal.aborted) setBusy(false); });
     return () => { active.current?.abort(); active.current = null; };
   }, [base, token, onUnauthorized, attempt]);
+  useEffect(() => {
+    if (plan && window.location.hash.startsWith(`#plan-${id}-`)) {
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ block: 'center' });
+    }
+  }, [plan, id]);
   async function mutate(step, done) {
     if (busy || !plan) return;
     const controller = new AbortController(); active.current = controller;
@@ -44,7 +49,7 @@ export default function PlanCard({ id, workspace, token, onUnauthorized }) {
       <p>{plan.spec.limitations}</p>
       <p><strong>{completed}/{plan.spec.steps.length} bước tự đánh dấu hoàn thành</strong> — không phải điểm đánh giá thành thạo.</p>
       {plan.status === 'draft' && <button type="button" disabled={busy || Boolean(error)} onClick={() => mutate(null)}>Xác nhận kế hoạch này</button>}
-      <ol className="plan-steps">{plan.spec.steps.map((step, index) => <li key={step.key}>
+      <ol className="plan-steps">{plan.spec.steps.map((step, index) => <li key={step.key} id={`plan-${id}-${step.key}`}>
         <h4>{index + 1}. {step.title} · {step.minutes} phút</h4>
         <p><strong>Học trước:</strong> {step.prerequisites.length ? step.prerequisites.map(key => plan.spec.steps.find(s => s.key === key)?.title || key).join(', ') : 'Bắt đầu tại đây (theo mức nền đã khai).'}</p>
         <p><strong>Mục tiêu:</strong> {step.objective}</p><p><strong>Hoạt động:</strong> {step.activity}</p>

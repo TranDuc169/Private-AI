@@ -1,3 +1,7 @@
+## Tuần 10 — Migration 0006_quizzes
+
+`quizzes`: UUID, created_at, workspace_id, conversation_id, status draft/approved, spec JSON riêng chứa câu hỏi/đáp án/nguồn/review/version. `quiz_attempts`: UUID, created_at, quiz_id UNIQUE, answers JSON, score INTEGER. Một quiz tương ứng một lần nộp; xin bài mới nếu luyện lại. HTTP chỉ trả projection công khai; không serialize thẳng model/spec. Thêm bảng, giữ nguyên migration và dữ liệu cũ.
+
 # Bổ sung schema tuần 9
 
 Migration 0005_study_plans nối sau 0004_chat_history, tạo hai bảng mới:

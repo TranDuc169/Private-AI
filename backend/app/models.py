@@ -101,3 +101,18 @@ class StudyStep(IdTimestampMixin, Base):
     plan_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('study_plans.id', ondelete='CASCADE'), index=True)
     step_key: Mapped[str] = mapped_column(String(40))
     done: Mapped[bool] = mapped_column(Boolean, server_default='false')
+
+class Quiz(IdTimestampMixin, Base):
+    __tablename__ = 'quizzes'
+    __table_args__ = (CheckConstraint("status IN ('draft', 'approved')", name='ck_quiz_status'),)
+    workspace_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('workspaces.id'), index=True)
+    conversation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('conversations.id'), index=True)
+    status: Mapped[str] = mapped_column(String(20))
+    spec: Mapped[dict] = mapped_column(JSON)
+
+
+class QuizAttempt(IdTimestampMixin, Base):
+    __tablename__ = 'quiz_attempts'
+    quiz_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('quizzes.id'), unique=True)
+    answers: Mapped[list] = mapped_column(JSON)
+    score: Mapped[int] = mapped_column(Integer)

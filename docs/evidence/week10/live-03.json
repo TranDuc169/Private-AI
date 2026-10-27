@@ -1,0 +1,150 @@
+{
+  "mode": "postgres",
+  "real_embeddings": true,
+  "real_qwen": true,
+  "cases": [
+    {
+      "topic": "relations",
+      "chat": {
+        "workspace_id": "02f87bab-e181-468b-ae1c-26c7f9b1d06d",
+        "question": "Quiz Mô hình quan hệ và ràng buộc",
+        "status": "answered",
+        "answer": "Bài luyện tập demo đã sẵn sàng. Chọn đủ đáp án rồi nộp để xem điểm và giải thích.",
+        "sources": [],
+        "model": "Bộ demo csdl-quiz-v1",
+        "elapsed_ms": 39,
+        "conversation_id": "1e6ffb23-5dab-427f-ba06-9f3598df6d5a",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": "ce15b806-67ab-4ddd-bb80-8a7c1d74eafd",
+        "roadmap_id": null,
+        "planning_request": null
+      },
+      "before_submit": {
+        "id": "ce15b806-67ab-4ddd-bb80-8a7c1d74eafd",
+        "status": "approved",
+        "topic": "Mô hình quan hệ và ràng buộc",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "PRIMARY KEY yêu cầu điều gì?",
+            "choices": [
+              "Duy nhất và không NULL",
+              "Cho phép mọi giá trị NULL",
+              "Chỉ cần sắp xếp tăng",
+              "Chỉ dùng cho văn bản"
+            ]
+          },
+          {
+            "question": "Muốn khóa ngoại bắt buộc có giá trị, cần thêm gì?",
+            "choices": [
+              "ORDER BY",
+              "NOT NULL",
+              "HAVING",
+              "SAVEPOINT"
+            ]
+          }
+        ],
+        "result": null
+      },
+      "after_submit": {
+        "id": "ce15b806-67ab-4ddd-bb80-8a7c1d74eafd",
+        "status": "approved",
+        "topic": "Mô hình quan hệ và ràng buộc",
+        "review": "Đối chiếu kỹ thuật với phiếu học tập csdl-demo-v1; chưa có giảng viên thẩm định.",
+        "related_plan": null,
+        "questions": [
+          {
+            "question": "PRIMARY KEY yêu cầu điều gì?",
+            "choices": [
+              "Duy nhất và không NULL",
+              "Cho phép mọi giá trị NULL",
+              "Chỉ cần sắp xếp tăng",
+              "Chỉ dùng cho văn bản"
+            ]
+          },
+          {
+            "question": "Muốn khóa ngoại bắt buộc có giá trị, cần thêm gì?",
+            "choices": [
+              "ORDER BY",
+              "NOT NULL",
+              "HAVING",
+              "SAVEPOINT"
+            ]
+          }
+        ],
+        "result": {
+          "score": 1,
+          "total": 2,
+          "answers": [
+            0,
+            0
+          ],
+          "submitted_at": "2026-10-27T15:54:25.989353+00:00",
+          "feedback": [
+            {
+              "correct": 0,
+              "explanation": "giá trị phải duy nhất và không NULL.",
+              "source_id": 1
+            },
+            {
+              "correct": 1,
+              "explanation": "Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì thêm NOT NULL.",
+              "source_id": 2
+            }
+          ],
+          "sources": [
+            {
+              "chunk_id": "52735b29-c530-4cb2-9b99-ef6214dc5597",
+              "document_id": "17ed149b-e683-459f-b632-487d0c50ec60",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 1,
+              "chunk_index": 0,
+              "start_char": 0,
+              "end_char": 749,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n1\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa chính và tính duy nhất\nBảng quan hệ gồm hàng và cột. PRIMARY KEY (khóa chính) định danh mỗi hàng: giá trị\nphải duy nhất và không NULL. Khóa chính có thể gồm nhiều cột; mỗi bảng có tối đa một\nràng buộc khóa chính.\nUNIQUE bảo đảm tính duy nhất nhưng PostgreSQL mặc định xem các NULL là khác nhau,\nnên có thể có nhiều NULL. UNIQUE NULLS NOT DISTINCT thay đổi cách xử lý này.\nVí dụ tự soạn: SinhVien(ma_sv PRIMARY KEY, email UNIQUE). Mã sinh viên không trùng\nvà không thiếu; email vẫn có thể NULL nếu chưa đặt NOT NULL.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 1
+            },
+            {
+              "chunk_id": "62467524-2d6f-4bed-855f-e7c9e17412b1",
+              "document_id": "17ed149b-e683-459f-b632-487d0c50ec60",
+              "filename": "01-quan-he-rang-buoc.pdf",
+              "page_number": 2,
+              "chunk_index": 1,
+              "start_char": 0,
+              "end_char": 693,
+              "text": "Trợ lý CSDL | Phiếu demo v1 | 27/10/2026\n2\nMÔ HÌNH QUAN HỆ VÀ RÀNG BUỘC\nKhóa ngoại và CHECK\nFOREIGN KEY (khóa ngoại) liên kết dữ liệu: giá trị khác NULL phải tham chiếu khóa hợp lệ\nở bảng đích. Ví dụ Lop(ma_lop PRIMARY KEY), SinhVien(ma_sv PRIMARY KEY, ma_lop\nREFERENCES Lop(ma_lop)). Khóa ngoại không tự cấm NULL; muốn bắt buộc có lớp thì\nthêm NOT NULL.\nCHECK kiểm tra điều kiện. CHECK (diem >= 0 AND diem <= 10) giới hạn điểm nhưng\nkhông tự cấm NULL, vì CHECK chấp nhận kết quả true hoặc unknown. Thêm NOT NULL\nnếu điểm bắt buộc nhập.\nTài liệu demo được biên soạn có hỗ trợ AI, đã đối chiếu nguồn; cần nhóm/giảng viên rà soát trước khi dùng làm giáo trình. Không thực\nthi SQL trong ứng dụng.",
+              "score": 0.0,
+              "source_id": 2
+            }
+          ]
+        }
+      },
+      "seconds": 0.138
+    },
+    {
+      "topic": "sql",
+      "chat": {
+        "workspace_id": "02f87bab-e181-468b-ae1c-26c7f9b1d06d",
+        "question": "Quiz SQL và JOIN",
+        "status": "insufficient_context",
+        "answer": "Bộ quiz demo cần đủ đoạn gốc trong bộ PDF mẫu CSDL (đã tạo vector). Chưa đủ căn cứ để mở bài. Bạn có thể yêu cầu “sinh mới quiz SQL và JOIN” để tạo bản nháp.",
+        "sources": [],
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsed_ms": 19,
+        "conversation_id": "ae360879-543f-42fc-8abf-0894b31e6d3f",
+        "revision": 1,
+        "kind": "quiz",
+        "coverage": null,
+        "quiz_id": null,
+        "roadmap_id": null,
+        "planning_request": null
+      }
+    }
+  ],
+  "drafts": [],
+  "public_data_unchanged": true
+}

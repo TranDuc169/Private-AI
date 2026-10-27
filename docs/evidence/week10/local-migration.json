@@ -1,0 +1,65 @@
+{
+  "previous": "0003_document_vectors",
+  "current": "0006_quizzes",
+  "old_columns_preserved": true,
+  "before": {
+    "users": {
+      "rows": 2,
+      "sha256": "05607ba51505d1702418890af91b45cace4a2ebe6023fb7a56ba32394482c22e"
+    },
+    "workspaces": {
+      "rows": 2,
+      "sha256": "eb20d9ad858de99a3b2d9d0f92e85e85e90bf4f0e40c02d018fd241ab34d4d96"
+    },
+    "documents": {
+      "rows": 5,
+      "sha256": "84b0f67fc9aa2692fbaa062b3794ebd22c998c22eae77c69004bc71c40b3669a"
+    },
+    "document_pages": {
+      "rows": 29,
+      "sha256": "2af9f11404706f66aa896197f46a703e85d944f691de4cf31fea4cd646b3b7f9"
+    },
+    "document_chunks": {
+      "rows": 40,
+      "sha256": "6caa2b49315e20bb409e8960513b87750f86c8b9bda68a54f02c1f61cb44c110"
+    },
+    "conversations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "messages": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "after": {
+    "users": {
+      "rows": 2,
+      "sha256": "05607ba51505d1702418890af91b45cace4a2ebe6023fb7a56ba32394482c22e"
+    },
+    "workspaces": {
+      "rows": 2,
+      "sha256": "eb20d9ad858de99a3b2d9d0f92e85e85e90bf4f0e40c02d018fd241ab34d4d96"
+    },
+    "documents": {
+      "rows": 5,
+      "sha256": "84b0f67fc9aa2692fbaa062b3794ebd22c998c22eae77c69004bc71c40b3669a"
+    },
+    "document_pages": {
+      "rows": 29,
+      "sha256": "2af9f11404706f66aa896197f46a703e85d944f691de4cf31fea4cd646b3b7f9"
+    },
+    "document_chunks": {
+      "rows": 40,
+      "sha256": "6caa2b49315e20bb409e8960513b87750f86c8b9bda68a54f02c1f61cb44c110"
+    },
+    "conversations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "messages": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

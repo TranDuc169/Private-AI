@@ -1,3 +1,7 @@
+## Tuần 10 — Bàn giao mới
+
+Đã thêm quiz demo 10 câu/5 chủ đề, quiz Qwen dạng nháp, chấm server, lưu kết quả và mở lại trong chat, quyền theo workspace, link bước học. Chi tiết chạy và giới hạn: [WEEK10.md](WEEK10.md). Kết quả thực chạy: [evidence/week10/README.md](evidence/week10/README.md). Chưa có giao diện giảng viên duyệt; bản nháp không được chấm. Bộ demo mới chỉ được đối chiếu kỹ thuật, chưa thẩm định sư phạm. Các ghi chú chưa commit ở phần cũ mô tả thời điểm bàn giao cũ; tuần 8–9 đã được người dùng push trong be83293.
+
 # Trạng thái tuần 9
 
 Đã thêm roadmap theo 5 nhóm đề cương CSDL, hỏi bổ sung đầu vào, phân bổ quỹ thời gian bằng code, nguồn từng bước, xác nhận và checklist lưu/reload. Cần chạy migration 0005_study_plans trên database dùng hằng ngày. Xem [minh chứng](evidence/week9/README.md) để phân biệt kiểm thử giả lập, SQLite/model thật và PostgreSQL chưa kiểm chứng. Chưa có quiz hoặc đánh giá thành thạo. Tuần 8–9 đang chưa commit.
