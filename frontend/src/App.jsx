@@ -5,6 +5,7 @@ import { Login, WorkspacePicker } from './Account.jsx';
 import Documents from './Documents.jsx';
 import Chat from './Chat.jsx';
 import History from './History.jsx';
+import Progress from './Progress.jsx';
 
 function SavedChat(props) {
   const { conversationId } = useParams();
@@ -79,6 +80,7 @@ export default function App() {
         <NavLink to="/" end>Chat chung</NavLink>
         <NavLink to="/documents">Tài liệu</NavLink>
         <NavLink to="/history">Lịch sử hội thoại</NavLink>
+        <NavLink to="/progress">Tiến độ học tập</NavLink>
       </nav>
       <p className="sidebar-note">Tài liệu và lịch sử sẽ được tải theo workspace đã chọn.</p>
     </aside>
@@ -90,7 +92,8 @@ export default function App() {
         <Route path="/chat/:conversationId" element={<SavedChat workspace={workspace} token={session.access_token} onUnauthorized={expire} />} />
         <Route path="/documents" element={workspace ? <Documents key={`${workspace.id}-documents`} token={session.access_token} workspace={workspace} onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem tài liệu.</EmptyState>} />
         <Route path="/history" element={workspace ? <History key={`${workspace.id}-history`} token={session.access_token} workspace={workspace} onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem lịch sử.</EmptyState>} />
-        <Route path="*" element={<EmptyState title="Không tìm thấy trang">Chọn Chat chung, Tài liệu hoặc Lịch sử ở thanh điều hướng.</EmptyState>} />
+        <Route path="/progress" element={workspace ? <Progress key={`${workspace.id}-progress`} token={session.access_token} workspace={workspace} onUnauthorized={expire} /> : <EmptyState title="Chưa chọn workspace">Chọn workspace để xem tiến độ.</EmptyState>} />
+        <Route path="*" element={<EmptyState title="Không tìm thấy trang">Chọn Chat chung, Tài liệu, Lịch sử hoặc Tiến độ ở thanh điều hướng.</EmptyState>} />
       </Routes>}
     </main>
   </div>;
