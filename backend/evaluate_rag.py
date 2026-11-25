@@ -34,20 +34,29 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode',choices=['models','postgres'],default='models')
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--dataset',type=Path,default=ROOT/'docs/evaluation/week7.json')
+    parser.add_argument('--final-eval',action='store_true',help='Explicitly run frozen final set; do not use for tuning.')
     parser.add_argument('--limit',type=int,default=20)
     parser.add_argument('--start',type=int,default=0,help='Zero-based offset for a follow-up run; preserve earlier output.')
     parser.add_argument('--only',help='Comma-separated case IDs for a targeted follow-up, e.g. q05,q10')
     args=parser.parse_args()
-    if not 0 <= args.start < 20 or not 1 <= args.limit <= 20:
-        raise SystemExit('start must be 0..19 and limit must be 1..20')
+    dataset=json.loads(args.dataset.read_text(encoding='utf-8'))
+    total=len(dataset['cases'])
+    if dataset.get('role')=='heldout':
+        if not args.final_eval: raise SystemExit('Frozen set requires --final-eval. Use week7.json for development.')
+        lock=json.loads(args.dataset.with_suffix('.lock.json').read_text(encoding='utf-8'))
+        if hashlib.sha256(args.dataset.read_bytes()).hexdigest()!=lock['sha256']: raise SystemExit('Frozen dataset hash mismatch.')
+        if hashlib.sha256((ROOT/'docs/course/manifest.json').read_bytes()).hexdigest()!=lock['corpus_manifest_sha256']: raise SystemExit('Frozen corpus manifest changed.')
+    if not 0 <= args.start < total or not 1 <= args.limit <= total:
+        raise SystemExit('start/limit outside dataset range')
     if args.output.exists(): raise SystemExit('Output already exists; use a new filename to preserve evidence.')
     config=Settings(); corpus=json.loads((ROOT/'docs/course/manifest.json').read_text(encoding='utf-8'))
-    cases=json.loads((ROOT/'docs/evaluation/week7.json').read_text(encoding='utf-8'))['cases'][args.start:args.start+args.limit]
+    cases=dataset['cases'][args.start:args.start+args.limit]
     if args.only:
         requested=set(args.only.split(','))
         if not requested <= {c['id'] for c in cases}: raise SystemExit('Unknown case ID in selected range')
         cases=[c for c in cases if c['id'] in requested]
-    report={'mode':args.mode,'chat_model':config.chat_model,'embedding_model':config.embedding_model,
+    report={'dataset':args.dataset.name,'dataset_sha256':hashlib.sha256(args.dataset.read_bytes()).hexdigest(),'mode':args.mode,'chat_model':config.chat_model,'embedding_model':config.embedding_model,
             'prompt_sha256':hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest(),
             'configuration':{'num_ctx':8192,'num_predict':config.chat_num_predict,'temperature':0,'think':False},
             'platform':platform.platform(),'python':platform.python_version(),
