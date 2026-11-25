@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  font-family: "Segoe UI", Arial, system-ui, sans-serif;
   color: #223830;
   background: #f7f9f6;
   font-synthesis: none;
@@ -469,7 +469,7 @@ main {
   margin: 65px auto;
 }
 .login-intro h2 {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Segoe UI", Arial, system-ui, sans-serif;
   font-size: 44px;
   line-height: 1.23;
   font-weight: 400;
@@ -582,7 +582,7 @@ main {
   transform: rotate(5deg);
 }
 .chat-welcome h2 {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Segoe UI", Arial, system-ui, sans-serif;
   font-size: 43px;
   font-weight: 400;
   line-height: 1.2;
@@ -1175,7 +1175,7 @@ textarea::placeholder {
 }
 .progress-grid strong {
   display: block;
-  font-family: Georgia, serif;
+  font-family: "Segoe UI", Arial, system-ui, sans-serif;
   font-size: 33px;
   font-weight: 400;
   margin-top: 12px;
