@@ -1,0 +1,8 @@
+{
+  "dataset": "final-v1.json",
+  "sha256": "4b8f24a0cd4ed6c646f56ff901de808b8f0926dd0286d35cceec1014fff3a69d",
+  "case_count": 40,
+  "frozen_on": "2026-10-29",
+  "corpus_manifest_sha256": "b2bb85bae0667eae4d2071154248cd17408cb7e6096a0c81e99a47d16aced212",
+  "executed": false
+}

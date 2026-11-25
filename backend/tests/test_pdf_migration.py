@@ -59,7 +59,25 @@ def test_migration_preserves_old_data_and_matches_models(monkeypatch):
             assert connection.scalar(text('SELECT content FROM messages WHERE id=:id'), {'id':message_id}) == 'Legacy question'
             assert connection.scalar(text('SELECT revision FROM conversations WHERE id=:id'), {'id':conversation_id}) == 0
             assert compare_metadata(MigrationContext.configure(connection, opts={'compare_type': True}), Base.metadata) == []
-        command.upgrade(config, 'head')  # Safe repeated upgrade.
+        # Week 11: re-running upgrade must preserve week 9/10 user activity too.
+        from sqlalchemy.orm import Session
+        from app.models import StudyPlan, StudyStep, Quiz, QuizAttempt
+        with Session(engine) as session:
+            plan=StudyPlan(workspace_id=workspace_id,conversation_id=conversation_id,status='confirmed',spec={})
+            quiz=Quiz(workspace_id=workspace_id,conversation_id=conversation_id,status='approved',spec={'questions':[{'correct':0}]})
+            session.add_all([plan,quiz]);session.flush()
+            step=StudyStep(plan_id=plan.id,step_key='sql',done=True)
+            attempt=QuizAttempt(quiz_id=quiz.id,answers=[0],score=1)
+            session.add_all([step,attempt]);session.flush()
+            plan_id,quiz_id,step_id,attempt_id=plan.id,quiz.id,step.id,attempt.id
+            session.commit()
+        command.upgrade(config, 'head')
+        with Session(engine) as session:
+            assert session.get(StudyPlan,plan_id).status=='confirmed'
+            assert session.get(StudyStep,step_id).done is True
+            assert session.get(Quiz,quiz_id).spec['questions'][0]['correct']==0
+            assert session.get(QuizAttempt,attempt_id).score==1
+            assert session.get(QuizAttempt,attempt_id).answers==[0]
     finally:
         engine.dispose()
         with admin.begin() as connection:
