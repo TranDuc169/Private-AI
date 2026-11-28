@@ -1,3 +1,11 @@
+## Tuần 12 — Đánh giá và đóng gói backend
+
+Đã chạy 118 kiểm thử PostgreSQL đạt và 40 câu RAG thật; 37/40 nhãn khớp kỳ vọng,
+30/30 câu trong phạm vi có nguồn tham chiếu trong Top-5. Chưa có điểm chất lượng
+do người rà. Thêm công cụ tổng hợp, lock dependency và gói nguồn backend; Docker
+release mới kiểm tra cấu hình, chưa build do chặn named pipe. Xem [WEEK12](WEEK12.md)
+và [RELEASE](RELEASE.md). Không thay đổi frontend, prompt hoặc bộ đánh giá đã khóa.
+
 ## Tuần 10 — Bàn giao mới
 
 Đã thêm quiz demo 10 câu/5 chủ đề, quiz Qwen dạng nháp, chấm server, lưu kết quả và mở lại trong chat, quyền theo workspace, link bước học. Chi tiết chạy và giới hạn: [WEEK10.md](WEEK10.md). Kết quả thực chạy: [evidence/week10/README.md](evidence/week10/README.md). Chưa có giao diện giảng viên duyệt; bản nháp không được chấm. Bộ demo mới chỉ được đối chiếu kỹ thuật, chưa thẩm định sư phạm. Các ghi chú chưa commit ở phần cũ mô tả thời điểm bàn giao cũ; tuần 8–9 đã được người dùng push trong be83293.

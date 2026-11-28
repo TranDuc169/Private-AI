@@ -11,3 +11,4 @@ dist/
 frontend/npm-install-log.txt
 backend/storage/
 backups/
+.env.release
