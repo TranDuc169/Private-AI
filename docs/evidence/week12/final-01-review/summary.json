@@ -1,0 +1,19 @@
+{
+  "dataset_cases": 40,
+  "attempted": 40,
+  "missing_ids": [],
+  "successful_responses": 40,
+  "failed_attempts": 0,
+  "status_matches": 37,
+  "retrieval_hit_at_5": 30,
+  "retrieval_denominator": 30,
+  "outside_insufficient": 8,
+  "outside_denominator": 10,
+  "median_attempt_seconds": 25.1295,
+  "p95_attempt_seconds": 46.58,
+  "latency_definition": "retrieval plus chat attempt, including recorded failures; nearest-rank p95",
+  "public_data_unchanged": true,
+  "human_content_score": null,
+  "human_source_score": null,
+  "human_review": "pending; HTTP, status matches and retrieval are not semantic accuracy"
+}

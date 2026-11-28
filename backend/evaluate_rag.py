@@ -10,6 +10,8 @@ import math
 import platform
 import time
 import uuid
+import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -56,20 +58,36 @@ def main():
         requested=set(args.only.split(','))
         if not requested <= {c['id'] for c in cases}: raise SystemExit('Unknown case ID in selected range')
         cases=[c for c in cases if c['id'] in requested]
-    report={'dataset':args.dataset.name,'dataset_sha256':hashlib.sha256(args.dataset.read_bytes()).hexdigest(),'mode':args.mode,'chat_model':config.chat_model,'embedding_model':config.embedding_model,
+    def git_value(*arguments):
+        try:
+            return subprocess.check_output(['git', *arguments], cwd=ROOT, text=True, timeout=10).strip()
+        except (OSError, subprocess.SubprocessError):
+            return None
+    report={'started_at':datetime.now(timezone.utc).isoformat(),
+            'git_commit':git_value('rev-parse','HEAD'),'git_dirty':bool(git_value('status','--porcelain')),
+            'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'selected_case_ids':[c['id'] for c in cases], 'run_status':'running',
+            'dataset':args.dataset.name,'dataset_sha256':hashlib.sha256(args.dataset.read_bytes()).hexdigest(),'mode':args.mode,'chat_model':config.chat_model,'embedding_model':config.embedding_model,
             'prompt_sha256':hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest(),
             'configuration':{'num_ctx':8192,'num_predict':config.chat_num_predict,'temperature':0,'think':False},
             'platform':platform.platform(),'python':platform.python_version(),
             'corpus_version':corpus['version'],'human_review':'pending; source matches are not correctness scores',
             'cases':[],'public_data_unchanged':None}
-    with httpx.Client(timeout=5,trust_env=False) as http:
-        report['ollama_version']=http.get(config.ollama_base_url+'/api/version').json()
-        report['model_inventory']=http.get(config.ollama_base_url+'/api/tags').json()
     chunks=[];admin=engine=None;schema=None;before=None;original=app.main.make_engine
     def save():
         args.output.parent.mkdir(parents=True,exist_ok=True)
-        args.output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        temporary=args.output.with_suffix(args.output.suffix+'.tmp')
+        temporary.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        temporary.replace(args.output)
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    # Reserve this evidence path; concurrent runs may never overwrite one another.
+    with args.output.open('x',encoding='utf-8') as stream:
+        json.dump(report,stream,ensure_ascii=False,indent=2)
     try:
+        with httpx.Client(timeout=5,trust_env=False) as http:
+            version=http.get(config.ollama_base_url+'/api/version');version.raise_for_status()
+            inventory=http.get(config.ollama_base_url+'/api/tags');inventory.raise_for_status()
+            report['ollama_version']=version.json();report['model_inventory']=inventory.json()
         with TemporaryDirectory(prefix='week7-rag-') as folder:
             config.storage_dir=Path(folder)/'storage'
             if args.mode=='postgres':
@@ -128,10 +146,17 @@ def main():
                             if h.filename==case['expected_file'] and h.page_number==case['expected_page']),None)
                     except GenerationError as error:
                         record.update(error=str(error),error_code=error.code,http_status=error.status_code,diagnostics=error.diagnostics)
+                    except (httpx.HTTPError, AssertionError, ValueError) as error:
+                        # Keep failed cases in the denominator; avoid secrets in exception strings.
+                        record.update(error_code=type(error).__name__)
                     record['elapsed_seconds']=round(time.perf_counter()-started,3)
                     record['review']={'answer_correct':None,'sources_support_claims':None,'notes':''}
                     report['cases'].append(record);save()
                     print(case['id'],record.get('response',{}).get('status',record.get('http_status')),record['elapsed_seconds'],flush=True)
+        report['run_status']='completed'
+    except Exception as error:
+        report['run_status']='failed';report['failure_type']=type(error).__name__
+        raise
     finally:
         app.main.make_engine=original
         if engine: engine.dispose()
@@ -141,6 +166,7 @@ def main():
             if before is not None:
                 report['public_data_unchanged']=public_snapshot(admin)==before
             admin.dispose()
+        report['finished_at']=datetime.now(timezone.utc).isoformat()
         report['completed_cases']=len(report['cases']);save()
     if report['public_data_unchanged'] is False: raise SystemExit('Public data changed during evaluation; investigate.')
 

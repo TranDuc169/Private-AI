@@ -1,3 +1,10 @@
+## Tuần 12 Đánh giá và bàn giao backend
+
+Đã chạy 118 kiểm thử PostgreSQL và bộ 40 câu RAG với model thật. Xem
+[kết quả và giới hạn](docs/WEEK12.md), [hướng dẫn bản bàn giao](docs/RELEASE.md),
+[minh chứng](docs/evidence/week12/README.md). Migration hiện tại là `0006_quizzes`.
+Các cập nhật tuần trước bên dưới mang tính lịch sử, không thay thế hướng dẫn tuần 12.
+
 ## Cập nhật tuần 10: quiz trong chat
 
 Dùng `Quiz SQL JOIN` cho bộ demo đã đối chiếu nguồn (2 câu/chủ đề); `Sinh mới quiz SQL JOIN` tạo bản nháp Qwen chưa được chấm. Server chấm và lưu lần nộp, mở lại từ Lịch sử. Migration mới: `0006_quizzes`. Xem [hướng dẫn tuần 10](docs/WEEK10.md), [ngân hàng và rà soát](docs/QUIZ_BANK_REVIEW.md).
